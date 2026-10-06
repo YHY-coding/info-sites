@@ -374,6 +374,10 @@ def main():
         shutil.rmtree(OUT)
     build_site1(); build_site2(); build_site3(); build_hub()
     write(".nojekyll", "")
+    sd = os.path.join(ROOT, "static")
+    if os.path.isdir(sd):
+        for fn in os.listdir(sd):
+            shutil.copy(os.path.join(sd, fn), os.path.join(OUT, fn))
     if BASE_URL:
         urls = "".join(f"<url><loc>{BASE_URL}/{p}</loc><lastmod>{TODAY}</lastmod></url>" for p in sorted(written))
         write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
