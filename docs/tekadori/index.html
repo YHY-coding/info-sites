@@ -16,7 +16,7 @@ a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td
 button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
 ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
 </style></head><body>
-<header><a class="logo" href="../index.html">手取り・税金かんたん計算</a><nav><a href="../index.html">手取り計算</a><a href="../nenshu/index.html">年収別一覧</a><a href="../fukugyo.html">副業の税金</a></nav></header>
+<header><a class="logo" href="index.html">手取り・税金かんたん計算</a><nav><a href="index.html">手取り計算</a><a href="nenshu/index.html">年収別一覧</a><a href="fukugyo.html">副業の税金</a></nav></header>
 <main><h1>年収から手取りを計算</h1><p>年収(万円)を入れると、社会保険料・税金を引いた手取りの目安がわかります。</p><div class="card"><label>年収(万円) <input id="g" type="number" value="400" min="1" step="10"></label> <button id="btn">計算する</button></div><div id="out" class="card"></div><h2>計算の前提</h2><ul><li>給与のみ、独身、扶養なし、賞与は月給に均等割り</li><li>健康保険5.0%、厚生年金9.15%、雇用保険0.55%(いずれも本人負担の概算)</li><li>所得税は令和7年度税制改正後の給与所得控除・基礎控除を使用、復興特別所得税2.1%を加算</li><li>住民税は所得割10%+均等割5,000円(自治体で差があります)</li></ul><h2>年収別の手取り</h2><p><a href="nenshu/index.html">年収200万円〜2,000万円の手取り一覧を見る</a></p><script>
 function calcNet(g){var kd;if(g<=1900000)kd=650000;else if(g<=3600000)kd=g*0.3+80000;else if(g<=6600000)kd=g*0.2+440000;else if(g<=8500000)kd=g*0.1+1100000;else kd=1950000;kd=Math.min(kd,g);
 var s=g-kd,m=g/12,kenpo=Math.min(m,1390000)*0.05*12,nen=Math.min(m,650000)*0.0915*12,koyo=g*0.0055,sha=kenpo+nen+koyo,kiso;
@@ -29,4 +29,4 @@ function run(){var g=parseFloat(document.getElementById('g').value)*10000;if(!(g
 var r=calcNet(g);document.getElementById('out').innerHTML='<p class="big">手取り 年'+fmt(r.net)+'(月'+fmt(r.net/12)+')</p><table><tr><th>社会保険料</th><td>'+fmt(r.sha)+'</td></tr><tr><th>所得税(復興税込)</th><td>'+fmt(r.st)+'</td></tr><tr><th>住民税</th><td>'+fmt(r.jm)+'</td></tr><tr><th>手取り率</th><td>'+(r.net/g*100).toFixed(1)+'%</td></tr></table>'}
 document.getElementById('btn').onclick=run;document.getElementById('g').addEventListener('keydown',function(e){if(e.key==='Enter')run()});run();
 </script></main>
-<footer><p>本サイトの金額は、独身・扶養なし・協会けんぽ平均料率・賞与なしを仮定した<strong>概算</strong>です。実際の金額は勤務先・地域・家族構成で変わります。正確な額は給与明細や税務署・自治体で確認してください。</p><p>最終更新: 2026-10-07</p></footer></body></html>
+<footer><p>本サイトの金額は、独身・扶養なし・協会けんぽ平均料率・賞与なしを仮定した<strong>概算</strong>です。実際の金額は勤務先・地域・家族構成で変わります。正確な額は給与明細や税務署・自治体で確認してください。</p><p>最終更新: 2026-10-06</p></footer></body></html>

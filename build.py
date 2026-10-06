@@ -40,7 +40,7 @@ def write(path, content):
 
 
 def page(site, path, title, desc, body, nav, disclaimer):
-    depth = path.count("/")
+    depth = max(path.count("/") - 1, 0)  # path は docs/ 基準、各サイトのルート(サイトフォルダ)からの深さにする
     up = "../" * depth
     navhtml = "".join(f'<a href="{up}{u}">{esc(t)}</a>' for t, u in nav)
     canon = f'<link rel="canonical" href="{BASE_URL}/{path}">' if BASE_URL else ""
@@ -237,6 +237,24 @@ ITPASS = [
      "<li><strong>RAID5</strong>: データとパリティを分散。1台の故障までは復旧できる</li></ul>"
      "<p>バックアップの種類は、<strong>フルバックアップ</strong>(全部)、<strong>差分</strong>(前回のフル以降の変更分)、"
      "<strong>増分</strong>(前回のバックアップ以降の変更分)があります。復元は増分が最も手間がかかります。</p>"),
+    ("logic", "論理演算(AND・OR・NOT・XOR)の基本",
+     "<p>論理演算は、真(1)と偽(0)を組み合わせて結果を求める演算です。</p>"
+     "<table><tr><th>演算</th><th>意味</th><th>結果が1になる条件</th></tr>"
+     "<tr><td>AND(論理積)</td><td>かつ</td><td>両方が1のとき</td></tr>"
+     "<tr><td>OR(論理和)</td><td>または</td><td>どちらか一方でも1のとき</td></tr>"
+     "<tr><td>NOT(否定)</td><td>反転</td><td>入力が0のとき</td></tr>"
+     "<tr><td>XOR(排他的論理和)</td><td>どちらか一方だけ</td><td>入力が異なるとき</td></tr></table>"
+     "<ul><li>例: 1 AND 0 = 0、1 OR 0 = 1、NOT 1 = 0、1 XOR 1 = 0</li>"
+     "<li>検索条件の「AかつB」はAND、「AまたはB」はORに対応する</li>"
+     "<li>ベン図で、ANDは重なり部分、ORは両方を合わせた領域として表せる</li></ul>"
+     "<p>真理値表を自分で書いて確認する習慣をつけると、図表問題で迷いにくくなります。</p>"),
+    ("project", "プロジェクトマネジメントの基本用語",
+     "<ul><li><strong>プロジェクト</strong>: 期限と目的のある、一度限りの取り組み</li>"
+     "<li><strong>WBS</strong>: 作業を階層的に細かく分解した一覧。見積りや進捗管理の土台になる</li>"
+     "<li><strong>ガントチャート</strong>: 作業の期間を横棒で表し、スケジュールを見える化する図</li>"
+     "<li><strong>クリティカルパス</strong>: 全体の所要期間を決める、最も長い作業の経路。ここが遅れるとプロジェクト全体が遅れる</li>"
+     "<li><strong>PDCA</strong>: 計画・実行・評価・改善を繰り返す管理サイクル</li></ul>"
+     "<p>プロジェクトでは、品質・コスト・納期のバランスを取ることが管理の中心になります。</p>"),
 ]
 
 AZ = [
@@ -329,6 +347,15 @@ AZ900 = [
      "<li><strong>Microsoft Purview</strong>: データのガバナンスとコンプライアンス</li>"
      "<li><strong>Service Trust Portal</strong>: Microsoftのコンプライアンス文書や監査報告書の公開場所</li>"
      "<li><strong>Azure Resource Manager(ARM)</strong>: Azureの管理レイヤー。ポータル・CLI・テンプレートなど、どの手段でも同じAPIを通る</li></ul>"),
+    ("monitor-arc", "Azure Monitor・Advisor・Arcの役割",
+     "<table><tr><th>サービス</th><th>役割</th></tr>"
+     "<tr><td>Azure Monitor</td><td>メトリックやログを収集・分析し、アラートで異常を通知する</td></tr>"
+     "<tr><td>Azure Advisor</td><td>利用状況を分析し、信頼性・セキュリティ・コスト・パフォーマンスなどの観点で推奨事項を示す</td></tr>"
+     "<tr><td>Azure Service Health</td><td>Azureサービスの障害やメンテナンスなど、自分の環境に影響する情報を通知する</td></tr>"
+     "<tr><td>Azure Arc</td><td>オンプレミスや他社クラウドにあるサーバーなどを、Azureの管理機能の対象に加える</td></tr></table>"
+     "<ul><li>「推奨事項をもらう」ならAdvisor、「状態を監視して通知する」ならMonitor、と使い分ける</li>"
+     "<li>Arcは、ハイブリッド環境やマルチクラウド環境を一元管理したい場面で登場する</li></ul>"
+     "<p>名前が似たサービスが多いため、「何をするためのものか」を一言で言えるようにしておきましょう。</p>"),
 ]
 
 
