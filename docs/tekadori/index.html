@@ -1,0 +1,32 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>年収から手取りを計算|手取り・税金かんたん計算</title><meta name="description" content="年収を入力するだけで、社会保険料・所得税・住民税を引いた手取り額の目安を計算できます。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/tekadori/index.html">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="../index.html">手取り・税金かんたん計算</a><nav><a href="../index.html">手取り計算</a><a href="../nenshu/index.html">年収別一覧</a><a href="../fukugyo.html">副業の税金</a></nav></header>
+<main><h1>年収から手取りを計算</h1><p>年収(万円)を入れると、社会保険料・税金を引いた手取りの目安がわかります。</p><div class="card"><label>年収(万円) <input id="g" type="number" value="400" min="1" step="10"></label> <button id="btn">計算する</button></div><div id="out" class="card"></div><h2>計算の前提</h2><ul><li>給与のみ、独身、扶養なし、賞与は月給に均等割り</li><li>健康保険5.0%、厚生年金9.15%、雇用保険0.55%(いずれも本人負担の概算)</li><li>所得税は令和7年度税制改正後の給与所得控除・基礎控除を使用、復興特別所得税2.1%を加算</li><li>住民税は所得割10%+均等割5,000円(自治体で差があります)</li></ul><h2>年収別の手取り</h2><p><a href="nenshu/index.html">年収200万円〜2,000万円の手取り一覧を見る</a></p><script>
+function calcNet(g){var kd;if(g<=1900000)kd=650000;else if(g<=3600000)kd=g*0.3+80000;else if(g<=6600000)kd=g*0.2+440000;else if(g<=8500000)kd=g*0.1+1100000;else kd=1950000;kd=Math.min(kd,g);
+var s=g-kd,m=g/12,kenpo=Math.min(m,1390000)*0.05*12,nen=Math.min(m,650000)*0.0915*12,koyo=g*0.0055,sha=kenpo+nen+koyo,kiso;
+if(s<=1320000)kiso=950000;else if(s<=3360000)kiso=880000;else if(s<=4890000)kiso=680000;else if(s<=6550000)kiso=630000;else kiso=580000;
+var t=Math.floor(Math.max(0,s-sha-kiso)/1000)*1000,B=[[1950000,.05,0],[3300000,.10,97500],[6950000,.20,427500],[9000000,.23,636000],[18000000,.33,1536000],[40000000,.40,2796000],[1e12,.45,4796000]],tax=0;
+for(var i=0;i<B.length;i++){if(t<=B[i][0]){tax=t*B[i][1]-B[i][2];break}}
+var st=tax*1.021,jt=Math.floor(Math.max(0,s-sha-430000)/1000)*1000,jm=jt*0.10+5000;return{sha:sha,st:st,jm:jm,net:g-sha-st-jm}}
+function fmt(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function run(){var g=parseFloat(document.getElementById('g').value)*10000;if(!(g>0)){return}
+var r=calcNet(g);document.getElementById('out').innerHTML='<p class="big">手取り 年'+fmt(r.net)+'(月'+fmt(r.net/12)+')</p><table><tr><th>社会保険料</th><td>'+fmt(r.sha)+'</td></tr><tr><th>所得税(復興税込)</th><td>'+fmt(r.st)+'</td></tr><tr><th>住民税</th><td>'+fmt(r.jm)+'</td></tr><tr><th>手取り率</th><td>'+(r.net/g*100).toFixed(1)+'%</td></tr></table>'}
+document.getElementById('btn').onclick=run;document.getElementById('g').addEventListener('keydown',function(e){if(e.key==='Enter')run()});run();
+</script></main>
+<footer><p>本サイトの金額は、独身・扶養なし・協会けんぽ平均料率・賞与なしを仮定した<strong>概算</strong>です。実際の金額は勤務先・地域・家族構成で変わります。正確な額は給与明細や税務署・自治体で確認してください。</p><p>最終更新: 2026-10-07</p></footer></body></html>
