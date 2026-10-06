@@ -178,7 +178,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-104", "az104/index.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -282,9 +282,59 @@ AZ = [
 ]
 
 
+AZ900 = [
+    ("exam", "AZ-900(Azure Fundamentals)試験の概要",
+     "<p>AZ-900は、クラウドとAzureの基礎知識を問う入門レベルの認定試験(Microsoft Certified: Azure Fundamentals)です。技術職でなくても受験できます。</p>"
+     "<ul><li>クラウドの概念</li><li>Azureのアーキテクチャとサービス</li><li>Azureの管理とガバナンス(コスト・セキュリティ・規制)</li></ul>"
+     "<p>出題範囲と配点はMicrosoft Learnの「試験の学習ガイド」で改訂されるため、受験前に最新版を確認してください。</p>"),
+    ("cloud-concepts", "クラウドの概念(共同責任モデル・CapEx/OpEx)",
+     "<ul><li><strong>CapEx(資本支出)</strong>: 設備を買う先行投資。<strong>OpEx(運用支出)</strong>: 使った分だけ支払う。クラウドはOpEx中心</li>"
+     "<li><strong>従量課金</strong>: 使用量に応じて課金される</li>"
+     "<li><strong>高可用性・スケーラビリティ・弾力性</strong>: 負荷に合わせて増減でき、障害に強い</li></ul>"
+     "<table><tr><th>責任範囲</th><th>オンプレ</th><th>IaaS</th><th>PaaS</th><th>SaaS</th></tr>"
+     "<tr><td>データ・アカウント・アクセス</td><td>利用者</td><td>利用者</td><td>利用者</td><td>利用者</td></tr>"
+     "<tr><td>アプリケーション</td><td>利用者</td><td>利用者</td><td>共有</td><td>プロバイダー</td></tr>"
+     "<tr><td>OS</td><td>利用者</td><td>利用者</td><td>プロバイダー</td><td>プロバイダー</td></tr>"
+     "<tr><td>物理ホスト・ネットワーク・データセンター</td><td>利用者</td><td>プロバイダー</td><td>プロバイダー</td><td>プロバイダー</td></tr></table>"
+     "<p>パブリック・プライベート・ハイブリッドの各クラウドの違いも出題されます。データがどこまで自社管理かが見分けのポイントです。</p>"),
+    ("architecture", "Azureのアーキテクチャ(リージョン・ゾーン・階層)",
+     "<ul><li><strong>リージョン</strong>: データセンターが集まる地理的エリア。<strong>リージョンペア</strong>は災害復旧のために組まれる2つのリージョン</li>"
+     "<li><strong>可用性ゾーン</strong>: 同一リージョン内の物理的に分かれたデータセンター群</li></ul>"
+     "<p>リソースの整理は、<strong>管理グループ → サブスクリプション → リソースグループ → リソース</strong>の階層です。"
+     "リソースグループは、同じライフサイクルのリソースをまとめる論理コンテナーです。</p>"),
+    ("services", "主要サービス(コンピューティング・ネットワーク・ストレージ)",
+     "<table><tr><th>分類</th><th>サービス</th><th>用途</th></tr>"
+     "<tr><td>コンピューティング</td><td>仮想マシン</td><td>OSから管理できるIaaS</td></tr>"
+     "<tr><td></td><td>App Service</td><td>Webアプリのホスティング(PaaS)</td></tr>"
+     "<tr><td></td><td>Azure Functions</td><td>イベント駆動のサーバーレス</td></tr>"
+     "<tr><td></td><td>コンテナー(ACI、AKS)</td><td>コンテナーの実行・オーケストレーション</td></tr>"
+     "<tr><td>ネットワーク</td><td>仮想ネットワーク</td><td>Azure内のプライベートネットワーク</td></tr>"
+     "<tr><td></td><td>VPN Gateway / ExpressRoute</td><td>オンプレとの接続(ExpressRouteは専用線)</td></tr>"
+     "<tr><td>ストレージ</td><td>Blob / Files / Queue / Table</td><td>非構造化データ / ファイル共有 / メッセージ / NoSQL</td></tr></table>"),
+    ("identity-security", "ID・アクセス・セキュリティ",
+     "<ul><li><strong>Microsoft Entra ID</strong>: クラウドのID管理。シングルサインオン(SSO)や多要素認証(MFA)に対応</li>"
+     "<li><strong>条件付きアクセス</strong>: 場所・デバイス・リスクなどの条件に応じてアクセスを許可・要求・ブロックする</li>"
+     "<li><strong>ゼロトラスト</strong>: 「社内だから安全」とは考えず、常に検証する考え方</li>"
+     "<li><strong>多層防御</strong>: 物理、ID、境界、ネットワーク、コンピューティング、アプリケーション、データの各層で守る</li>"
+     "<li><strong>Microsoft Defender for Cloud</strong>: セキュリティ態勢の評価と脅威の検出</li></ul>"),
+    ("cost-sla", "コスト管理とSLA",
+     "<ul><li><strong>料金計算ツール</strong>: これから使うサービスの見積もり</li>"
+     "<li><strong>TCO計算ツール</strong>: オンプレミスからの移行で、総所有コストがどう変わるかの比較</li>"
+     "<li><strong>Microsoft Cost Management</strong>: 実際の利用コストの分析・予算とアラート</li>"
+     "<li><strong>タグ</strong>: コストを部署やプロジェクトごとに集計するためのラベル</li>"
+     "<li><strong>SLA</strong>: サービスの稼働率の保証。複数サービスを組み合わせると、全体のSLAは各SLAの積になり、単体より下がる</li></ul>"),
+    ("governance", "ガバナンスとコンプライアンス",
+     "<ul><li><strong>Azure Policy</strong>: ルールに沿わないリソースを検出・防止する</li>"
+     "<li><strong>リソースロック</strong>: 誤削除・誤変更を防ぐ</li>"
+     "<li><strong>Microsoft Purview</strong>: データのガバナンスとコンプライアンス</li>"
+     "<li><strong>Service Trust Portal</strong>: Microsoftのコンプライアンス文書や監査報告書の公開場所</li>"
+     "<li><strong>Azure Resource Manager(ARM)</strong>: Azureの管理レイヤー。ポータル・CLI・テンプレートなど、どの手段でも同じAPIを通る</li></ul>"),
+]
+
+
 def build_site2():
     d = "it-shikaku/"
-    for sec, items, label in (("itpass", ITPASS, "ITパスポート"), ("az104", AZ, "AZ-104")):
+    for sec, items, label in (("itpass", ITPASS, "ITパスポート"), ("az900", AZ900, "AZ-900"), ("az104", AZ, "AZ-104")):
         lis = "".join(f'<li><a href="{s}.html">{esc(t)}</a></li>' for s, t, _ in items)
         page(S2, d + f"{sec}/index.html", f"{label} 学習ノート一覧", f"{label}の要点を項目別にまとめた学習ノートの一覧です。",
              f"<h1>{label} 学習ノート</h1><ul class='links'>{lis}</ul>", S2_NAV, S2_DISC)
@@ -295,8 +345,9 @@ def build_site2():
                  S2_NAV, S2_DISC)
     page(S2, d + "index.html", "IT資格 学習ノート|ITパスポート・AZ-104",
          "ITパスポートとAZ-104の要点を、短く読める形でまとめた非公式の学習ノート。",
-         "<h1>IT資格 学習ノート</h1><p>ITパスポートとAZ-104(Azure Administrator)の要点を、1ページ1テーマでまとめています。</p>"
+         "<h1>IT資格 学習ノート</h1><p>ITパスポート・AZ-900・AZ-104の要点を、1ページ1テーマでまとめています。</p>"
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
+         "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
          "<div class='card'><a href='az104/index.html'><strong>AZ-104</strong></a><br>ID・ストレージ・VM・ネットワーク・監視</div>",
          S2_NAV, S2_DISC)
 
