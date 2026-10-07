@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>監視エージェントとNetwork Watcher|AZ-104</title><meta name="description" content="AZ-104: 監視エージェントとNetwork Watcher。一言での説明、たとえ話、試験のポイント、確認問題。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/it-shikaku/az104-units/agents-watcher.html">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="../index.html">IT資格 学習ノート</a><nav><a href="../itpass/index.html">ITパスポート</a><a href="../az900/index.html">AZ-900</a><a href="../az104/index.html">AZ-104</a><a href="../az104-intro/index.html">AZ-104入門</a><a href="../az104-study/index.html">AZ-104ガイド</a><a href="../az900-study/index.html">AZ-900シリーズ</a><a href="../az900-units/index.html">AZ-900単元別</a><a href="../az104-units/index.html">AZ-104単元別</a></nav></header>
+<main><p class='note'>監視・バックアップ</p><h1>監視エージェントとNetwork Watcher</h1><div class='card'><strong>一言で言うと</strong><br>現行の標準はAzure Monitorエージェント。ネットワーク診断はNetwork Watcher。</div><h2>たとえ話</h2><p>古い道具から新しい道具へ。ネットワーク専門の診断キット。</p><h2>押さえること</h2><ul><li>Azure Monitorエージェント(AMA): 現行の標準。データ収集ルール(DCR)と連携。旧Log Analyticsエージェント(MMA)は非推奨</li><li>イベントサブスクリプションを作るだけでは、ゲストOSのログは収集できない。エージェントとワークスペースが必要</li><li>Network Watcher: 接続モニター=継続的に疎通を監視、IPフロー検証=今この瞬間の許可/拒否をその場で診断、ネクストホップ=次の中継先、トポロジ=見取り図、パケットキャプチャ=生のパケット</li><li>Azure Advisorは、30日を超えてVMに接続されていないディスクを検出できる</li></ul><h2>試験でのポイント</h2><ul><li>NSG設定後の疎通確認はIPフロー検証。継続して見るなら接続モニター</li></ul><h2>確認問題</h2><p>「いまこの通信が許可されるか」を1回だけ確認する機能は?</p><details><summary>答えを見る</summary><p>IPフロー検証</p></details><h2>関連する単元</h2><ul class='links'><li><a href='alert-counting.html'>アラートルールとアクショングループの数え方</a></li><li><a href='backup-deletion.html'>Recovery Servicesコンテナーの削除の順番</a></li></ul><p><a href='index.html'>単元一覧へ</a> / <a href='ai-study.html'>AIを先生にして学ぶ</a></p></main>
+<footer><p>本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。各社の商標は各権利者に帰属します。</p><p>最終更新: 2026-10-08</p></footer></body></html>

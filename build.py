@@ -5,6 +5,7 @@ from az104_intro import ARTICLES as AZ_INTRO
 from az104_main import ARTICLES as AZ_STUDY
 from az900_series import ARTICLES as AZ900_STUDY
 from az900_units import UNITS as AZ900_UNITS, DOMAINS as AZ900_DOMAINS
+from az104_units import UNITS as AZ104_UNITS, DOMAINS as AZ104_DOMAINS
 from datetime import date
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -182,7 +183,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -381,6 +382,7 @@ def build_site2():
          "<h1>IT資格 学習ノート</h1><p>ITパスポート・AZ-900・AZ-104の要点を、1ページ1テーマでまとめています。</p>"
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
          "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
+         "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az900-units/index.html'><strong>AZ-900 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ900_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az900-study/index.html'><strong>AZ-900学習シリーズ(完全初心者向け)</strong></a><br>たとえ話「クラウド街」で学ぶ、全16記事(ひっかけ集・クイズ・ハンズオンつき)</div>"
          "<div class='card'><a href='az104-intro/index.html'><strong>AZ-104入門シリーズ</strong></a><br>知識ゼロから、たとえ話で学ぶ(全9記事)</div>"
@@ -406,36 +408,35 @@ AI_PROMPT = """あなたは、私専属のAZ-900(Microsoft Azure Fundamentals)�
 今日学ぶ範囲は、次のとおりです。(ここに、学びたい単元を書く)"""
 
 
-def build_az900_units():
-    d = "it-shikaku/az900-units/"
+def build_units(UNITS_, DOMAINS_, d, cert, ai_desc, hub_title):
     by = {}
-    for u in AZ900_UNITS:
+    for u in UNITS_:
         by.setdefault(u[2], []).append(u)
-    titles = {u[0]: u[1] for u in AZ900_UNITS}
+    titles = {u[0]: u[1] for u in UNITS_}
     sections = ""
     for dom in sorted(by):
         lis = "".join(f"<li><a href='{u[0]}.html'>{esc(u[1])}</a></li>" for u in by[dom])
-        sections += f"<h2>{esc(AZ900_DOMAINS[dom])}</h2><ul class='links'>{lis}</ul>"
-    page(S2, d + "index.html", "AZ-900 単元別ガイド(1テーマ1ページ)",
-         "AZ-900の出題範囲を、1つの概念ごとに解説。たとえ話、試験での聞かれ方、似た用語との違い、確認問題つき。",
-         "<h1>AZ-900 単元別ガイド</h1><p>知りたい単元に、そのまま飛べる一覧です。各ページに、たとえ話、試験のポイント、似た用語へのリンク、確認問題があります。</p>"
+        sections += f"<h2>{esc(DOMAINS_[dom])}</h2><ul class='links'>{lis}</ul>"
+    page(S2, d + "index.html", hub_title,
+         f"{cert}の出題範囲を、1つの概念ごとに解説。たとえ話、試験での聞かれ方、似た用語との違い、確認問題つき。",
+         f"<h1>{esc(hub_title)}</h1><p>知りたい単元に、そのまま飛べる一覧です。各ページに、たとえ話、試験のポイント、似た用語へのリンク、確認問題があります。</p>"
          "<div class='card'><a href='ai-study.html'><strong>AIを先生にして学ぶ方法</strong></a><br>そのまま貼れる指示文つき</div>" + sections,
          S2_NAV, S2_DISC)
-    for u in AZ900_UNITS:
+    for u in UNITS_:
         slug, title, dom, one, tatoe_s, details, points, rel, quiz = u
-        body = (f"<p class='note'>{esc(AZ900_DOMAINS[dom])}</p><h1>{esc(title)}</h1><div class='card'><strong>一言で言うと</strong><br>{esc(one)}</div>"
+        body = (f"<p class='note'>{esc(DOMAINS_[dom])}</p><h1>{esc(title)}</h1><div class='card'><strong>一言で言うと</strong><br>{esc(one)}</div>"
                 f"<h2>たとえ話</h2><p>{esc(tatoe_s)}</p><h2>押さえること</h2><ul>" + "".join(f"<li>{esc(x)}</li>" for x in details) + "</ul>"
                 "<h2>試験でのポイント</h2><ul>" + "".join(f"<li>{esc(x)}</li>" for x in points) + "</ul>"
                 "<h2>確認問題</h2>" + "".join(f"<p>{esc(q)}</p><details><summary>答えを見る</summary><p>{esc(a)}</p></details>" for q, a in quiz)
                 + "<h2>関連する単元</h2><ul class='links'>" + "".join(f"<li><a href='{r}.html'>{esc(titles.get(r, lab))}</a></li>" for r, lab in rel) + "</ul>"
                 "<p><a href='index.html'>単元一覧へ</a> / <a href='ai-study.html'>AIを先生にして学ぶ</a></p>")
-        page(S2, d + f"{slug}.html", f"{title}|AZ-900", f"AZ-900: {title}。一言での説明、たとえ話、試験のポイント、確認問題。", body, S2_NAV, S2_DISC)
-    page(S2, d + "ai-study.html", "AIを先生にしてAZ-900を学ぶ方法(そのまま貼れる指示文つき)",
-         "ChatGPTやClaudeなどのAIを、AZ-900の専属の先生にする使い方と、そのまま貼れる指示文。",
-         "<h1>AIを先生にしてAZ-900を学ぶ方法</h1><p>ChatGPTやClaudeなどのAIに、次の指示文を貼ると、AZ-900の専属の先生になってもらえます。使うAIの利用規約と、入力してよい情報の範囲は、各自で確認してください。個人情報や仕事の情報は入力しないでください。</p>"
+        page(S2, d + f"{slug}.html", f"{title}|{cert}", f"{cert}: {title}。一言での説明、たとえ話、試験のポイント、確認問題。", body, S2_NAV, S2_DISC)
+    page(S2, d + "ai-study.html", f"AIを先生にして{cert}を学ぶ方法(そのまま貼れる指示文つき)",
+         f"ChatGPTやClaudeなどのAIを、{cert}の専属の先生にする使い方と、そのまま貼れる指示文。",
+         f"<h1>AIを先生にして{cert}を学ぶ方法</h1><p>ChatGPTやClaudeなどのAIに、次の指示文を貼ると、{cert}の専属の先生になってもらえます。使うAIの利用規約と、入力してよい情報の範囲は、各自で確認してください。個人情報や仕事の情報は入力しないでください。</p>"
          "<h2>手順</h2><ol><li>下の指示文をコピーして、AIの最初のメッセージとして送る</li><li>最後の「今日学ぶ範囲」の部分に、学びたい単元を書く(<a href='index.html'>単元一覧</a>のタイトルをそのまま書くとよい)</li>"
          "<li>AIが出す問題に、1問ずつ答える</li><li>間違えた問題は、AIに「記録して」と頼み、1日後・3日後・7日後に復習する</li></ol>"
-         "<h2>そのまま貼れる指示文</h2><pre style='white-space:pre-wrap'>" + esc(AI_PROMPT) + "</pre>"
+         "<h2>そのまま貼れる指示文</h2><pre style='white-space:pre-wrap'>" + esc(AI_PROMPT.replace("AZ-900(Microsoft Azure Fundamentals)", ai_desc)) + "</pre>"
          "<h2>うまく使うコツ</h2><ul><li>1回の学習で扱う範囲を小さくする(3〜5概念)</li><li>AIの答えが、サイトの説明と違うときは、Microsoft Learnの公式情報で確認する</li>"
          "<li>正解でも、理由を自分の言葉で説明できるか確認してもらう</li></ul><p><a href='index.html'>単元一覧へ</a></p>", S2_NAV, S2_DISC)
 
@@ -520,7 +521,7 @@ def build_hub(extras=()):
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
-    build_site1(); build_site2(); build_az900_units(); build_site3()
+    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_site3()
     extras = load_extra_sites()
     for m in extras:
         m.build(page, write)
