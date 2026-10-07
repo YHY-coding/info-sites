@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """3サイトを docs/ に静的生成する。 使い方: python3 build.py  (BASE_URL=https://xxx を付けると sitemap も出力)"""
 import os, shutil, html
+from az104_intro import ARTICLES as AZ_INTRO
+from az104_main import ARTICLES as AZ_STUDY
 from datetime import date
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -178,7 +180,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -361,7 +363,8 @@ AZ900 = [
 
 def build_site2():
     d = "it-shikaku/"
-    for sec, items, label in (("itpass", ITPASS, "ITパスポート"), ("az900", AZ900, "AZ-900"), ("az104", AZ, "AZ-104")):
+    for sec, items, label in (("itpass", ITPASS, "ITパスポート"), ("az900", AZ900, "AZ-900"), ("az104", AZ, "AZ-104"),
+                                 ("az104-intro", AZ_INTRO, "AZ-104入門(たとえ話)"), ("az104-study", AZ_STUDY, "AZ-104学習ガイド")):
         lis = "".join(f'<li><a href="{s}.html">{esc(t)}</a></li>' for s, t, _ in items)
         page(S2, d + f"{sec}/index.html", f"{label} 学習ノート一覧", f"{label}の要点を項目別にまとめた学習ノートの一覧です。",
              f"<h1>{label} 学習ノート</h1><ul class='links'>{lis}</ul>", S2_NAV, S2_DISC)
@@ -375,6 +378,8 @@ def build_site2():
          "<h1>IT資格 学習ノート</h1><p>ITパスポート・AZ-900・AZ-104の要点を、1ページ1テーマでまとめています。</p>"
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
          "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
+         "<div class='card'><a href='az104-intro/index.html'><strong>AZ-104入門シリーズ</strong></a><br>知識ゼロから、たとえ話で学ぶ(全9記事)</div>"
+         "<div class='card'><a href='az104-study/index.html'><strong>AZ-104学習ガイド(AZ-900取得者向け)</strong></a><br>分野別の要点と引っかけパターン集(全8記事)</div>"
          "<div class='card'><a href='az104/index.html'><strong>AZ-104</strong></a><br>ID・ストレージ・VM・ネットワーク・監視</div>",
          S2_NAV, S2_DISC)
 
