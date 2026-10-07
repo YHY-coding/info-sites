@@ -1,0 +1,29 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>住宅ローン返済シミュレーター|毎月の返済額と総返済額</title><meta name="description" content="借入額・金利・返済期間を入力すると、元利均等返済での毎月の返済額、総返済額、利息の合計を計算します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/money-tools/loan/index.html">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="../index.html">お金の計算ツール集</a><nav><a href="../loan/index.html">住宅ローン</a><a href="../overtime.html">残業代</a><a href="../discount.html">割引・消費税</a></nav></header>
+<main><h1>住宅ローン返済シミュレーター</h1><p>元利均等返済(毎月の返済額が一定)の場合の目安を計算します。</p><div class='card'><label>借入額(万円) <input id='p' type='number' value='3000' min='1' step='100'></label><br><label>年利(%) <input id='r' type='number' value='1.5' min='0' step='0.1'></label><br><label>返済期間(年) <input id='y' type='number' value='35' min='1' step='1'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><h2>計算の前提</h2><ul><li>金利は返済期間中、変わらないものとして計算(固定金利のイメージ)</li><li>ボーナス返済・繰り上げ返済・各種手数料・保険料は含まない</li><li>実際の返済額は、金融機関の計算方法(端数処理など)で、数十円〜数百円の差が出ることがあります</li></ul><h2>借入額別の返済額一覧</h2><ul class='links'><li><a href='1000.html'>借入額1,000万円の毎月の返済額</a></li><li><a href='1500.html'>借入額1,500万円の毎月の返済額</a></li><li><a href='2000.html'>借入額2,000万円の毎月の返済額</a></li><li><a href='2500.html'>借入額2,500万円の毎月の返済額</a></li><li><a href='3000.html'>借入額3,000万円の毎月の返済額</a></li><li><a href='3500.html'>借入額3,500万円の毎月の返済額</a></li><li><a href='4000.html'>借入額4,000万円の毎月の返済額</a></li><li><a href='4500.html'>借入額4,500万円の毎月の返済額</a></li><li><a href='5000.html'>借入額5,000万円の毎月の返済額</a></li><li><a href='5500.html'>借入額5,500万円の毎月の返済額</a></li><li><a href='6000.html'>借入額6,000万円の毎月の返済額</a></li><li><a href='6500.html'>借入額6,500万円の毎月の返済額</a></li><li><a href='7000.html'>借入額7,000万円の毎月の返済額</a></li><li><a href='7500.html'>借入額7,500万円の毎月の返済額</a></li><li><a href='8000.html'>借入額8,000万円の毎月の返済額</a></li></ul><script>
+function pay(P,rate,years){var n=Math.round(years*12),r=rate/100/12;if(r===0)return P/n;return P*r/(1-Math.pow(1+r,-n))}
+function f(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function run(){var P=parseFloat(document.getElementById('p').value)*10000,rate=parseFloat(document.getElementById('r').value),y=parseFloat(document.getElementById('y').value);
+if(!(P>0)||!(y>0)||!(rate>=0)){document.getElementById('out').textContent='入力を確認してください';return}
+var m=pay(P,rate,y),n=Math.round(y*12),total=m*n;
+document.getElementById('out').innerHTML='<p class="big">毎月 '+f(m)+'</p><table><tr><th>総返済額</th><td>'+f(total)+'</td></tr><tr><th>うち利息</th><td>'+f(total-P)+'</td></tr><tr><th>返済回数</th><td>'+n+'回</td></tr></table>'}
+document.getElementById('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの計算結果は目安です。実際の金額は、金融機関・勤務先の就業規則・契約内容で変わります。重要な判断の前には、必ず契約書や専門家の説明で確認してください。</p><p>最終更新: 2026-10-08</p></footer></body></html>

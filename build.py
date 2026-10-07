@@ -448,17 +448,37 @@ def build_site3():
 
 
 # ============================================================ ハブ・sitemap
-def build_hub():
-    body = ("<h1>サイト一覧</h1><div class='card'><a href='tekadori/index.html'>手取り・税金かんたん計算</a></div>"
-            "<div class='card'><a href='it-shikaku/index.html'>IT資格 学習ノート</a></div>"
-            "<div class='card'><a href='hojokin/index.html'>補助金・助成金ガイド</a></div>")
-    page(dict(name="サイト一覧", home="index.html"), "index.html", "サイト一覧", "3つの情報サイトへのリンク", body, [], "")
+def load_extra_sites():
+    """extra_sites/*.py を読み込む。各モジュールは META(dict: slug,name,desc) と build(page, write) を持つ。"""
+    import importlib
+    mods = []
+    d = os.path.join(ROOT, "extra_sites")
+    if os.path.isdir(d):
+        import sys
+        sys.path.insert(0, ROOT)
+        for fn in sorted(os.listdir(d)):
+            if fn.endswith(".py") and not fn.startswith("_"):
+                mods.append(importlib.import_module("extra_sites." + fn[:-3]))
+    return mods
+
+
+def build_hub(extras=()):
+    cards = ("<div class='card'><a href='tekadori/index.html'>手取り・税金かんたん計算</a></div>"
+             "<div class='card'><a href='it-shikaku/index.html'>IT資格 学習ノート</a></div>"
+             "<div class='card'><a href='hojokin/index.html'>補助金・助成金ガイド</a></div>")
+    for m in extras:
+        cards += f"<div class='card'><a href='{m.META['slug']}/index.html'><strong>{esc(m.META['name'])}</strong></a><br>{esc(m.META['desc'])}</div>"
+    page(dict(name="サイト一覧", home="index.html"), "index.html", "サイト一覧", "情報サイトへのリンク集", "<h1>サイト一覧</h1>" + cards, [], "")
 
 
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
-    build_site1(); build_site2(); build_site3(); build_hub()
+    build_site1(); build_site2(); build_site3()
+    extras = load_extra_sites()
+    for m in extras:
+        m.build(page, write)
+    build_hub(extras)
     write(".nojekyll", "")
     sd = os.path.join(ROOT, "static")
     if os.path.isdir(sd):

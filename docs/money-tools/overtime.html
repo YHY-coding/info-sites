@@ -1,0 +1,30 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>残業代(割増賃金)の計算|時間外・深夜・休日</title><meta name="description" content="月給と月平均所定労働時間から、時間外・深夜・休日労働の割増賃金の目安を計算します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/money-tools/overtime.html">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">お金の計算ツール集</a><nav><a href="loan/index.html">住宅ローン</a><a href="overtime.html">残業代</a><a href="discount.html">割引・消費税</a></nav></header>
+<main><h1>残業代(割増賃金)の計算</h1><p>月給から1時間あたりの基礎賃金を出し、割増率をかけた目安を計算します。</p><div class='card'><label>月給(万円・手当を除く基本分) <input id='w' type='number' value='25' min='1' step='0.5'></label><br><label>月平均所定労働時間 <input id='h' type='number' value='160' min='1' step='1'></label><br><label>時間外労働(時間) <input id='o' type='number' value='30' min='0' step='1'></label><br><label>法定休日の労働(時間) <input id='ho' type='number' value='0' min='0' step='1'></label><br><label>深夜(22時〜5時)の労働(時間) <input id='nt' type='number' value='0' min='0' step='1'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><h2>割増率の基本</h2><table><tr><th>種類</th><th>割増率</th></tr><tr><td>時間外労働(月60時間以内)</td><td>25%以上</td></tr><tr><td>時間外労働(月60時間超)</td><td>50%以上</td></tr><tr><td>法定休日の労働</td><td>35%以上</td></tr><tr><td>深夜労働(22時〜5時)</td><td>25%以上(他の割増に加算)</td></tr></table><h2>注意点</h2><ul><li>1時間あたりの基礎賃金には、通勤手当・家族手当・住宅手当など、法律で除外できる手当が含まれません。どの手当を除くかは、就業規則や給与明細で確認してください</li><li>この計算では、時間外と深夜が重なる場合の加算を、深夜の時間に対して25%加算で近似しています。実際の取り扱いは、勤務先の規則で確認してください</li><li>割増率は法律上の最低ラインで、会社が上乗せしている場合があります。割増の制度は改正されることがあるため、最新の情報は厚生労働省などの公式情報で確認してください</li></ul><script>
+function f(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function run(){var w=parseFloat(document.getElementById('w').value)*10000,h=parseFloat(document.getElementById('h').value);
+var o=parseFloat(document.getElementById('o').value)||0,ho=parseFloat(document.getElementById('ho').value)||0,nt=parseFloat(document.getElementById('nt').value)||0;
+if(!(w>0)||!(h>0)){document.getElementById('out').textContent='入力を確認してください';return}
+var hr=w/h,o1=Math.min(o,60),o2=Math.max(o-60,0);
+var a=hr*1.25*o1,b=hr*1.5*o2,c=hr*1.35*ho,d=hr*0.25*nt,t=a+b+c+d;
+document.getElementById('out').innerHTML='<p class="big">割増賃金の合計 '+f(t)+'</p><table><tr><th>1時間あたりの基礎賃金</th><td>'+f(hr)+'</td></tr><tr><th>時間外(60時間以内・25%増)</th><td>'+f(a)+'</td></tr><tr><th>時間外(60時間超・50%増)</th><td>'+f(b)+'</td></tr><tr><th>法定休日(35%増)</th><td>'+f(c)+'</td></tr><tr><th>深夜(25%加算)</th><td>'+f(d)+'</td></tr></table>'}
+document.getElementById('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの計算結果は目安です。実際の金額は、金融機関・勤務先の就業規則・契約内容で変わります。重要な判断の前には、必ず契約書や専門家の説明で確認してください。</p><p>最終更新: 2026-10-08</p></footer></body></html>

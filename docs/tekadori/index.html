@@ -29,4 +29,4 @@ function run(){var g=parseFloat(document.getElementById('g').value)*10000;if(!(g
 var r=calcNet(g);document.getElementById('out').innerHTML='<p class="big">手取り 年'+fmt(r.net)+'(月'+fmt(r.net/12)+')</p><table><tr><th>社会保険料</th><td>'+fmt(r.sha)+'</td></tr><tr><th>所得税(復興税込)</th><td>'+fmt(r.st)+'</td></tr><tr><th>住民税</th><td>'+fmt(r.jm)+'</td></tr><tr><th>手取り率</th><td>'+(r.net/g*100).toFixed(1)+'%</td></tr></table>'}
 document.getElementById('btn').onclick=run;document.getElementById('g').addEventListener('keydown',function(e){if(e.key==='Enter')run()});run();
 </script></main>
-<footer><p>本サイトの金額は、独身・扶養なし・協会けんぽ平均料率・賞与なしを仮定した<strong>概算</strong>です。実際の金額は勤務先・地域・家族構成で変わります。正確な額は給与明細や税務署・自治体で確認してください。</p><p>最終更新: 2026-10-07</p></footer></body></html>
+<footer><p>本サイトの金額は、独身・扶養なし・協会けんぽ平均料率・賞与なしを仮定した<strong>概算</strong>です。実際の金額は勤務先・地域・家族構成で変わります。正確な額は給与明細や税務署・自治体で確認してください。</p><p>最終更新: 2026-10-08</p></footer></body></html>
