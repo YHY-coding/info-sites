@@ -186,7 +186,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -385,6 +385,7 @@ def build_site2():
          "<h1>IT資格 学習ノート</h1><p>ITパスポート・AZ-900・AZ-104の要点を、1ページ1テーマでまとめています。</p>"
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
          "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
+         "<div class='card'><a href='note.html'><strong>noteの解説記事</strong></a><br>読み物の形で、たとえ話をまとめた記事の一覧</div>"
          "<div class='card'><a href='itpass-units/index.html'><strong>ITパスポート 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(ITP_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az900-units/index.html'><strong>AZ-900 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ900_UNITS))+"ページ+AIで学ぶ方法)</div>"
@@ -443,6 +444,21 @@ def build_units(UNITS_, DOMAINS_, d, cert, ai_desc, hub_title):
          "<h2>そのまま貼れる指示文</h2><pre style='white-space:pre-wrap'>" + esc(AI_PROMPT.replace("AZ-900(Microsoft Azure Fundamentals)", ai_desc).replace("Microsoft Learnの公式情報", "公式情報(IPAのサイトなど)" if cert == "ITパスポート" else "Microsoft Learnの公式情報")) + "</pre>"
          "<h2>うまく使うコツ</h2><ul><li>1回の学習で扱う範囲を小さくする(3〜5概念)</li><li>AIの答えが、サイトの説明と違うときは、Microsoft Learnの公式情報で確認する</li>"
          "<li>正解でも、理由を自分の言葉で説明できるか確認してもらう</li></ul><p><a href='index.html'>単元一覧へ</a></p>", S2_NAV, S2_DISC)
+
+
+NOTE_ARTICLES = [
+    ("クラウドって結局なに?賃貸・ホテル・レストランでわかるIaaS/PaaS/SaaS", "https://note.com/kumomachi_lab/n/n2c91b3bc00aa"),
+    ("クラウドの「似た言葉」を見分ける3つのコツ|弾力性・認証と承認・ゾーンとリージョン", "https://note.com/kumomachi_lab/n/n49d8c370fc19"),
+    ("ITパスポートの「似た用語」は、ペアで覚えると間違えない|ERP・CRM、KGI・KPIほか", "https://note.com/kumomachi_lab/n/ndcc1f45ca771"),
+    ("ITパスポートの計算問題は「型」で解ける|損益分岐点・稼働率・転送時間", "https://note.com/kumomachi_lab/n/nd97554a39145"),
+]
+
+
+def build_note_page():
+    lis = "".join(f"<li><a href='{u}' rel='noopener'>{esc(t)}</a></li>" for t, u in NOTE_ARTICLES)
+    page(S2, "it-shikaku/note.html", "noteの解説記事一覧|クラウド街ラボ", "IT未経験向けに、クラウド・ITパスポートの用語をたとえ話で解説したnoteの記事一覧です。",
+         "<h1>noteの解説記事</h1><p>このサイトの解説を、読み物の形でまとめた記事です(筆者のnote「クラウド街ラボ」)。文章の作成にはAIを活用しています。</p>"
+         f"<ul class='links'>{lis}</ul><p><a href='index.html'>学習ノートのトップへ</a></p>", S2_NAV, S2_DISC)
 
 
 def build_site3():
@@ -525,7 +541,7 @@ def build_hub(extras=()):
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
-    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
+    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
     extras = load_extra_sites()
     for m in extras:
         m.build(page, write)
