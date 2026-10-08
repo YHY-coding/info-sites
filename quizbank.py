@@ -172,3 +172,37 @@ ITP2 = [
     ("現実の風景にデジタル情報を重ねて表示する技術はどれか。", ["VR", "AR", "IoT", "5G"], 1, "AR(拡張現実)。"),
 ]
 ITP = ITP + ITP2
+
+
+AWS = [
+    ("AWSの責任共有モデルで、利用者の責任となるものはどれか。", ["データセンターの物理的な警備", "ハードウェアの保守", "EC2のOSのパッチ適用", "ホストの仮想化基盤"], 2, "EC2のOSの管理は、利用者の責任。物理的な部分はAWS。"),
+    ("需要に合わせて、リソースを自動で増減できる特性はどれか。", ["弾力性", "固定費", "オンプレミス", "専有"], 0, "弾力性(エラスティシティ)。"),
+    ("Well-Architectedフレームワークの柱に含まれないものはどれか。", ["運用上の優秀性", "信頼性", "コスト最適化", "広告収益の最大化"], 3, "6つの柱は、運用上の優秀性・セキュリティ・信頼性・パフォーマンス効率・コスト最適化・持続可能性。"),
+    ("アプリを変更せずに、そのままクラウドに移す移行戦略はどれか。", ["リホスト", "リファクタリング", "リパーチェス", "廃止"], 0, "リホスト(リフト&シフト)。"),
+    ("AWSアカウントのルートユーザーについて、適切な対応はどれか。", ["日常の作業に使う", "アクセスキーを共有する", "MFAで保護し、日常では使わない", "パスワードを使い回す"], 2, "ルートユーザーはMFAで保護し、日常の作業では使わない。"),
+    ("EC2上のアプリに、S3へのアクセス権限を与える適切な方法はどれか。", ["アクセスキーをコードに埋め込む", "IAMロールを割り当てる", "ルートユーザーの認証情報を使う", "S3を公開する"], 1, "IAMロール。"),
+    ("DDoS攻撃から、AWSのリソースを保護するサービスはどれか。", ["AWS Shield", "Amazon Macie", "AWS KMS", "AWS Config"], 0, "AWS Shield。"),
+    ("S3内の個人情報などの機密データを、検出するサービスはどれか。", ["Amazon Macie", "Amazon GuardDuty", "AWS CloudTrail", "Amazon Inspector"], 0, "Amazon Macie。"),
+    ("AWSアカウントでの、操作(API呼び出し)を記録するサービスはどれか。", ["CloudWatch", "CloudTrail", "Trusted Advisor", "Route 53"], 1, "CloudTrail。"),
+    ("セキュリティグループの特徴として、正しいものはどれか。", ["サブネット単位で動作する", "拒否ルールを設定できる", "ステートフルで、許可ルールのみ", "ステートレス"], 2, "セキュリティグループは、ステートフルで、許可ルールのみ。"),
+    ("AWSのコンプライアンスレポートを、入手できるサービスはどれか。", ["AWS Artifact", "AWS Config", "AWS Shield", "Amazon Cognito"], 0, "AWS Artifact。"),
+    ("複数のAZに、リソースを分散して配置する主な目的はどれか。", ["高可用性の確保", "データ転送料金の削減", "OSの更新", "ルートユーザーの保護"], 0, "AZ障害に備えて、高可用性を確保する。"),
+    ("負荷に応じて、EC2の台数を自動で増減する機能はどれか。", ["Elastic Load Balancing", "Auto Scaling", "Route 53", "CloudFormation"], 1, "Auto Scaling。ELBは、負荷分散。"),
+    ("サーバーを管理せず、イベントでコードを実行するサービスはどれか。", ["Amazon EC2", "AWS Lambda", "Amazon RDS", "AWS Direct Connect"], 1, "AWS Lambda。"),
+    ("オブジェクトストレージのサービスはどれか。", ["Amazon S3", "Amazon EBS", "Amazon EFS", "Amazon RDS"], 0, "Amazon S3。"),
+    ("めったに使わないデータを、低コストで、長期保存するのに適したストレージクラスはどれか。", ["S3 Standard", "S3 Glacier", "Amazon EBS", "Amazon ElastiCache"], 1, "S3 Glacier。"),
+    ("マネージドなNoSQLデータベースサービスはどれか。", ["Amazon RDS", "Amazon DynamoDB", "Amazon Redshift", "Amazon Aurora"], 1, "DynamoDB。"),
+    ("大規模なデータ分析のための、データウェアハウスサービスはどれか。", ["Amazon Redshift", "Amazon DynamoDB", "Amazon SQS", "AWS Lambda"], 0, "Redshift。"),
+    ("DNSサービスはどれか。", ["Amazon Route 53", "Amazon CloudFront", "AWS Direct Connect", "Amazon VPC"], 0, "Route 53。"),
+    ("オンプレミスとAWSを、専用線で接続するサービスはどれか。", ["AWS Direct Connect", "Site-to-Site VPN", "Amazon CloudFront", "AWS Snowball"], 0, "Direct Connect。VPNは、インターネット越し。"),
+    ("非同期で、メッセージを受け渡すキューのサービスはどれか。", ["Amazon SNS", "Amazon SQS", "Amazon Lex", "Amazon Polly"], 1, "SQS。SNSは、通知の配信。"),
+    ("インフラを、テンプレートで自動構築するサービスはどれか。", ["AWS CloudFormation", "AWS CloudTrail", "AWS Config", "Amazon Inspector"], 0, "CloudFormation(IaC)。"),
+    ("長期の利用を約束して、EC2の料金を大幅に割引できる購入オプションはどれか。", ["オンデマンド", "リザーブドインスタンス/Savings Plans", "スポット", "無料利用枠"], 1, "1年・3年の約束で割引。"),
+    ("余剰の容量を、大幅な割引で利用できるが、中断されることがある購入オプションはどれか。", ["スポットインスタンス", "リザーブドインスタンス", "Dedicated Hosts", "オンデマンド"], 0, "スポットインスタンス。"),
+    ("AWSの過去のコストを、グラフで分析するサービスはどれか。", ["AWS Cost Explorer", "AWS Pricing Calculator", "AWS Budgets", "AWS Artifact"], 0, "Cost Explorer。"),
+    ("これから使うAWSの、料金を見積もるツールはどれか。", ["AWS Pricing Calculator", "AWS Cost Explorer", "Amazon CloudWatch", "AWS Organizations"], 0, "料金計算ツール。"),
+    ("複数のAWSアカウントの請求を、まとめて管理できる機能はどれか。", ["IAMポリシー", "Organizationsの一括請求", "セキュリティグループ", "CloudFront"], 1, "Organizationsの一括請求。"),
+    ("すべてのAWSアカウントに、無料で提供されるサポートプランはどれか。", ["Basic", "Developer", "Business", "Enterprise"], 0, "Basic。"),
+    ("大容量のデータを、物理デバイスで、オフラインでAWSに運ぶサービス群はどれか。", ["AWS Snowファミリー", "AWS Direct Connect", "Amazon Kinesis", "Amazon Athena"], 0, "Snowファミリー。"),
+    ("AWSへのデータ転送(インバウンド)の料金について、基本的に正しいものはどれか。", ["無料", "常に高額", "アウトバウンドより高い", "リージョンによらず固定の定額"], 0, "インバウンドは、基本的に無料。アウトバウンドは、料金がかかる。"),
+]
