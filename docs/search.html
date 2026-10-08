@@ -1,0 +1,31 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>サイト内検索</title><meta name="description" content="このサイトの解説ページを、キーワードで検索できます。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/search.html"><meta property="og:title" content="サイト内検索"><meta property="og:description" content="このサイトの解説ページを、キーワードで検索できます。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/search.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">サイト内検索</a><nav></nav></header>
+<main><h1>サイト内検索</h1><p><input id='q' type='search' placeholder='例: 損益分岐点 / NSG / 公開鍵' style='width:100%;max-width:520px'></p><p id='cnt' class='note'></p><div id='res'></div><script>
+(function(){var data=[],q=document.getElementById('q'),out=document.getElementById('res'),cnt=document.getElementById('cnt');
+fetch('search-index.json').then(function(r){return r.json()}).then(function(d){data=d;cnt.textContent=d.length+'ページから検索できます';run()}).catch(function(){cnt.textContent='検索データを読み込めませんでした'});
+function run(){var s=q.value.trim().toLowerCase();if(!s){out.innerHTML='';return}var ws=s.split(/\s+/);var hit=[];
+for(var i=0;i<data.length;i++){var t=data[i].t.toLowerCase(),d=data[i].d.toLowerCase(),sc=0,ok=true;
+for(var k=0;k<ws.length;k++){var w=ws[k];if(t.indexOf(w)>=0)sc+=3;else if(d.indexOf(w)>=0)sc+=1;else{ok=false;break}}
+if(ok)hit.push([sc,data[i]])}
+hit.sort(function(a,b){return b[0]-a[0]});out.innerHTML=hit.slice(0,50).map(function(h){var e=h[1];return '<div class="card"><a href="'+e.u+'"><strong>'+esc(e.t)+'</strong></a><br><span class="note">'+esc(e.d)+'</span></div>'}).join('')||'<p>見つかりませんでした</p>'}
+function esc(x){return x.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+q.addEventListener('input',run)})();
+</script></main>
+<footer><p></p><p>最終更新: 2026-10-08</p></footer></body></html>

@@ -16,6 +16,7 @@ OUT = os.path.join(ROOT, "docs")
 BASE_URL = os.environ.get("BASE_URL", "").rstrip("/")
 TODAY = date.today().isoformat()
 written = []  # sitemap 用
+SEARCH = []  # 検索インデックス用
 
 CSS = """
 :root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
@@ -52,6 +53,12 @@ def page(site, path, title, desc, body, nav, disclaimer):
     up = "../" * depth
     navhtml = "".join(f'<a href="{up}{u}">{esc(t)}</a>' for t, u in nav)
     canon = f'<link rel="canonical" href="{BASE_URL}/{path}">' if BASE_URL else ""
+    if BASE_URL:
+        canon += (f'<meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}">'
+                  f'<meta property="og:type" content="article"><meta property="og:url" content="{BASE_URL}/{path}"><meta property="og:locale" content="ja_JP">'
+                  '<meta name="twitter:card" content="summary">')
+    if path != "search.html" and not path.startswith("google"):
+        SEARCH.append({"u": path, "t": title, "d": desc})
     doc = f"""<!doctype html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)}</title><meta name="description" content="{esc(desc)}">{canon}
@@ -186,7 +193,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("検索", "../search.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -502,6 +509,25 @@ def build_glossary():
          "<p><a href='itpass-units/index.html'>ITパスポート 単元別ガイドへ</a></p>", S2_NAV, S2_DISC)
 
 
+def build_search():
+    import json
+    write("search-index.json", json.dumps(SEARCH, ensure_ascii=False, separators=(",", ":")))
+    js = """
+(function(){var data=[],q=document.getElementById('q'),out=document.getElementById('res'),cnt=document.getElementById('cnt');
+fetch('search-index.json').then(function(r){return r.json()}).then(function(d){data=d;cnt.textContent=d.length+'ページから検索できます';run()}).catch(function(){cnt.textContent='検索データを読み込めませんでした'});
+function run(){var s=q.value.trim().toLowerCase();if(!s){out.innerHTML='';return}var ws=s.split(/\\s+/);var hit=[];
+for(var i=0;i<data.length;i++){var t=data[i].t.toLowerCase(),d=data[i].d.toLowerCase(),sc=0,ok=true;
+for(var k=0;k<ws.length;k++){var w=ws[k];if(t.indexOf(w)>=0)sc+=3;else if(d.indexOf(w)>=0)sc+=1;else{ok=false;break}}
+if(ok)hit.push([sc,data[i]])}
+hit.sort(function(a,b){return b[0]-a[0]});out.innerHTML=hit.slice(0,50).map(function(h){var e=h[1];return '<div class="card"><a href="'+e.u+'"><strong>'+esc(e.t)+'</strong></a><br><span class="note">'+esc(e.d)+'</span></div>'}).join('')||'<p>見つかりませんでした</p>'}
+function esc(x){return x.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+q.addEventListener('input',run)})();
+"""
+    page(dict(name="サイト内検索", home="index.html"), "search.html", "サイト内検索", "このサイトの解説ページを、キーワードで検索できます。",
+         "<h1>サイト内検索</h1><p><input id='q' type='search' placeholder='例: 損益分岐点 / NSG / 公開鍵' style='width:100%;max-width:520px'></p><p id='cnt' class='note'></p><div id='res'></div><script>" + js + "</script>",
+         [], "")
+
+
 def build_site3():
     d = "hojokin/"
     page(S3, d + "index.html", "補助金・助成金ガイド|はじめての申請準備",
@@ -576,6 +602,7 @@ def build_hub(extras=()):
              "<div class='card'><a href='hojokin/index.html'>補助金・助成金ガイド</a></div>")
     for m in extras:
         cards += f"<div class='card'><a href='{m.META['slug']}/index.html'><strong>{esc(m.META['name'])}</strong></a><br>{esc(m.META['desc'])}</div>"
+    cards = "<p><a href='search.html'>🔎 サイト内を検索する</a></p>" + cards
     page(dict(name="サイト一覧", home="index.html"), "index.html", "サイト一覧", "情報サイトへのリンク集", "<h1>サイト一覧</h1>" + cards, [], "")
 
 
@@ -587,6 +614,7 @@ def main():
     for m in extras:
         m.build(page, write)
     build_hub(extras)
+    build_search()
     write(".nojekyll", "")
     sd = os.path.join(ROOT, "static")
     if os.path.isdir(sd):
