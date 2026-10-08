@@ -186,7 +186,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -385,6 +385,8 @@ def build_site2():
          "<h1>IT資格 学習ノート</h1><p>ITパスポート・AZ-900・AZ-104の要点を、1ページ1テーマでまとめています。</p>"
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
          "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
+         "<div class='card'><a href='itpass-glossary.html'><strong>ITパスポート 略語・用語辞典</strong></a><br>略語を、英語のフル表記と意味つきで一覧("+str(__import__('itp_glossary').TERMS.__len__())+"語)</div>"
+         "<div class='card'><a href='quiz-index.html'><strong>オリジナル4択問題集</strong></a><br>ITパスポート63問・AZ-900 30問・AZ-104 24問(解説つき)</div>"
          "<div class='card'><a href='note.html'><strong>noteの解説記事</strong></a><br>読み物の形で、たとえ話をまとめた記事の一覧</div>"
          "<div class='card'><a href='itpass-units/index.html'><strong>ITパスポート 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(ITP_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
@@ -459,6 +461,45 @@ def build_note_page():
     page(S2, "it-shikaku/note.html", "noteの解説記事一覧|クラウド街ラボ", "IT未経験向けに、クラウド・ITパスポートの用語をたとえ話で解説したnoteの記事一覧です。",
          "<h1>noteの解説記事</h1><p>このサイトの解説を、読み物の形でまとめた記事です(筆者のnote「クラウド街ラボ」)。文章の作成にはAIを活用しています。</p>"
          f"<ul class='links'>{lis}</ul><p><a href='index.html'>学習ノートのトップへ</a></p>", S2_NAV, S2_DISC)
+
+
+def build_quizbank(qs, d, cert, per=10):
+    import quizbank  # noqa
+    letters = "アイウエ"
+    sets = [qs[i:i + per] for i in range(0, len(qs), per)]
+    lis = "".join(f"<li><a href='set{i + 1}.html'>第{i + 1}回({i * per + 1}〜{i * per + len(st)}問)</a></li>" for i, st in enumerate(sets))
+    page(S2, d + "index.html", f"{cert} 4択問題集(オリジナル)",
+         f"{cert}のオリジナル4択問題集。1問ずつ、解説つき。全{len(qs)}問。",
+         f"<h1>{esc(cert)} 4択問題集</h1><p>独自に作成したオリジナル問題です(過去問ではありません)。答えは、選んでから、折りたたみを開いて確認してください。全{len(qs)}問。</p><ul class='links'>{lis}</ul>",
+         S2_NAV, S2_DISC)
+    for i, st in enumerate(sets):
+        body = f"<h1>{esc(cert)} 4択問題集 第{i + 1}回</h1>"
+        for j, (q, ch, a, ex) in enumerate(st):
+            n = i * per + j + 1
+            body += (f"<div class='card'><strong>問{n}</strong> {esc(q)}<ul>" + "".join(f"<li>{letters[k]} {esc(c)}</li>" for k, c in enumerate(ch))
+                     + f"</ul><details><summary>答えを見る</summary><p><strong>正解: {letters[a]} {esc(ch[a])}</strong></p><p>{esc(ex)}</p></details></div>")
+        nav = "".join(f"<a href='set{k + 1}.html'>第{k + 1}回</a> " for k in range(len(sets)))
+        body += f"<p>{nav}</p><p><a href='index.html'>問題集のトップへ</a></p>"
+        page(S2, d + f"set{i + 1}.html", f"{cert} 4択問題集 第{i + 1}回", f"{cert}のオリジナル4択問題 第{i + 1}回。解説つき。", body, S2_NAV, S2_DISC)
+
+
+def build_quiz_index():
+    page(S2, "it-shikaku/quiz-index.html", "オリジナル4択問題集(ITパスポート・AZ-900・AZ-104)", "ITパスポート、AZ-900、AZ-104のオリジナル4択問題集の入口。", 
+         "<h1>オリジナル4択問題集</h1><p>解説つきの、1問ずつ解ける問題集です。</p>"
+         "<div class='card'><a href='itpass-quiz/index.html'><strong>ITパスポート</strong></a>(63問)</div>"
+         "<div class='card'><a href='az900-quiz/index.html'><strong>AZ-900</strong></a>(30問)</div>"
+         "<div class='card'><a href='az104-quiz/index.html'><strong>AZ-104</strong></a>(24問)</div>", S2_NAV, S2_DISC)
+
+
+def build_glossary():
+    from itp_glossary import TERMS
+    rows = "".join(f"<tr id='t{i}'><td><strong>{esc(a)}</strong></td><td>{esc(b)}</td><td>{esc(c)}</td></tr>" for i, (a, b, c) in enumerate(TERMS))
+    page(S2, "it-shikaku/itpass-glossary.html", "ITパスポート 略語・用語辞典(フル表記つき)",
+         f"ITパスポートに出る略語{len(TERMS)}語を、英語のフル表記と日本語の意味つきで一覧にした辞典。",
+         f"<h1>ITパスポート 略語・用語辞典</h1><p>略語は、フル表記(英語)を知ると、意味と結びつけて覚えられます。全{len(TERMS)}語。</p>"
+         "<p class='note'>ブラウザの検索機能(Ctrl+F / Cmd+F)で、略語をすぐ探せます。</p>"
+         f"<table><tr><th>略語</th><th>英語のフル表記</th><th>意味</th></tr>{rows}</table>"
+         "<p><a href='itpass-units/index.html'>ITパスポート 単元別ガイドへ</a></p>", S2_NAV, S2_DISC)
 
 
 def build_site3():
@@ -541,7 +582,7 @@ def build_hub(extras=()):
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
-    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
+    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
     extras = load_extra_sites()
     for m in extras:
         m.build(page, write)
