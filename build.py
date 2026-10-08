@@ -16,6 +16,8 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(ROOT, "docs")
 BASE_URL = os.environ.get("BASE_URL", "").rstrip("/")
 TODAY = date.today().isoformat()
+# 出典の確認が済むまで、元教材(Udemy等を参考にした教材)に近い『シリーズ』ページは、公開しない
+PUBLISH_DERIVED_SERIES = False
 written = []  # sitemap 用
 SEARCH = []  # 検索インデックス用
 
@@ -194,7 +196,7 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-104入門", "az104-intro/index.html"), ("AZ-104ガイド", "az104-study/index.html"), ("AZ-900シリーズ", "az900-study/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("AWS単元別", "aws-units/index.html"), ("検索", "../search.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("AZ-104単元別", "az104-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("AWS単元別", "aws-units/index.html"), ("検索", "../search.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。")
 
@@ -378,8 +380,8 @@ AZ900 = [
 def build_site2():
     d = "it-shikaku/"
     for sec, items, label in (("itpass", ITPASS, "ITパスポート"), ("az900", AZ900, "AZ-900"), ("az104", AZ, "AZ-104"),
-                                 ("az104-intro", AZ_INTRO, "AZ-104入門(たとえ話)"), ("az104-study", AZ_STUDY, "AZ-104学習ガイド"),
-                                 ("az900-study", AZ900_STUDY, "AZ-900学習シリーズ")):
+                                 *([("az104-intro", AZ_INTRO, "AZ-104入門(たとえ話)"), ("az104-study", AZ_STUDY, "AZ-104学習ガイド"),
+                                 ("az900-study", AZ900_STUDY, "AZ-900学習シリーズ")] if PUBLISH_DERIVED_SERIES else [])):
         lis = "".join(f'<li><a href="{s}.html">{esc(t)}</a></li>' for s, t, _ in items)
         page(S2, d + f"{sec}/index.html", f"{label} 学習ノート一覧", f"{label}の要点を項目別にまとめた学習ノートの一覧です。",
              f"<h1>{label} 学習ノート</h1><ul class='links'>{lis}</ul>", S2_NAV, S2_DISC)
@@ -400,9 +402,6 @@ def build_site2():
          "<div class='card'><a href='itpass-units/index.html'><strong>ITパスポート 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(ITP_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az900-units/index.html'><strong>AZ-900 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ900_UNITS))+"ページ+AIで学ぶ方法)</div>"
-         "<div class='card'><a href='az900-study/index.html'><strong>AZ-900学習シリーズ(完全初心者向け)</strong></a><br>たとえ話「クラウド街」で学ぶ、全16記事(ひっかけ集・クイズ・ハンズオンつき)</div>"
-         "<div class='card'><a href='az104-intro/index.html'><strong>AZ-104入門シリーズ</strong></a><br>知識ゼロから、たとえ話で学ぶ(全9記事)</div>"
-         "<div class='card'><a href='az104-study/index.html'><strong>AZ-104学習ガイド(AZ-900取得者向け)</strong></a><br>分野別の要点と引っかけパターン集(全8記事)</div>"
          "<div class='card'><a href='az104/index.html'><strong>AZ-104</strong></a><br>ID・ストレージ・VM・ネットワーク・監視</div>",
          S2_NAV, S2_DISC)
 
@@ -497,7 +496,7 @@ def build_quiz_index():
          "<h1>オリジナル4択問題集</h1><p>解説つきの、1問ずつ解ける問題集です。</p>"
          "<div class='card'><a href='itpass-quiz/index.html'><strong>ITパスポート</strong></a>("+str(len(__import__('quizbank').ITP))+"問)</div>"
          "<div class='card'><a href='az900-quiz/index.html'><strong>AZ-900</strong></a>(30問)</div>"
-         "<div class='card'><a href='az104-quiz/index.html'><strong>AZ-104</strong></a>(24問)</div>"
+         ""
          "<div class='card'><a href='aws-quiz/index.html'><strong>AWSクラウドプラクティショナー</strong></a>(30問)</div>", S2_NAV, S2_DISC)
 
 
@@ -612,7 +611,7 @@ def build_hub(extras=()):
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
-    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104"); build_units(AWS_UNITS, AWS_DOMAINS, "it-shikaku/aws-units/", "AWSクラウドプラクティショナー", "AWS Certified Cloud Practitioner", "AWSクラウドプラクティショナー 単元別ガイド(1テーマ1ページ)"); build_quizbank(_qb.AWS, "it-shikaku/aws-quiz/", "AWSクラウドプラクティショナー"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
+    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); (build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104") if PUBLISH_DERIVED_SERIES else None); build_units(AWS_UNITS, AWS_DOMAINS, "it-shikaku/aws-units/", "AWSクラウドプラクティショナー", "AWS Certified Cloud Practitioner", "AWSクラウドプラクティショナー 単元別ガイド(1テーマ1ページ)"); build_quizbank(_qb.AWS, "it-shikaku/aws-quiz/", "AWSクラウドプラクティショナー"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
     extras = load_extra_sites()
     for m in extras:
         m.build(page, write)
