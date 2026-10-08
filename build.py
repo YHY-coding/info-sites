@@ -402,7 +402,7 @@ def build_site2():
          "<div class='card'><a href='itpass-units/index.html'><strong>ITパスポート 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(ITP_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az900-units/index.html'><strong>AZ-900 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ900_UNITS))+"ページ+AIで学ぶ方法)</div>"
-         "<div class='card'><a href='az104/index.html'><strong>AZ-104</strong></a><br>ID・ストレージ・VM・ネットワーク・監視</div>",
+         "<div class='card'><a href='az104/index.html'><strong>AZ-104</strong></a><br>ID・ストレージ・VM・ネットワーク・監視</div>" + extra_cards(),
          S2_NAV, S2_DISC)
 
 
@@ -530,6 +530,37 @@ q.addEventListener('input',run)})();
          [], "")
 
 
+def load_units_extra():
+    """units_extra/*.py を読み込む。各モジュールは META(dict: slug, cert, ai_desc, hub_title)、DOMAINS、UNITS(、任意でQUIZ)を持つ。"""
+    import importlib, sys
+    mods = []
+    d = os.path.join(ROOT, "units_extra")
+    if os.path.isdir(d):
+        sys.path.insert(0, ROOT)
+        for fn in sorted(os.listdir(d)):
+            if fn.endswith(".py") and not fn.startswith("_"):
+                mods.append(importlib.import_module("units_extra." + fn[:-3]))
+    return mods
+
+
+def extra_cards():
+    cards = ""
+    for m in load_units_extra():
+        if m.META.get("append_to"): continue
+        cards += (f"<div class='card'><a href='{m.META['slug']}/index.html'><strong>{esc(m.META['hub_title'])}</strong></a><br>"
+                  f"知りたい単元へそのまま飛べる(1テーマ1ページ・全{len(m.UNITS)}ページ)</div>")
+    return cards
+
+
+def build_units_extra():
+    for m in load_units_extra():
+        meta = m.META
+        if meta.get("append_to"): continue
+        build_units(m.UNITS, m.DOMAINS, f"it-shikaku/{meta['slug']}/", meta["cert"], meta["ai_desc"], meta["hub_title"])
+        if getattr(m, "QUIZ", None):
+            build_quizbank(m.QUIZ, f"it-shikaku/{meta['slug']}-quiz/", meta["cert"])
+
+
 def build_site3():
     d = "hojokin/"
     page(S3, d + "index.html", "補助金・助成金ガイド|はじめての申請準備",
@@ -608,10 +639,27 @@ def build_hub(extras=()):
     page(dict(name="サイト一覧", home="index.html"), "index.html", "サイト一覧", "情報サイトへのリンク集", "<h1>サイト一覧</h1>" + cards, [], "")
 
 
+def merge_appended_units():
+    """units_extra の append_to 指定のモジュールを、既存の単元ガイド・問題集に追加する。"""
+    import quizbank
+    seen = set()
+    for m in load_units_extra():
+        t = m.META.get("append_to")
+        if not t: continue
+        units, quiz = {"itpass": (ITP_UNITS, quizbank.ITP), "aws": (AWS_UNITS, quizbank.AWS)}[t]
+        have = {u[0] for u in units}
+        for u in m.UNITS:
+            if u[0] in have: continue  # slug重複は無視
+            units.append(u); have.add(u[0])
+        quiz.extend(getattr(m, "QUIZ", []))
+
+
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
+    merge_appended_units()
     build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)"); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); (build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104") if PUBLISH_DERIVED_SERIES else None); build_units(AWS_UNITS, AWS_DOMAINS, "it-shikaku/aws-units/", "AWSクラウドプラクティショナー", "AWS Certified Cloud Practitioner", "AWSクラウドプラクティショナー 単元別ガイド(1テーマ1ページ)"); build_quizbank(_qb.AWS, "it-shikaku/aws-quiz/", "AWSクラウドプラクティショナー"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
+    build_units_extra()
     extras = load_extra_sites()
     for m in extras:
         m.build(page, write)
