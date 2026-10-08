@@ -7,3 +7,9 @@
 ## 2026-10-08 (2)
 - date-tools(日付・年齢・和暦ツール集): 10ページ(index, age, days, add, weekday, wareki, eras, wareki-table, leap-year, age-counting)
 - 確認: Python基準実装とブラウザJSを node で3004ケース照合し不一致0。build.py エラーなし、docs内の内部リンク4103件で切れ0
+
+## 2026-10-08 (週次単元追加)
+- ITパスポート: ma-tob(M&A・TOB)、shareholder-board(株主総会と取締役会)
+- AWS: aws-ec2-instance-types(EC2のインスタンスタイプ)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(317ページ生成)、docs内の内部リンク切れ0
