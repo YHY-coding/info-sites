@@ -1,0 +1,49 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>和暦⇔西暦の変換|令和・平成・昭和・大正・明治</title><meta name="description" content="西暦の日付から和暦(元号と年)を、和暦の年から西暦を計算します。改元の日付を考慮します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/date-tools/wareki.html">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">日付・年齢・和暦ツール集</a><nav><a href="age.html">年齢</a><a href="days.html">日数</a><a href="add.html">日付の加減算</a><a href="weekday.html">曜日</a><a href="wareki.html">和暦↔西暦</a><a href="eras.html">解説</a></nav></header>
+<main><h1>和暦⇔西暦の変換</h1><h2>西暦の日付から和暦へ</h2><div class='card'><label>日付 <input id='a' type='date' value='2026-01-01'></label><br><div id='o1'></div></div><h2>和暦から西暦へ</h2><div class='card'><label>元号 <select id='e'><option>令和</option><option>平成</option><option>昭和</option><option>大正</option><option>明治</option></select></label> <label><input id='n' type='number' value='1' min='1' step='1'>年</label><div id='o2'></div></div><button id='btn'>計算する</button><p class='note'>改元の日付は<a href='eras.html'>元号と改元の日付</a>、年ごとの対応は<a href='wareki-table.html'>対応表</a>にあります。</p><script>
+function leap(y){return y%4===0&&(y%100!==0||y%400===0)}
+function dim(y,m){return [31,leap(y)?29:28,31,30,31,30,31,31,30,31,30,31][m-1]}
+function toDay(y,m,d){var t=new Date(0);t.setUTCFullYear(y,m-1,d);return Math.round(t.getTime()/86400000)}
+function fromDay(n){var t=new Date(n*86400000);return [t.getUTCFullYear(),t.getUTCMonth()+1,t.getUTCDate()]}
+function weekday(y,m,d){return (((toDay(y,m,d)+4)%7)+7)%7}
+function addMonths(y,m,d,k){var t=y*12+m-1+k,ny=Math.floor(t/12),nm=((t%12)+12)%12+1;return [ny,nm,Math.min(d,dim(ny,nm))]}
+function addDays(y,m,d,n){return fromDay(toDay(y,m,d)+n)}
+function age(b,t){var months=(t[0]-b[0])*12+(t[1]-b[1]);if(t[2]<b[2])months--;var a=addMonths(b[0],b[1],b[2],months);return [Math.floor(months/12),months%12,toDay(t[0],t[1],t[2])-toDay(a[0],a[1],a[2])]}
+var ERAS=[['令和',2019,5,1],['平成',1989,1,8],['昭和',1926,12,25],['大正',1912,7,30],['明治',1868,10,23]];
+function wareki(y,m,d){for(var i=0;i<ERAS.length;i++){var e=ERAS[i];if(y>e[1]||(y===e[1]&&(m>e[2]||(m===e[2]&&d>=e[3]))))return [e[0],y-e[1]+1]}return null}
+function fromWareki(name,n){for(var i=0;i<ERAS.length;i++){if(ERAS[i][0]===name)return ERAS[i][1]+n-1}return null}
+function eto(y){return '子丑寅卯辰巳午未申酉戌亥'.charAt((((y-4)%12)+12)%12)}
+var WD='日月火水木金土';
+function pd(id){var v=document.getElementById(id).value;if(!/^\d{4}-\d{2}-\d{2}$/.test(v))return null;var a=v.split('-');return [parseInt(a[0],10),parseInt(a[1],10),parseInt(a[2],10)]}
+function fd(a){return a[0]+'年'+a[1]+'月'+a[2]+'日('+WD.charAt(weekday(a[0],a[1],a[2]))+')'}
+function bad(){document.getElementById('out').textContent='日付を確認してください'}
+
+function run(){var out='';var d=pd('a');
+if(d){var w=wareki(d[0],d[1],d[2]);out+=(w&&d[0]>=1873)?'<p class="big">'+w[0]+(w[1]===1?'元':w[1])+'年</p>':'<p>1873年(明治6年)より前は、旧暦のため対応していません</p>'}
+document.getElementById('o1').innerHTML=out;
+var name=document.getElementById('e').value,n=parseInt(document.getElementById('n').value,10),o2='';
+if(!isNaN(n)&&n>=1){var y=fromWareki(name,n);var ei=0;for(var i=0;i<ERAS.length;i++)if(ERAS[i][0]===name)ei=i;
+var endY=ei>0?ERAS[ei-1][1]:null;
+if(endY!==null&&y>endY)o2='<p>'+name+n+'年は存在しません</p>';else o2='<p class="big">西暦'+y+'年</p>'+((endY!==null&&y===endY)?'<p class="note">この年は途中で改元があります。月日によって元号が変わります。</p>':'')}
+else o2='<p>年を確認してください</p>';
+document.getElementById('o2').innerHTML=o2}
+document.getElementById('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの計算結果は目安です。契約・手続き・法律上の日数や年齢の数え方は、書類の記載や官公庁などの公式情報で確認してください。入力した日付は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-08</p></footer></body></html>
