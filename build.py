@@ -6,9 +6,9 @@ from az104_main import ARTICLES as AZ_STUDY
 from az900_series import ARTICLES as AZ900_STUDY
 from az900_units import UNITS as AZ900_UNITS, DOMAINS as AZ900_DOMAINS
 from az104_units import UNITS as AZ104_UNITS, DOMAINS as AZ104_DOMAINS
-import itpass_units1, itpass_units2
-ITP_UNITS = itpass_units1.UNITS + itpass_units2.UNITS
-ITP_DOMAINS = itpass_units1.DOMAINS
+import itpass_units1, itpass_units2, itpass_units3
+ITP_UNITS = itpass_units1.UNITS + itpass_units2.UNITS + itpass_units3.UNITS
+ITP_DOMAINS = {**itpass_units1.DOMAINS, **itpass_units3.DOMAINS_EXTRA}
 from datetime import date
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -393,7 +393,7 @@ def build_site2():
          "<div class='card'><a href='itpass/index.html'><strong>ITパスポート</strong></a><br>基礎用語・セキュリティ・ネットワーク</div>"
          "<div class='card'><a href='az900/index.html'><strong>AZ-900</strong></a><br>クラウドの基礎・Azureの主要サービス・コストとガバナンス</div>"
          "<div class='card'><a href='itpass-glossary.html'><strong>ITパスポート 略語・用語辞典</strong></a><br>略語を、英語のフル表記と意味つきで一覧("+str(__import__('itp_glossary').TERMS.__len__())+"語)</div>"
-         "<div class='card'><a href='quiz-index.html'><strong>オリジナル4択問題集</strong></a><br>ITパスポート63問・AZ-900 30問・AZ-104 24問(解説つき)</div>"
+         "<div class='card'><a href='quiz-index.html'><strong>オリジナル4択問題集</strong></a><br>ITパスポート"+str(len(__import__('quizbank').ITP))+"問・AZ-900 30問・AZ-104 24問(解説つき)</div>"
          "<div class='card'><a href='note.html'><strong>noteの解説記事</strong></a><br>読み物の形で、たとえ話をまとめた記事の一覧</div>"
          "<div class='card'><a href='itpass-units/index.html'><strong>ITパスポート 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(ITP_UNITS))+"ページ+AIで学ぶ方法)</div>"
          "<div class='card'><a href='az104-units/index.html'><strong>AZ-104 単元別ガイド</strong></a><br>知りたい単元へそのまま飛べる(1テーマ1ページ・全"+str(len(AZ104_UNITS))+"ページ+AIで学ぶ方法)</div>"
@@ -493,7 +493,7 @@ def build_quizbank(qs, d, cert, per=10):
 def build_quiz_index():
     page(S2, "it-shikaku/quiz-index.html", "オリジナル4択問題集(ITパスポート・AZ-900・AZ-104)", "ITパスポート、AZ-900、AZ-104のオリジナル4択問題集の入口。", 
          "<h1>オリジナル4択問題集</h1><p>解説つきの、1問ずつ解ける問題集です。</p>"
-         "<div class='card'><a href='itpass-quiz/index.html'><strong>ITパスポート</strong></a>(63問)</div>"
+         "<div class='card'><a href='itpass-quiz/index.html'><strong>ITパスポート</strong></a>("+str(len(__import__('quizbank').ITP))+"問)</div>"
          "<div class='card'><a href='az900-quiz/index.html'><strong>AZ-900</strong></a>(30問)</div>"
          "<div class='card'><a href='az104-quiz/index.html'><strong>AZ-104</strong></a>(24問)</div>", S2_NAV, S2_DISC)
 
