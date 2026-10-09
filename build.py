@@ -199,9 +199,20 @@ def build_site1():
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
 S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("このサイトについて", "about.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("AWS単元別", "aws-units/index.html"), ("検索", "../search.html")]
+import monetize as _mon
+def _monet_footer():
+    from urllib.parse import quote
+    parts = ["筆者のnote: <a href='%s' rel='noopener'>クラウド街ラボ</a>" % _mon.NOTE_PROFILE_URL]
+    if _mon.NOTE_PACK_URL:
+        parts.append("<a href='%s' rel='noopener'>ITパスポートのAI学習パック(note・有料)</a>" % _mon.NOTE_PACK_URL)
+    if _mon.AMAZON_TAG:
+        for k, kw in _mon.AMAZON_KEYWORDS.items():
+            parts.append("<a href='https://www.amazon.co.jp/s?k=%s&tag=%s' rel='sponsored noopener'>%sをAmazonで探す</a>" % (quote(kw), _mon.AMAZON_TAG, kw.replace(" 参考書", "")+"の参考書"))
+        parts.append("Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。")
+    return "<br>" + " ／ ".join(parts)
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
            "各社の商標は各権利者に帰属します。「クラウド街」などのたとえ話は、運営者がAIと一緒に作った独自のものです。"
-           "文章の作成にはAIを活用しています。<a href='__UP__about.html'>このサイトについて</a>")
+           "文章の作成にはAIを活用しています。<a href='__UP__about.html'>このサイトについて</a>" + _monet_footer())
 
 ITPASS = [
     ("exam", "ITパスポート試験の概要と合格の目安",
@@ -209,7 +220,8 @@ ITPASS = [
      "<ul><li>形式: CBT方式(パソコンで受験)、100問、試験時間120分</li>"
      "<li>分野: ストラテジ系(経営全般)、マネジメント系(プロジェクト・サービス管理)、テクノロジ系(基礎理論・技術)</li>"
      "<li>合格基準: 総合評価点600点以上(1,000点満点)かつ、各分野別評価点が300点以上</li>"
-     "<li>受験は通年で可能。詳細は公式サイトで確認してください</li></ul>"
+     "<li>受験は通年で可能。詳細は公式サイトで確認してください</li>"
+     "<li>新制度: IPAは、2027年度の春ごろから試験制度を見直す方向を公表しています(出題分野の再編案など)。受験する時期の出題範囲は、IPAの公式ページで必ず確認してください</li></ul>"
      "<p>範囲が広いため、全分野を浅く押さえつつ、分野別の足切りを避けることが大切です。</p>"),
     ("security-3", "情報セキュリティの3要素(機密性・完全性・可用性)",
      "<p>情報セキュリティの基本は、次の3つを守ることです。</p>"
