@@ -70,7 +70,7 @@ def page(site, path, title, desc, body, nav, disclaimer):
 <style>{CSS}</style></head><body>
 <header><a class="logo" href="{up}{site['home']}">{esc(site['name'])}</a><nav>{navhtml}</nav></header>
 <main>{body}</main>
-<footer><p>{disclaimer}</p><p>最終更新: {TODAY}</p></footer></body></html>"""
+<footer><p>{disclaimer.replace("__UP__", up)}</p><p>最終更新: {TODAY}</p></footer></body></html>"""
     write(path, doc)
 
 
@@ -198,9 +198,10 @@ def build_site1():
 
 # ============================================================ サイト2: IT資格ノート
 S2 = dict(name="IT資格 学習ノート", home="index.html")
-S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("AWS単元別", "aws-units/index.html"), ("検索", "../search.html")]
+S2_NAV = [("ITパスポート", "itpass/index.html"), ("AZ-900", "az900/index.html"), ("AZ-104", "az104/index.html"), ("AZ-900単元別", "az900-units/index.html"), ("ITパスポート単元別", "itpass-units/index.html"), ("noteの記事", "note.html"), ("このサイトについて", "about.html"), ("問題集", "quiz-index.html"), ("略語辞典", "itpass-glossary.html"), ("AWS単元別", "aws-units/index.html"), ("検索", "../search.html")]
 S2_DISC = ("本サイトは非公式の学習ノートです。試験内容・出題範囲は変更されるため、必ず公式の最新情報を確認してください。"
-           "各社の商標は各権利者に帰属します。")
+           "各社の商標は各権利者に帰属します。「クラウド街」などのたとえ話は、運営者がAIと一緒に作った独自のものです。"
+           "文章の作成にはAIを活用しています。<a href='__UP__about.html'>このサイトについて</a>")
 
 ITPASS = [
     ("exam", "ITパスポート試験の概要と合格の目安",
@@ -562,6 +563,26 @@ def build_units_extra():
             build_quizbank(m.QUIZ, f"it-shikaku/{meta['slug']}-quiz/", meta["cert"])
 
 
+def build_about():
+    page(S2, "it-shikaku/about.html", "このサイトについて|クラウド街とは", "学習ノートの作り方、「クラウド街」のたとえ話について、AIの活用、注意事項の説明。",
+         "<h1>このサイトについて</h1>"
+         "<p>IT未経験の人が、資格の勉強でつまずきやすい用語を、日常のたとえ話で理解してから、用語に戻るための、無料の学習ノートです。</p>"
+         "<h2>「クラウド街」のたとえ話について</h2>"
+         "<p>クラウドの「わからないところ」を、全部「街」にたとえて説明する考え方は、<strong>運営者がAIと一緒に、試行錯誤して作った独自のたとえ話</strong>です。</p>"
+         "<ul><li>オンプレミス=自分で土地を買って家を建てる/クラウド=街の貸し物件を借りる</li>"
+         "<li>リージョン=街、可用性ゾーン=同じ街の別のマンション棟、データセンター=巨大なマンション棟</li>"
+         "<li>IaaS=賃貸マンション、PaaS=ホテルの部屋、SaaS=レストランで食事</li></ul>"
+         "<p>新しい概念が出るたびに、新しいたとえを作らず、同じ街に、新しい登場人物を追加していきます。そのほうが、頭に残りやすいからです。</p>"
+         "<h2>AIの活用について</h2>"
+         "<p>文章の作成には、AIを活用しています。内容は、運営者が確認していますが、誤りが含まれる可能性があります。気づいた点は、noteの記事のコメントなどで、お知らせください。</p>"
+         "<h2>ご利用にあたって</h2>"
+         "<ul><li>本サイトは、非公式の学習ノートです。試験の運営団体や、製品の提供元とは、関係がありません。製品名・資格名は、各権利者の商標です。</li>"
+         "<li>試験の範囲・仕様・サービス名は、変わることがあります。受験前に、必ず公式の情報を確認してください。</li>"
+         "<li>合格を保証するものではありません。</li>"
+         "<li>本物の試験問題や、市販の問題集・講座の文章は、掲載していません。問題は、すべてオリジナルです。</li></ul>"
+         "<p><a href='index.html'>学習ノートのトップへ</a></p>", S2_NAV, S2_DISC)
+
+
 def build_site3():
     d = "hojokin/"
     page(S3, d + "index.html", "補助金・助成金ガイド|はじめての申請準備",
@@ -659,7 +680,7 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     merge_appended_units()
-    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); (build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)") if PUBLISH_AZ104_UNITS else None); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); (build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104") if PUBLISH_DERIVED_SERIES else None); build_units(AWS_UNITS, AWS_DOMAINS, "it-shikaku/aws-units/", "AWSクラウドプラクティショナー", "AWS Certified Cloud Practitioner", "AWSクラウドプラクティショナー 単元別ガイド(1テーマ1ページ)"); build_quizbank(_qb.AWS, "it-shikaku/aws-quiz/", "AWSクラウドプラクティショナー"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
+    build_site1(); build_site2(); build_units(AZ900_UNITS, AZ900_DOMAINS, "it-shikaku/az900-units/", "AZ-900", "AZ-900(Microsoft Azure Fundamentals)", "AZ-900 単元別ガイド(1テーマ1ページ)"); (build_units(AZ104_UNITS, AZ104_DOMAINS, "it-shikaku/az104-units/", "AZ-104", "AZ-104(Microsoft Azure Administrator)", "AZ-104 単元別ガイド(1テーマ1ページ)") if PUBLISH_AZ104_UNITS else None); build_about(); build_note_page(); build_quiz_index(); build_glossary(); import quizbank as _qb; build_quizbank(_qb.ITP, "it-shikaku/itpass-quiz/", "ITパスポート"); build_quizbank(_qb.AZ900, "it-shikaku/az900-quiz/", "AZ-900"); (build_quizbank(_qb.AZ104, "it-shikaku/az104-quiz/", "AZ-104") if PUBLISH_DERIVED_SERIES else None); build_units(AWS_UNITS, AWS_DOMAINS, "it-shikaku/aws-units/", "AWSクラウドプラクティショナー", "AWS Certified Cloud Practitioner", "AWSクラウドプラクティショナー 単元別ガイド(1テーマ1ページ)"); build_quizbank(_qb.AWS, "it-shikaku/aws-quiz/", "AWSクラウドプラクティショナー"); build_units(ITP_UNITS, ITP_DOMAINS, "it-shikaku/itpass-units/", "ITパスポート", "ITパスポート試験", "ITパスポート 単元別ガイド(1テーマ1ページ)"); build_site3()
     build_units_extra()
     extras = load_extra_sites()
     for m in extras:
