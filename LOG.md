@@ -13,3 +13,9 @@
 - AWS: aws-ec2-instance-types(EC2のインスタンスタイプ)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(317ページ生成)、docs内の内部リンク切れ0
+
+## 2026-10-10 (週次単元追加)
+- ITパスポート: securities-report-ir(有価証券報告書とIR)、directors-auditors(会社法の基本用語)
+- AWS: aws-ec2-purchase-options(EC2の購入オプション)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし、docs内の内部リンク切れ0
