@@ -1,0 +1,58 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>全角半角変換|英数字・スペース・カタカナ</title><meta name="description" content="英数字・記号、スペース、カタカナを、全角と半角の間で相互に変換します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/text-tools/width.html"><meta property="og:title" content="全角半角変換|英数字・スペース・カタカナ"><meta property="og:description" content="英数字・記号、スペース、カタカナを、全角と半角の間で相互に変換します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/text-tools/width.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">テキスト整形ツール集</a><nav><a href="count.html">文字数</a><a href="width.html">全角半角</a><a href="kana.html">かな変換</a><a href="lines.html">行の整理</a><a href="chars-bytes.html">解説</a></nav></header>
+<main><h1>全角半角変換</h1><div class='card'><label>変換方向 <select id='d'><option value='half'>全角→半角</option><option value='full'>半角→全角</option></select></label><br><label><input id='a' type='checkbox' checked> 英数字・記号</label> <label><input id='s' type='checkbox' checked> スペース</label> <label><input id='k' type='checkbox'> カタカナ</label><br><br>入力<textarea id='t' rows='8' style='width:100%;box-sizing:border-box' >ＡＢＣ１２３　全角のテキスト ｶﾀｶﾅ</textarea>変換結果<textarea id='o' rows='8' style='width:100%;box-sizing:border-box' readonly></textarea></div><h2>変換の範囲</h2><ul><li>英数字・記号は、ASCIIの範囲(半角の「!」から「~」)と、対応する全角文字の間で変換します</li><li>カタカナは、半角カナと全角カナの間で変換します。濁点・半濁点は、半角では1文字ぶんの別の文字になります</li><li>漢字やひらがなは変換されません。詳しくは<a href='zenkaku-hankaku.html'>全角と半角の基礎知識</a>と<a href='convert-table.html'>変換の対応表</a>を参照してください</li></ul><script>
+var WS=' \t\n\r\u3000';
+var H2F={"\uff61": "\u3002", "\uff62": "\u300c", "\uff63": "\u300d", "\uff64": "\u3001", "\uff65": "\u30fb", "\uff66": "\u30f2", "\uff67": "\u30a1", "\uff68": "\u30a3", "\uff69": "\u30a5", "\uff6a": "\u30a7", "\uff6b": "\u30a9", "\uff6c": "\u30e3", "\uff6d": "\u30e5", "\uff6e": "\u30e7", "\uff6f": "\u30c3", "\uff70": "\u30fc", "\uff71": "\u30a2", "\uff72": "\u30a4", "\uff73": "\u30a6", "\uff74": "\u30a8", "\uff75": "\u30aa", "\uff76": "\u30ab", "\uff77": "\u30ad", "\uff78": "\u30af", "\uff79": "\u30b1", "\uff7a": "\u30b3", "\uff7b": "\u30b5", "\uff7c": "\u30b7", "\uff7d": "\u30b9", "\uff7e": "\u30bb", "\uff7f": "\u30bd", "\uff80": "\u30bf", "\uff81": "\u30c1", "\uff82": "\u30c4", "\uff83": "\u30c6", "\uff84": "\u30c8", "\uff85": "\u30ca", "\uff86": "\u30cb", "\uff87": "\u30cc", "\uff88": "\u30cd", "\uff89": "\u30ce", "\uff8a": "\u30cf", "\uff8b": "\u30d2", "\uff8c": "\u30d5", "\uff8d": "\u30d8", "\uff8e": "\u30db", "\uff8f": "\u30de", "\uff90": "\u30df", "\uff91": "\u30e0", "\uff92": "\u30e1", "\uff93": "\u30e2", "\uff94": "\u30e4", "\uff95": "\u30e6", "\uff96": "\u30e8", "\uff97": "\u30e9", "\uff98": "\u30ea", "\uff99": "\u30eb", "\uff9a": "\u30ec", "\uff9b": "\u30ed", "\uff9c": "\u30ef", "\uff9d": "\u30f3"},F2H={"\u3002": "\uff61", "\u300c": "\uff62", "\u300d": "\uff63", "\u3001": "\uff64", "\u30fb": "\uff65", "\u30f2": "\uff66", "\u30a1": "\uff67", "\u30a3": "\uff68", "\u30a5": "\uff69", "\u30a7": "\uff6a", "\u30a9": "\uff6b", "\u30e3": "\uff6c", "\u30e5": "\uff6d", "\u30e7": "\uff6e", "\u30c3": "\uff6f", "\u30fc": "\uff70", "\u30a2": "\uff71", "\u30a4": "\uff72", "\u30a6": "\uff73", "\u30a8": "\uff74", "\u30aa": "\uff75", "\u30ab": "\uff76", "\u30ad": "\uff77", "\u30af": "\uff78", "\u30b1": "\uff79", "\u30b3": "\uff7a", "\u30b5": "\uff7b", "\u30b7": "\uff7c", "\u30b9": "\uff7d", "\u30bb": "\uff7e", "\u30bd": "\uff7f", "\u30bf": "\uff80", "\u30c1": "\uff81", "\u30c4": "\uff82", "\u30c6": "\uff83", "\u30c8": "\uff84", "\u30ca": "\uff85", "\u30cb": "\uff86", "\u30cc": "\uff87", "\u30cd": "\uff88", "\u30ce": "\uff89", "\u30cf": "\uff8a", "\u30d2": "\uff8b", "\u30d5": "\uff8c", "\u30d8": "\uff8d", "\u30db": "\uff8e", "\u30de": "\uff8f", "\u30df": "\uff90", "\u30e0": "\uff91", "\u30e1": "\uff92", "\u30e2": "\uff93", "\u30e4": "\uff94", "\u30e6": "\uff95", "\u30e8": "\uff96", "\u30e9": "\uff97", "\u30ea": "\uff98", "\u30eb": "\uff99", "\u30ec": "\uff9a", "\u30ed": "\uff9b", "\u30ef": "\uff9c", "\u30f3": "\uff9d", "\u30ac": "\uff76\uff9e", "\u30ae": "\uff77\uff9e", "\u30b0": "\uff78\uff9e", "\u30b2": "\uff79\uff9e", "\u30b4": "\uff7a\uff9e", "\u30b6": "\uff7b\uff9e", "\u30b8": "\uff7c\uff9e", "\u30ba": "\uff7d\uff9e", "\u30bc": "\uff7e\uff9e", "\u30be": "\uff7f\uff9e", "\u30c0": "\uff80\uff9e", "\u30c2": "\uff81\uff9e", "\u30c5": "\uff82\uff9e", "\u30c7": "\uff83\uff9e", "\u30c9": "\uff84\uff9e", "\u30d0": "\uff8a\uff9e", "\u30d1": "\uff8a\uff9f", "\u30d3": "\uff8b\uff9e", "\u30d4": "\uff8b\uff9f", "\u30d6": "\uff8c\uff9e", "\u30d7": "\uff8c\uff9f", "\u30d9": "\uff8d\uff9e", "\u30da": "\uff8d\uff9f", "\u30dc": "\uff8e\uff9e", "\u30dd": "\uff8e\uff9f", "\u30f4": "\uff73\uff9e", "\u30f7": "\uff9c\uff9e", "\u30fa": "\uff66\uff9e"},COMB={"\uff76\uff9e": "\u30ac", "\uff77\uff9e": "\u30ae", "\uff78\uff9e": "\u30b0", "\uff79\uff9e": "\u30b2", "\uff7a\uff9e": "\u30b4", "\uff7b\uff9e": "\u30b6", "\uff7c\uff9e": "\u30b8", "\uff7d\uff9e": "\u30ba", "\uff7e\uff9e": "\u30bc", "\uff7f\uff9e": "\u30be", "\uff80\uff9e": "\u30c0", "\uff81\uff9e": "\u30c2", "\uff82\uff9e": "\u30c5", "\uff83\uff9e": "\u30c7", "\uff84\uff9e": "\u30c9", "\uff8a\uff9e": "\u30d0", "\uff8a\uff9f": "\u30d1", "\uff8b\uff9e": "\u30d3", "\uff8b\uff9f": "\u30d4", "\uff8c\uff9e": "\u30d6", "\uff8c\uff9f": "\u30d7", "\uff8d\uff9e": "\u30d9", "\uff8d\uff9f": "\u30da", "\uff8e\uff9e": "\u30dc", "\uff8e\uff9f": "\u30dd", "\uff73\uff9e": "\u30f4", "\uff9c\uff9e": "\u30f7", "\uff66\uff9e": "\u30fa"};
+function cps(s){return Array.from(s)}
+function stats(s){var a=cps(s),nows=0,nb=0,i;for(i=0;i<a.length;i++){if(WS.indexOf(a[i])<0)nows++;if(a[i]!=='\r'&&a[i]!=='\n')nb++}
+var t=s.replace(/\r\n/g,'\n').replace(/\r/g,'\n'),lines=t===''?0:t.split('\n').length;
+return [a.length,nows,lines,new TextEncoder().encode(s).length,Math.ceil(nb/400)]}
+function width(s,toFull,alnum,space,kana){var a=cps(s),out=[],i,c,o,nx;
+for(i=0;i<a.length;i++){c=a[i];o=c.codePointAt(0);
+if(toFull){
+if(alnum&&o>=0x21&&o<=0x7E)out.push(String.fromCodePoint(o+0xFEE0));
+else if(space&&c===' ')out.push('\u3000');
+else if(kana&&H2F.hasOwnProperty(c)){nx=i+1<a.length?a[i+1]:'';
+if((nx==='\uff9e'||nx==='\uff9f')&&COMB.hasOwnProperty(c+nx)){out.push(COMB[c+nx]);i++}else out.push(H2F[c])}
+else out.push(c)}
+else{
+if(alnum&&o>=0xFF01&&o<=0xFF5E)out.push(String.fromCodePoint(o-0xFEE0));
+else if(space&&c==='\u3000')out.push(' ');
+else if(kana&&F2H.hasOwnProperty(c))out.push(F2H[c]);
+else out.push(c)}}
+return out.join('')}
+function kana(s,toKata){return cps(s).map(function(c){var o=c.codePointAt(0);
+if(toKata&&o>=0x3041&&o<=0x3096)return String.fromCodePoint(o+0x60);
+if(!toKata&&o>=0x30A1&&o<=0x30F6)return String.fromCodePoint(o-0x60);return c}).join('')}
+function cmp(x,y){var a=cps(x),b=cps(y),i;for(i=0;i<a.length&&i<b.length;i++){var d=a[i].codePointAt(0)-b[i].codePointAt(0);if(d)return d}return a.length-b.length}
+function trimWs(x){var a=cps(x),s=0,e=a.length;while(s<e&&WS.indexOf(a[s])>=0)s++;while(e>s&&WS.indexOf(a[e-1])>=0)e--;return a.slice(s,e).join('')}
+function lineops(s,trim,dropEmpty,dedupe,order){var l=s.replace(/\r\n/g,'\n').replace(/\r/g,'\n').split('\n');
+if(trim)l=l.map(trimWs);
+if(dropEmpty)l=l.filter(function(x){return x!==''});
+if(dedupe){var seen={},r=[];l.forEach(function(x){if(!Object.prototype.hasOwnProperty.call(seen,x)){seen[x]=1;r.push(x)}});l=r}
+if(order==='asc')l=l.slice().sort(cmp);else if(order==='desc')l=l.slice().sort(function(a,b){return cmp(b,a)});else if(order==='reverse')l=l.slice().reverse();
+return l.join('\n')}
+function $(id){return document.getElementById(id)}
+function fmt(n){return n.toLocaleString('ja-JP')}
+
+function run(){var d=$('d').value==='full';$('o').value=width($('t').value,d,$('a').checked,$('s').checked,$('k').checked)}
+['t','d','a','s','k'].forEach(function(i){$(i).oninput=run;$(i).onchange=run});run();
+</script></main>
+<footer><p>本サイトの結果は目安です。文字数の制限や数え方は、投稿先・提出先・応募要項などの公式の案内で確認してください。入力した文章は、ブラウザの中だけで処理され、送信されません。</p><p>最終更新: 2026-10-10</p></footer></body></html>

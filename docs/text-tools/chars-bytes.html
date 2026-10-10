@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>文字数とバイト数の違い|文字コードの基本</title><meta name="description" content="文字数とバイト数がなぜ違うのか、UTF-8で日本語が何バイトになるかの目安と、数え方の注意点を解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/text-tools/chars-bytes.html"><meta property="og:title" content="文字数とバイト数の違い|文字コードの基本"><meta property="og:description" content="文字数とバイト数がなぜ違うのか、UTF-8で日本語が何バイトになるかの目安と、数え方の注意点を解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/text-tools/chars-bytes.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">テキスト整形ツール集</a><nav><a href="count.html">文字数</a><a href="width.html">全角半角</a><a href="kana.html">かな変換</a><a href="lines.html">行の整理</a><a href="chars-bytes.html">解説</a></nav></header>
+<main><h1>文字数とバイト数の違い</h1><p>文字数は文字の個数、バイト数はコンピュータが保存するときのデータ量です。同じ文章でも、文字コードによってバイト数は変わります。</p><h2>UTF-8の場合の目安</h2><table><tr><th>文字の種類</th><th>1文字のバイト数</th></tr><tr><td>半角の英数字・基本的な記号</td><td>1バイト</td></tr><tr><td>ひらがな・カタカナ・一般的な漢字・全角の記号</td><td>3バイト</td></tr><tr><td>絵文字や一部の珍しい漢字</td><td>4バイト</td></tr></table><p>たとえば「abc」は3バイト、「あいう」は9バイトです。<a href='count.html'>文字数カウント</a>では、UTF-8のバイト数も表示します。</p><h2>数え方が分かれる例</h2><ul><li>「é」のように、基本の文字と記号を組み合わせて表せる文字は、1文字として数えるか2文字として数えるかが仕組みによって変わります</li><li>絵文字は、内部では複数のコードポイントで表されることがあり、見た目は1つでも数が増えることがあります</li><li>古い仕組みでは、半角を1、全角を2と数える方式もあります</li></ul><p class='note'>投稿サイトや応募フォームなどの文字数制限は、サービスごとに数え方が異なります。必ず提供元の公式の案内で確認してください。</p></main>
+<footer><p>本サイトの結果は目安です。文字数の制限や数え方は、投稿先・提出先・応募要項などの公式の案内で確認してください。入力した文章は、ブラウザの中だけで処理され、送信されません。</p><p>最終更新: 2026-10-10</p></footer></body></html>
