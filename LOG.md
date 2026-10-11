@@ -23,3 +23,9 @@
 ## 2026-10-10 (週次新サイト追加)
 - 追加: text-tools(テキスト整形ツール集)、9ページ(index・count・width・kana・lines・chars-bytes・zenkaku-hankaku・line-breaks・convert-table)
 - 確認: node で Python基準実装とJSの結果が一致(15250件、不一致0)、build.py エラーなし、docs内の内部リンク切れ0
+
+## 2026-10-11 (週次単元追加)
+- ITパスポート: employment-types(雇用形態の種類)、working-hours-basics(労働基準法の基本)
+- AWS: aws-ami-snapshot(AMIとスナップショット)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
