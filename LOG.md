@@ -29,3 +29,9 @@
 - AWS: aws-ami-snapshot(AMIとスナップショット)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
+
+## 2026-10-12 (週次単元追加)
+- ITパスポート: saburoku-agreement(36協定の用語)、harassment-types(ハラスメントの種類と企業の責任)
+- AWS: aws-elb-types(Elastic Load Balancingの種類)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし、docs内の内部リンク切れ確認(上記スクリプト)
