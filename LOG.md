@@ -35,3 +35,9 @@
 - AWS: aws-elb-types(Elastic Load Balancingの種類)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし、docs内の内部リンク切れ確認(上記スクリプト)
+
+## 2026-10-13 (週次単元追加)
+- ITパスポート: telework-security(テレワークと情報セキュリティの注意点)、my-number-basics(マイナンバー制度の基本)
+- AWS: aws-auto-scaling-concept(Auto Scalingの考え方)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(319ページ生成)、docs内の内部リンク切れ0
