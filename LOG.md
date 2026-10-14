@@ -41,3 +41,9 @@
 - AWS: aws-auto-scaling-concept(Auto Scalingの考え方)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(319ページ生成)、docs内の内部リンク切れ0
+
+## 2026-10-14 (週次単元追加)
+- ITパスポート: e-signature-certificate(電子署名法と電子証明書)、e-document-law(e-文書法と電子帳簿保存の考え方)
+- AWS: aws-ebs-volume-types(EBSのボリュームタイプ)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(322ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
