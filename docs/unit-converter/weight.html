@@ -1,0 +1,36 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>重さの換算|kg・ポンド・オンス・貫</title><meta name="description" content="mg、g、kg、トン、オンス、ポンド、匁、貫の間で重さ(質量)を換算します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/unit-converter/weight.html"><meta property="og:title" content="重さの換算|kg・ポンド・オンス・貫"><meta property="og:description" content="mg、g、kg、トン、オンス、ポンド、匁、貫の間で重さ(質量)を換算します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/unit-converter/weight.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">単位換算ツール集</a><nav><a href="length.html">長さ</a><a href="weight.html">重さ</a><a href="area.html">面積</a><a href="temperature.html">温度</a><a href="data.html">データ容量</a><a href="jp-units.html">解説</a></nav></header>
+<main><h1>重さの換算</h1><div class='card'><label>数値 <input id='v' type='number' value='1' step='any'></label><br><label>換算元 <select id='a'></select></label> <label>換算先 <select id='b'></select></label></div><div id='out' class='card'></div><h2>よく使う目安</h2><ul><li>1ポンド = 0.45359237kg(定義)</li><li>1オンス = 約28.35g(1ポンドの16分の1)</li><li>1貫 = 3.75kg、1匁 = 3.75g</li></ul><p class='note'>ここでの「重さ」は質量の単位として換算しています。宝石や貴金属で使われるトロイオンスなど、別の定義の単位は含みません。</p><script>
+var T={"length": {"units": [["mm", "\u30df\u30ea\u30e1\u30fc\u30c8\u30eb(mm)", 0.001], ["cm", "\u30bb\u30f3\u30c1\u30e1\u30fc\u30c8\u30eb(cm)", 0.01], ["m", "\u30e1\u30fc\u30c8\u30eb(m)", 1.0], ["km", "\u30ad\u30ed\u30e1\u30fc\u30c8\u30eb(km)", 1000.0], ["in", "\u30a4\u30f3\u30c1(in)", 0.0254], ["ft", "\u30d5\u30a3\u30fc\u30c8(ft)", 0.3048], ["yd", "\u30e4\u30fc\u30c9(yd)", 0.9144], ["mi", "\u30de\u30a4\u30eb(mile)", 1609.344], ["shaku", "\u5c3a", 0.30303030303030304], ["ken", "\u9593", 1.8181818181818181], ["ri", "\u91cc", 3927.2727272727275]]}, "weight": {"units": [["mg", "\u30df\u30ea\u30b0\u30e9\u30e0(mg)", 1e-06], ["g", "\u30b0\u30e9\u30e0(g)", 0.001], ["kg", "\u30ad\u30ed\u30b0\u30e9\u30e0(kg)", 1.0], ["t", "\u30c8\u30f3(t)", 1000.0], ["oz", "\u30aa\u30f3\u30b9(oz)", 0.028349523125], ["lb", "\u30dd\u30f3\u30c9(lb)", 0.45359237], ["monme", "\u5301", 0.00375], ["kan", "\u8cab", 3.75]]}, "area": {"units": [["m2", "\u5e73\u65b9\u30e1\u30fc\u30c8\u30eb(m\u00b2)", 1.0], ["a", "\u30a2\u30fc\u30eb(a)", 100.0], ["ha", "\u30d8\u30af\u30bf\u30fc\u30eb(ha)", 10000.0], ["km2", "\u5e73\u65b9\u30ad\u30ed\u30e1\u30fc\u30c8\u30eb(km\u00b2)", 1000000.0], ["tsubo", "\u576a", 3.3057851239669422], ["ft2", "\u5e73\u65b9\u30d5\u30a3\u30fc\u30c8(ft\u00b2)", 0.09290304], ["acre", "\u30a8\u30fc\u30ab\u30fc(acre)", 4046.8564224]]}, "data": {"units": [["bit", "\u30d3\u30c3\u30c8(bit)", 0.125], ["B", "\u30d0\u30a4\u30c8(B)", 1.0], ["KB", "\u30ad\u30ed\u30d0\u30a4\u30c8(KB=1000B)", 1000.0], ["MB", "\u30e1\u30ac\u30d0\u30a4\u30c8(MB=10^6B)", 1000000.0], ["GB", "\u30ae\u30ac\u30d0\u30a4\u30c8(GB=10^9B)", 1000000000.0], ["TB", "\u30c6\u30e9\u30d0\u30a4\u30c8(TB=10^12B)", 1000000000000.0], ["KiB", "\u30ad\u30d3\u30d0\u30a4\u30c8(KiB=1024B)", 1024.0], ["MiB", "\u30e1\u30d3\u30d0\u30a4\u30c8(MiB)", 1048576.0], ["GiB", "\u30ae\u30d3\u30d0\u30a4\u30c8(GiB)", 1073741824.0], ["TiB", "\u30c6\u30d3\u30d0\u30a4\u30c8(TiB)", 1099511627776.0]]}};
+function convert(t,v,a,b){var f={};T[t].units.forEach(function(u){f[u[0]]=u[2]});return v*f[a]/f[b]}
+function temp(v,a,b){var k=a==='C'?v+273.15:a==='F'?(v-32)*5/9+273.15:v;return b==='C'?k-273.15:b==='F'?(k-273.15)*9/5+32:k}
+function $(id){return document.getElementById(id)}
+function fmt(x){if(!isFinite(x))return '-';if(x===0)return '0';var a=Math.abs(x);if(a>=1e15||a<1e-9)return x.toExponential(6);return Number(x.toPrecision(10)).toLocaleString('ja-JP',{maximumSignificantDigits:10})}
+
+function init(t){var us=T[t].units,s1=$('a'),s2=$('b');
+us.forEach(function(u,i){s1.add(new Option(u[1],u[0]));s2.add(new Option(u[1],u[0]))});
+s1.selectedIndex=2;s2.selectedIndex=5;
+function run(){var v=parseFloat($('v').value);if(isNaN(v)){$('out').textContent='数値を入力してください';return}
+var r=convert(t,v,s1.value,s2.value),h='<p class="big">'+fmt(r)+'</p><table><tr><th>単位</th><th>値</th></tr>';
+us.forEach(function(u){h+='<tr><td>'+u[1]+'</td><td>'+fmt(convert(t,v,s1.value,u[0]))+'</td></tr>'});
+$('out').innerHTML=h+'</table>'}
+['v','a','b'].forEach(function(i){$(i).oninput=run;$(i).onchange=run});run()}
+init('weight');</script></main>
+<footer><p>本サイトの換算結果は概算・目安です(表示は有効数字10桁まで)。取引・証明・製品仕様など正確さが必要な場面では、公式の基準や取扱説明書で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-15</p></footer></body></html>
