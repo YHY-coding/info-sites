@@ -57,3 +57,9 @@
 - 追加: unit-converter(単位換算ツール集)、10ページ(index、ツール5: length・weight・area・temperature・data、解説4: jp-units・si-prefix・bits-bytes・temperature-scales)
 - 確認: node で Python基準実装とJSの結果が一致(24010件、不一致0)、build.py エラーなし(333ページ生成)、docs内の内部リンク切れ0
 - 備考: フッターの「最終更新」日付により既存ページのhtmlも日付のみ更新された
+
+## 2026-10-15 (週次単元追加)
+- ITパスポート: work-for-hire-copyright(職務著作(法人著作)の考え方)、ip-four-rights(特許・実用新案・意匠・商標の違い)
+- AWS: aws-s3-storage-classes(S3のストレージクラス)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(336ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
