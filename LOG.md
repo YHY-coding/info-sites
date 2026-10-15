@@ -47,3 +47,8 @@
 - AWS: aws-ebs-volume-types(EBSのボリュームタイプ)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(322ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
+
+## 2026-10-15 (追加1本・ユーザー依頼)
+- ITパスポート: trade-secret-law(不正競争防止法と営業秘密)
+- 追加: 1ページ、4択問題1問
+- 確認: build.py エラーなし、関連リンクは既存slug(ip-rights, security-management)のみ
