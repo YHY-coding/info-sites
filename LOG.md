@@ -52,7 +52,8 @@
 - ITパスポート: trade-secret-law(不正競争防止法と営業秘密)
 - 追加: 1ページ、4択問題1問
 - 確認: build.py エラーなし、関連リンクは既存slug(ip-rights, security-management)のみ
-## 2026-10-15 (新サイト追加・手動実行)
-- 追加: unit-converter(単位換算ツール集)、9ページ(index・length・weight・area・temperature・data・jp-units・si-prefix・bits-bytes・temperature-scales の計10ファイル、うち解説4・ツール5)
-- 確認: node で Python基準実装とJSの結果が一致(24010件、不一致0)、build.py エラーなし(332ページ生成)、docs内の内部リンク切れ0
+
+## 2026-10-15 (新サイト追加・ユーザー依頼)
+- 追加: unit-converter(単位換算ツール集)、10ページ(index、ツール5: length・weight・area・temperature・data、解説4: jp-units・si-prefix・bits-bytes・temperature-scales)
+- 確認: node で Python基準実装とJSの結果が一致(24010件、不一致0)、build.py エラーなし(333ページ生成)、docs内の内部リンク切れ0
 - 備考: フッターの「最終更新」日付により既存ページのhtmlも日付のみ更新された
