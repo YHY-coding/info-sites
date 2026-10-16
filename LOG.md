@@ -63,3 +63,9 @@
 - AWS: aws-s3-storage-classes(S3のストレージクラス)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(336ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
+
+## 2026-10-16 (週次単元追加)
+- ITパスポート: copyright-exceptions(著作権の例外)、software-license-types(ソフトウェアのライセンス形態)
+- AWS: aws-s3-versioning-lifecycle(S3のバージョニングとライフサイクル)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(339ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
