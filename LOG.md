@@ -69,3 +69,9 @@
 - AWS: aws-s3-versioning-lifecycle(S3のバージョニングとライフサイクル)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(339ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
+
+## 2026-10-17 (週次単元追加)
+- ITパスポート: oss-license-types(OSSライセンスの種類の基本)、nda-basics(守秘義務契約(NDA)の基本)
+- AWS: aws-s3-access-control(S3のアクセス制御)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(343ページ生成)、docs内の内部リンク切れ0(search.html内のJSテンプレート文字列を除く)
