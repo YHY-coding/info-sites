@@ -1,0 +1,45 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>配色パターン|補色・類似色・トライアド</title><meta name="description" content="基準色から、補色、類似色、3色配色の色を色相の回転で求めます。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/color-tools/palette.html"><meta property="og:title" content="配色パターン|補色・類似色・トライアド"><meta property="og:description" content="基準色から、補色、類似色、3色配色の色を色相の回転で求めます。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/color-tools/palette.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">色コード変換ツール集</a><nav><a href="converter.html">変換</a><a href="contrast.html">コントラスト</a><a href="mix.html">混色</a><a href="palette.html">配色</a><a href="color-models.html">色の表し方</a><a href="basic-colors.html">基本色</a></nav></header>
+<main><style>.sw{display:inline-block;width:2em;height:1.2em;border:1px solid #888;vertical-align:middle}</style><h1>配色パターン</h1><div class='card'><label>基準色(HEX) <input id='base' value='#3366cc'></label></div><div id='out' class='card'></div><p class='note'>色相だけを回転し、彩度と明度は基準色のままにしています。出てきた色の組み合わせが見やすいとは限りません。考え方は<a href='color-harmony.html'>配色の基本</a>を参照してください。</p><script>
+function rnd(x){return Math.floor(x+0.5)}
+function hexToRgb(h){h=h.trim().replace(/^#/,'');if(h.length===3)h=h.split('').map(function(c){return c+c}).join('');return [parseInt(h.substr(0,2),16),parseInt(h.substr(2,2),16),parseInt(h.substr(4,2),16)]}
+function rgbToHex(r,g,b){return '#'+[r,g,b].map(function(v){var s=v.toString(16);return s.length<2?'0'+s:s}).join('')}
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,d=mx-mn;if(d===0)return [0,0,rnd(l*100)];
+var s=d/(1-Math.abs(2*l-1)),h;if(mx===r){h=(g-b)/d%6;if(h<0)h+=6}else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;return [rnd(h*60)%360,rnd(s*100),rnd(l*100)]}
+function hslToRgb(h,s,l){s/=100;l/=100;var c=(1-Math.abs(2*l-1))*s,hp=(((h%360)+360)%360)/60,x=c*(1-Math.abs(hp%2-1)),k=Math.floor(hp);
+var t=[[c,x,0],[x,c,0],[0,c,x],[0,x,c],[x,0,c],[c,0,x]][k],m=l-c/2;return [rnd((t[0]+m)*255),rnd((t[1]+m)*255),rnd((t[2]+m)*255)]}
+function lin(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)}
+function luminance(r,g,b){return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b)}
+function contrast(a,b){var x=luminance(a[0],a[1],a[2]),y=luminance(b[0],b[1],b[2]),hi=Math.max(x,y),lo=Math.min(x,y);return (hi+0.05)/(lo+0.05)}
+function mix(a,b,t){return [0,1,2].map(function(i){return rnd(a[i]*(1-t)+b[i]*t)})}
+function palette(h){return {comp:[(h+180)%360],analog:[(h+330)%360,(h+30)%360],triad:[(h+120)%360,(h+240)%360]}}
+function $(id){return document.getElementById(id)}
+function validHex(h){return /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(h.trim())}
+function sw(hex){return '<span class="sw" style="background:'+hex+'"></span>'}
+
+function run(){var a=$('base').value;if(!validHex(a)){$('out').textContent='HEXは3桁か6桁で入力してください';return}
+var rgb=hexToRgb(a),hsl=rgbToHsl(rgb[0],rgb[1],rgb[2]),p=palette(hsl[0]),h='<table><tr><th>配色</th><th>色</th></tr>',names={comp:'補色',analog:'類似色',triad:'3色配色(トライアド)'};
+function cell(hh){var c=hslToRgb(hh,hsl[1],hsl[2]),hx=rgbToHex(c[0],c[1],c[2]);return sw(hx)+' '+hx+'(色相'+hh+')'}
+h+='<tr><td>基準色</td><td>'+sw(rgbToHex(rgb[0],rgb[1],rgb[2]))+' '+rgbToHex(rgb[0],rgb[1],rgb[2])+'(色相'+hsl[0]+')</td></tr>';
+['comp','analog','triad'].forEach(function(k){h+='<tr><td>'+names[k]+'</td><td>'+p[k].map(cell).join('<br>')+'</td></tr>'});
+$('out').innerHTML=h+'</table>'}
+$('base').oninput=run;run();
+</script></main>
+<footer><p>本サイトの結果は概算・目安です(画面や環境によって実際の見え方は変わります)。デザインの最終判断や、アクセシビリティの基準への適合確認は、公式の基準で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-17</p></footer></body></html>

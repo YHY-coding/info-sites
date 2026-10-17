@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16進数のカラーコードの読み方</title><meta name="description" content="#ff8800のようなカラーコードの読み方と、3桁表記の意味、16進数の基本を解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/color-tools/hex-basics.html"><meta property="og:title" content="16進数のカラーコードの読み方"><meta property="og:description" content="#ff8800のようなカラーコードの読み方と、3桁表記の意味、16進数の基本を解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/color-tools/hex-basics.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">色コード変換ツール集</a><nav><a href="converter.html">変換</a><a href="contrast.html">コントラスト</a><a href="mix.html">混色</a><a href="palette.html">配色</a><a href="color-models.html">色の表し方</a><a href="basic-colors.html">基本色</a></nav></header>
+<main><h1>16進数のカラーコードの読み方</h1><p>カラーコード「#rrggbb」は、赤・緑・青の強さを16進数2桁ずつで並べたものです。16進数は0〜9とa〜f(10〜15)を使い、2桁で0〜255を表せます。</p><h2>読み方の例</h2><p>「#ff8800」は、赤=ff(255)、緑=88(136)、青=00(0)です。16進数の2桁は「上の桁×16+下の桁」で数に直せます(88なら8×16+8=136)。</p><table><tr><th>HEX</th><th>RGB</th><th>色</th></tr><tr><td>#000000</td><td>0, 0, 0</td><td>黒</td></tr><tr><td>#ffffff</td><td>255, 255, 255</td><td>白</td></tr><tr><td>#ff0000</td><td>255, 0, 0</td><td>赤</td></tr><tr><td>#00ff00</td><td>0, 255, 0</td><td>緑(最も明るい)</td></tr><tr><td>#0000ff</td><td>0, 0, 255</td><td>青</td></tr><tr><td>#808080</td><td>128, 128, 128</td><td>中間のグレー</td></tr><tr><td>#ffff00</td><td>255, 255, 0</td><td>黄(赤+緑)</td></tr></table><h2>3桁表記</h2><p>各色の2桁が同じ数字の組(例: #ff8800)は、3桁に短縮して#f80と書けます。たとえば#fffは#ffffff(白)と同じです。</p><h2>大文字と小文字</h2><p>a〜fの大文字と小文字は同じ意味です。</p><p><a href='converter.html'>色コード変換ツール</a> / <a href='color-models.html'>RGB・HEX・HSLの考え方</a></p></main>
+<footer><p>本サイトの結果は概算・目安です(画面や環境によって実際の見え方は変わります)。デザインの最終判断や、アクセシビリティの基準への適合確認は、公式の基準で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-17</p></footer></body></html>

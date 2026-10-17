@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RGB・HEX・HSLの考え方</title><meta name="description" content="画面の色を表すRGB、HEX、HSLの違いと、それぞれの値の意味を解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/color-tools/color-models.html"><meta property="og:title" content="RGB・HEX・HSLの考え方"><meta property="og:description" content="画面の色を表すRGB、HEX、HSLの違いと、それぞれの値の意味を解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/color-tools/color-models.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">色コード変換ツール集</a><nav><a href="converter.html">変換</a><a href="contrast.html">コントラスト</a><a href="mix.html">混色</a><a href="palette.html">配色</a><a href="color-models.html">色の表し方</a><a href="basic-colors.html">基本色</a></nav></header>
+<main><h1>RGB・HEX・HSLの考え方</h1><h2>RGB</h2><p>赤(Red)・緑(Green)・青(Blue)の光の強さを、それぞれ0〜255の数で表す方法です。3つとも0なら黒、3つとも255なら白になります。光を足して色を作るため、「加法混色」と呼ばれます。</p><h2>HEX(16進数表記)</h2><p>RGBの3つの値を16進数の2桁ずつにして並べ、先頭に#を付けた書き方です。Webの制作でよく使われます。詳しくは<a href='hex-basics.html'>16進数のカラーコードの読み方</a>を参照してください。</p><h2>HSL</h2><p>色相(Hue)、彩度(Saturation)、明度(Lightness)で表す方法です。</p><table><tr><th>要素</th><th>範囲</th><th>意味</th></tr><tr><td>色相</td><td>0〜360度</td><td>色の種類。0度が赤、120度が緑、240度が青の付近</td></tr><tr><td>彩度</td><td>0〜100%</td><td>色の鮮やかさ。0%でグレー</td></tr><tr><td>明度</td><td>0〜100%</td><td>明るさ。0%で黒、100%で白</td></tr></table><p>HSLは「少し明るくする」「少し落ち着かせる」といった調整が数字で考えやすいのが利点です。</p><p class='note'>実際の見え方は、ディスプレイの設定や周囲の明るさで変わります。印刷用のCMYKとは別の仕組みです。</p><p><a href='converter.html'>色コード変換ツール</a>で試せます。</p></main>
+<footer><p>本サイトの結果は概算・目安です(画面や環境によって実際の見え方は変わります)。デザインの最終判断や、アクセシビリティの基準への適合確認は、公式の基準で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-17</p></footer></body></html>
