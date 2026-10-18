@@ -79,3 +79,9 @@
 ## 2026-10-17 (週次新サイト)
 - 追加: color-tools(色コード変換ツール集)、10ページ(index、ツール4: converter・contrast・mix・palette、解説5: color-models・hex-basics・color-harmony・contrast-guide・basic-colors)
 - 確認: build.py エラーなし(353ページ生成)、docs内の内部リンク切れ0(search.html除く)、Python基準実装とブラウザ側JS(変換・コントラスト比・混色・配色)をnodeで3000ケース比較し不一致0
+
+## 2026-10-18 (週次単元追加)
+- ITパスポート: subcontract-act(下請法のポイント)、misleading-representation-act(景品表示法のポイント)
+- AWS: aws-efs-fsx(EFSとFSxの違い)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(356ページ生成)、docs内の内部リンク切れ0(search.html除く)
