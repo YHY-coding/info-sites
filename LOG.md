@@ -85,3 +85,9 @@
 - AWS: aws-efs-fsx(EFSとFSxの違い)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(356ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-19 (週次単元追加)
+- ITパスポート: specified-commercial-transactions(特定商取引法のポイント)、product-liability-law(PL法と製造物責任)
+- AWS: aws-storage-gateway(Storage Gatewayの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(360ページ生成)、docs内の内部リンク切れ0(search.html除く)
