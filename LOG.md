@@ -91,3 +91,9 @@
 - AWS: aws-storage-gateway(Storage Gatewayの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(360ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-20 (週次単元追加)
+- ITパスポート: personal-info-terms(個人情報保護法の用語)、overseas-privacy-regulation(GDPRなど海外の個人情報規制の概要)
+- AWS: aws-backup-service(AWS Backupの基本)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(363ページ生成)、docs内の内部リンク切れ0(search.html除く)
