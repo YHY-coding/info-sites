@@ -97,3 +97,9 @@
 - AWS: aws-backup-service(AWS Backupの基本)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(363ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-21 (単元追加)
+- ITパスポート: standards-bodies(標準化団体)、iso-9001-14001-27001(ISO 9001・14001・27001の違い)
+- AWS: aws-glacier-retrieval(Glacierの取り出しオプション)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(366ページ生成)、docs内の内部リンク切れ0(search.html除く)
