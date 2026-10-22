@@ -109,3 +109,9 @@
 - AWS: aws-rds-features(RDSの機能)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(370ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-22 (単元追加・第2便)
+- ITパスポート: whistleblowing-system(内部通報制度とは)、work-life-diversity(ワークライフバランスとダイバーシティ)
+- AWS: aws-aurora-vs-rds(AuroraとRDSの違い)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(373ページ生成)、docs内の内部リンク切れ0(search.html除く)
