@@ -103,3 +103,9 @@
 - AWS: aws-glacier-retrieval(Glacierの取り出しオプション)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(366ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-22 (単元追加)
+- ITパスポート: csr-social-contribution(CSRと社会貢献活動の用語)、compliance-violation-patterns(コンプライアンス違反の事例パターン)
+- AWS: aws-rds-features(RDSの機能)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(370ページ生成)、docs内の内部リンク切れ0(search.html除く)
