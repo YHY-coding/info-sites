@@ -115,3 +115,9 @@
 - AWS: aws-aurora-vs-rds(AuroraとRDSの違い)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(373ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-23 (単元追加)
+- ITパスポート: hr-development-methods(人材育成の手法)、coaching-mentoring(コーチングとメンタリング)
+- AWS: aws-dynamodb-basics(DynamoDBの基本)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(376ページ生成)、docs内の内部リンク切れ0(search.html除く)
