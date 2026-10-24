@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2進数の基本|0と1で数を表す仕組み</title><meta name="description" content="2進数の考え方、桁の重み、よく使う2のべき乗、ビットとバイトの関係を、初心者向けに解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/radix-tools/binary-basics.html"><meta property="og:title" content="2進数の基本|0と1で数を表す仕組み"><meta property="og:description" content="2進数の考え方、桁の重み、よく使う2のべき乗、ビットとバイトの関係を、初心者向けに解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/radix-tools/binary-basics.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">進数変換ツール集</a><nav><a href="converter.html">変換</a><a href="twos-complement.html">2の補数</a><a href="bitops.html">ビット演算</a><a href="binary-basics.html">2進数</a><a href="hex-basics.html">16進数</a><a href="octal.html">8進数</a><a href="manual-conversion.html">手計算</a><a href="table.html">早見表</a><a href="uses.html">用途</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>2進数の基本</h1><p>2進数は、0と1の2種類の数字だけで数を表す方法です。コンピュータは、内部の電気的な状態(オンとオフ)を0と1に対応させて情報を扱います。</p><h2>桁の重み</h2><p>10進数では、右から1の位・10の位・100の位…と、10倍ずつ重みが増えます。2進数では、右から1・2・4・8・16…と2倍ずつ増えます。</p><table><tr><th>桁(右から)</th><td>8桁目</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1桁目</td></tr><tr><th>重み</th><td>128</td><td>64</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr><tr><th>例: 1101 0110</th><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr></table><p>上の例は 128+64+16+4+2 = 214 です。</p><h2>ビットとバイト</h2><ul><li>1ビット: 0か1の1桁</li><li>1バイト: 8ビット。0〜255の256通りを表せる</li><li>nビットで表せる値の種類は、2のn乗通り</li></ul><h2>よく出る2のべき乗</h2><table><tr><th>べき乗</th><th>値</th></tr><tr><td>2の4乗</td><td>16</td></tr><tr><td>2の8乗</td><td>256</td></tr><tr><td>2の10乗</td><td>1,024</td></tr><tr><td>2の16乗</td><td>65,536</td></tr></table><p><a href='converter.html'>変換ツール</a>で、いろいろな数を試してみましょう。負の数の表し方は<a href='twos-complement.html'>2の補数</a>のページへ。</p></main>
+<footer><p>本サイトの結果は目安です。試験・業務・プログラムで使う前には、教科書・言語の公式ドキュメントなど公式の情報で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-24</p></footer></body></html>

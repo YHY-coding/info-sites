@@ -1,0 +1,35 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2の補数の計算|負の数を2進数で表す</title><meta name="description" content="負の数をnビットの2進数(2の補数)で表したり、2進数を符号付き整数に戻したりします。4・8・16・32ビット対応。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/radix-tools/twos-complement.html"><meta property="og:title" content="2の補数の計算|負の数を2進数で表す"><meta property="og:description" content="負の数をnビットの2進数(2の補数)で表したり、2進数を符号付き整数に戻したりします。4・8・16・32ビット対応。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/radix-tools/twos-complement.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">進数変換ツール集</a><nav><a href="converter.html">変換</a><a href="twos-complement.html">2の補数</a><a href="bitops.html">ビット演算</a><a href="binary-basics.html">2進数</a><a href="hex-basics.html">16進数</a><a href="octal.html">8進数</a><a href="manual-conversion.html">手計算</a><a href="table.html">早見表</a><a href="uses.html">用途</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>2の補数の計算</h1><p>コンピュータで負の数を扱うときの代表的な表し方である「2の補数」を計算します。</p><div class='card'><label>ビット数 <select id='w'><option value='4'>4ビット</option><option value='8' selected>8ビット</option><option value='16'>16ビット</option><option value='32'>32ビット</option></select></label><br><label>10進数 <input id='d' type='text' value='-5'></label><br><label>2進数 <input id='b' type='text' value='11111011'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><h2>2の補数とは</h2><p>nビットで負の数を表すとき、元の数を2のn乗に足した値(または、ビットを反転して1を足した値)を使う方法です。最上位ビットが1なら負の数として扱います。nビットで表せる範囲は、−2のn−1乗 から 2のn−1乗−1 までです(8ビットなら −128〜127)。</p><h2>求め方の例(8ビットで −5)</h2><ol><li>5を2進数にする: 00000101</li><li>全ビットを反転する: 11111010</li><li>1を足す: 11111011</li></ol><p>言語や機器によって整数の扱いは異なるため、実際のプログラムでは公式ドキュメントで確認してください。</p><script>
+function parseBig(s,b){s=s.trim().toLowerCase().replace(/[\s_]/g,'');var neg=false;if(s.charAt(0)==='-'){neg=true;s=s.slice(1)}if(!s.length)return null;var v=0n,B=BigInt(b);for(var i=0;i<s.length;i++){var d=parseInt(s.charAt(i),36);if(isNaN(d)||d>=b)return null;v=v*B+BigInt(d)}return neg?-v:v}
+function toBase(v,b){var neg=v<0n;if(neg)v=-v;if(v===0n)return '0';var B=BigInt(b),s='';while(v>0n){s=Number(v%B).toString(36)+s;v=v/B}return neg?'-'+s:s}
+function twos(v,w){var lo=-(1n<<BigInt(w-1)),hi=(1n<<BigInt(w-1))-1n;if(v<lo||v>hi)return null;var u=v<0n?v+(1n<<BigInt(w)):v;return toBase(u,2).padStart(w,'0')}
+function untwos(s,w){if(!s.length||s.length>w||/[^01]/.test(s))return null;var u=parseBig(s,2);if(u>=(1n<<BigInt(w-1)))u-=(1n<<BigInt(w));return u}
+function bitop(a,b,op,w){var m=(1n<<BigInt(w))-1n;a=a&m;b=b&m;var r;if(op==='and')r=a&b;else if(op==='or')r=a|b;else if(op==='xor')r=a^b;else if(op==='not')r=~a;else if(op==='shl')r=a<<b;else r=a>>b;return r&m}
+function $(id){return document.getElementById(id)}
+
+function run(){var w=parseInt($('w').value,10),v=parseBig($('d').value,10),o='';
+if(v===null){o='<p>10進数の入力を確認してください</p>'}else{var t=twos(v,w);o=t===null?'<p>'+w+'ビットで表せる範囲を超えています</p>':'<p class="big">'+t+'</p><p>16進数では '+toBase(BigInt('0b'+t),16).toUpperCase()+'</p>'}
+var s=$('b').value.trim().replace(/\s/g,''),u=untwos(s,w);
+o+=(u===null)?'<p>2進数の入力を確認してください(0と1だけ、'+w+'桁以内)</p>':'<p>2進数 '+s+' を '+w+'ビットの符号付き整数とみなすと <strong>'+u.toString()+'</strong></p>';
+$('out').innerHTML=o}
+$('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの結果は目安です。試験・業務・プログラムで使う前には、教科書・言語の公式ドキュメントなど公式の情報で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-24</p></footer></body></html>

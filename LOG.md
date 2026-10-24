@@ -127,3 +127,9 @@
 - AWS: aws-elasticache-usage(ElastiCacheの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(379ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-24 (新サイト)
+- radix-tools(進数変換ツール集): index, converter, twos-complement, bitops, binary-basics, hex-basics, octal, manual-conversion, table, uses, glossary
+- 追加: 11ページ(ツール3、解説・一覧8)
+- 確認: build.py エラーなし(390ページ生成)、Python基準実装とブラウザJSをnodeで3202ケース照合し不一致0、docs内の内部リンク切れ0(search.html除く)
+- 修正: 既存ITパスポート単元の関連リンク2件(存在しないcomplianceを指していた)を compliance-violation-patterns に修正

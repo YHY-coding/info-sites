@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>16進数の基本|0〜9とA〜Fで数を表す</title><meta name="description" content="16進数の考え方と、2進数との対応(4ビット=16進1桁)、見かける場面を解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/radix-tools/hex-basics.html"><meta property="og:title" content="16進数の基本|0〜9とA〜Fで数を表す"><meta property="og:description" content="16進数の考え方と、2進数との対応(4ビット=16進1桁)、見かける場面を解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/radix-tools/hex-basics.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">進数変換ツール集</a><nav><a href="converter.html">変換</a><a href="twos-complement.html">2の補数</a><a href="bitops.html">ビット演算</a><a href="binary-basics.html">2進数</a><a href="hex-basics.html">16進数</a><a href="octal.html">8進数</a><a href="manual-conversion.html">手計算</a><a href="table.html">早見表</a><a href="uses.html">用途</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>16進数の基本</h1><p>16進数は、1桁で16種類を表す方法です。0〜9に加えて、10〜15をA〜F(a〜f)で表します。</p><table><tr><th>10進</th><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr><tr><th>16進</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr></table><h2>2進数との相性が良い理由</h2><p>2進数の4桁(4ビット)は、ちょうど16通りです。そのため、2進数を右から4桁ずつ区切ると、16進数の1桁に対応します。</p><p>例: 1101 0110 → D(1101) と 6(0110) で、16進数の D6 になります。10進数では 214 です。</p><h2>書き方の慣習</h2><ul><li>プログラミング言語では、0x を先頭に付けて 0xD6 と書くことが多い</li><li>HTMLの色指定では、# を付けて #ff8800 のように書く</li></ul><p>書き方は言語やツールによって異なるため、使う環境の公式ドキュメントで確認してください。</p><p><a href='converter.html'>変換ツール</a> / <a href='uses.html'>進数が使われる場面</a></p></main>
+<footer><p>本サイトの結果は目安です。試験・業務・プログラムで使う前には、教科書・言語の公式ドキュメントなど公式の情報で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-24</p></footer></body></html>
