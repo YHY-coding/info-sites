@@ -121,3 +121,9 @@
 - AWS: aws-dynamodb-basics(DynamoDBの基本)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(376ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-24 (単元追加)
+- ITパスポート: org-culture-philosophy(組織文化と企業理念)、benchmarking-best-practice(ベンチマーキングとベストプラクティス)
+- AWS: aws-elasticache-usage(ElastiCacheの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(379ページ生成)、docs内の内部リンク切れ0(search.html除く)
