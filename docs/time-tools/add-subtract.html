@@ -1,0 +1,41 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>時間の足し算・引き算ツール|日またぎも対応</title><meta name="description" content="時刻に「何時間何分」を足したり引いたりした結果を計算します。日をまたぐ場合は何日後・何日前かも表示します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/time-tools/add-subtract.html"><meta property="og:title" content="時間の足し算・引き算ツール|日またぎも対応"><meta property="og:description" content="時刻に「何時間何分」を足したり引いたりした結果を計算します。日をまたぐ場合は何日後・何日前かも表示します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/time-tools/add-subtract.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">時間計算ツール集</a><nav><a href="add-subtract.html">足し引き</a><a href="duration.html">時間差</a><a href="timezone.html">時差変換</a><a href="decimal.html">小数時間</a><a href="notation.html">時刻の表記</a><a href="utc-and-offsets.html">UTC</a><a href="dst.html">夏時間</a><a href="manual.html">手計算</a><a href="offset-table.html">オフセット表</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>時間の足し算・引き算</h1><p>基準の時刻に、時間を足すか引きます。時刻は 時:分 または 時:分:秒 の形式で入力します。</p><div class='card'><label>基準の時刻 <input id='base' type='text' value='22:30'></label><br><label>演算 <select id='sign'><option value='1'>足す(+)</option><option value='-1'>引く(−)</option></select></label><br><label>足す・引く時間 <input id='delta' type='text' value='3:45'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><h2>使い方のヒント</h2><ul><li>足す・引く時間は、24時間を超えても入力できます(例: 30:00)</li><li>結果が日をまたぐときは「+1日後」のように表示されます</li><li>時刻どうしの差を知りたいときは<a href='duration.html'>時間差の計算</a>を使います</li></ul><p>手計算の考え方は<a href='manual.html'>時間計算の手計算</a>を参照してください。</p><script>
+function parseHMS(s){var p=s.trim().split(':');if(p.length<1||p.length>3)return null;for(var i=0;i<p.length;i++)if(!/^[0-9]+$/.test(p[i]))return null;
+var h=parseInt(p[0],10),m=p.length>1?parseInt(p[1],10):0,x=p.length>2?parseInt(p[2],10):0;if(m>59||x>59)return null;return h*3600+m*60+x}
+function pad(n){return (n<10?'0':'')+n}
+function fmtHMS(t){return Math.floor(t/3600)+':'+pad(Math.floor(t%3600/60))+':'+pad(t%60)}
+function addsub(b,d,s){var t=b+s*d;return [Math.floor(t/86400),((t%86400)+86400)%86400]}
+function duration(a,b){var d=b-a;return d<0?d+86400:d}
+function tzconv(m,f,t){var x=m-f+t;return [Math.floor(x/1440),((x%1440)+1440)%1440]}
+function parseDec(s){s=s.trim();if(!s)return null;var p=s.split('.');if(p.length>2)return null;var a=p[0],b=p.length>1?p[1]:'';
+if((a&&!/^[0-9]+$/.test(a))||(b&&!/^[0-9]+$/.test(b))||(!a&&!b))return null;return parseInt(a||'0',10)*100+parseInt((b+'00').slice(0,2),10)}
+function decToMin(h){return Math.floor((h*60+50)/100)}
+function minToDec(m){return Math.floor((m*200+60)/120)}
+function fmtDec(h){return Math.floor(h/100)+'.'+pad(h%100)}
+function $(id){return document.getElementById(id)}
+
+function run(){var b=parseHMS($('base').value),d=parseHMS($('delta').value),s=parseInt($('sign').value,10);
+if(b===null||d===null){$('out').textContent='時刻の形式を確認してください(例: 9:30 や 13:45:10。分と秒は0〜59)';return}
+var r=addsub(b,d,s),dd=r[0],txt=dd===0?'同じ日':(dd>0?'+'+dd+'日後':dd+'日(前の日)');
+$('out').innerHTML='<p class="big">'+fmtHMS(r[1])+'</p><p>'+txt+'</p>'}
+$('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの結果は目安です。勤怠・契約・航空券などで使う前には、公式の時刻表や各組織の規定など公式の情報で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-24</p></footer></body></html>

@@ -133,3 +133,8 @@
 - 追加: 11ページ(ツール3、解説・一覧8)
 - 確認: build.py エラーなし(390ページ生成)、Python基準実装とブラウザJSをnodeで3202ケース照合し不一致0、docs内の内部リンク切れ0(search.html除く)
 - 修正: 既存ITパスポート単元の関連リンク2件(存在しないcomplianceを指していた)を compliance-violation-patterns に修正
+
+## 2026-10-24 (新サイト・2件目)
+- time-tools(時間計算ツール集): index, add-subtract, duration, timezone, decimal, notation, utc-and-offsets, dst, manual, offset-table, glossary
+- 追加: 11ページ(ツール4、解説・一覧7)
+- 確認: build.py エラーなし(401ページ生成)、Python基準実装とブラウザJSをnodeで4000ケース(40000項目)照合し不一致0、docs内の内部リンク切れ0(search.html除く)

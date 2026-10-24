@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>時間計算の手計算のやり方|60進法の繰り上がり</title><meta name="description" content="時間・分・秒の足し算、引き算、時間差を、60進法の繰り上がりと繰り下がりで手計算するやり方を例つきで解説します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/time-tools/manual.html"><meta property="og:title" content="時間計算の手計算のやり方|60進法の繰り上がり"><meta property="og:description" content="時間・分・秒の足し算、引き算、時間差を、60進法の繰り上がりと繰り下がりで手計算するやり方を例つきで解説します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/time-tools/manual.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">時間計算ツール集</a><nav><a href="add-subtract.html">足し引き</a><a href="duration.html">時間差</a><a href="timezone.html">時差変換</a><a href="decimal.html">小数時間</a><a href="notation.html">時刻の表記</a><a href="utc-and-offsets.html">UTC</a><a href="dst.html">夏時間</a><a href="manual.html">手計算</a><a href="offset-table.html">オフセット表</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>時間計算の手計算のやり方</h1><p>時間・分・秒は60進法です。10進数の筆算と同じ形で、60を超えたら繰り上げます。</p><h2>足し算</h2><p>例: 22:30 に 3時間45分を足す</p><ol><li>分を足す: 30 + 45 = 75分 → 60を引いて15分、時に1繰り上げ</li><li>時を足す: 22 + 3 + 1 = 26時 → 24を引いて2時(翌日)</li></ol><p>答え: 翌日の2:15。</p><h2>引き算</h2><p>例: 9:20 から 2時間45分を引く</p><ol><li>分が足りないので、1時間(60分)を借りる: 20 + 60 = 80分</li><li>分: 80 − 45 = 35分</li><li>時: 9 − 1 − 2 = 6時</li></ol><p>答え: 6:35。</p><h2>すべて秒に直す方法</h2><p>1時間=3600秒、1分=60秒に直して足し引きし、最後に3600や60で割って戻すと、繰り上がりを意識せずに済みます。</p><p>計算結果は<a href='add-subtract.html'>足し引きツール</a>で検算できます。</p></main>
+<footer><p>本サイトの結果は目安です。勤怠・契約・航空券などで使う前には、公式の時刻表や各組織の規定など公式の情報で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-24</p></footer></body></html>
