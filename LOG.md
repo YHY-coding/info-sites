@@ -138,3 +138,9 @@
 - time-tools(時間計算ツール集): index, add-subtract, duration, timezone, decimal, notation, utc-and-offsets, dst, manual, offset-table, glossary
 - 追加: 11ページ(ツール4、解説・一覧7)
 - 確認: build.py エラーなし(401ページ生成)、Python基準実装とブラウザJSをnodeで4000ケース(40000項目)照合し不一致0、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-25
+- ITパスポート: management-resources(経営資源)、knowledge-management(ナレッジマネジメント)
+- AWS: aws-redshift-usage(Redshiftの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(404ページ生成)、docs内の内部リンク切れ0(search.html除く)
