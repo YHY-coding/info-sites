@@ -150,3 +150,9 @@
 - AWS: aws-dms-sct(DMSとSCT)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(408ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-27
+- ITパスポート: risk-management-flow(リスクマネジメントの流れ)、pdca-vs-ooda(PDCAとOODAの違い)
+- AWS: aws-vpc-subnet-route(VPCのサブネットとルートテーブル)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(411ページ生成)、docs内の内部リンク切れ0(search.html除く)
