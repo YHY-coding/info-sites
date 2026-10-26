@@ -144,3 +144,9 @@
 - AWS: aws-redshift-usage(Redshiftの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(404ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-26
+- ITパスポート: seci-model(SECIモデル)、bcp-basics(BCPと災害対策の基本)
+- AWS: aws-dms-sct(DMSとSCT)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(408ページ生成)、docs内の内部リンク切れ0(search.html除く)
