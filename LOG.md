@@ -156,3 +156,9 @@
 - AWS: aws-vpc-subnet-route(VPCのサブネットとルートテーブル)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(411ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-27(その2)
+- ITパスポート: ansoff-matrix-deep(アンゾフの成長マトリクス)、blue-red-ocean(ブルーオーシャンとレッドオーシャン)
+- AWS: aws-igw-nat(インターネットゲートウェイとNATゲートウェイ)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(415ページ生成)、docs内の内部リンク切れ0(search.html除く)
