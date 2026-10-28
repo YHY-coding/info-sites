@@ -162,3 +162,9 @@
 - AWS: aws-igw-nat(インターネットゲートウェイとNATゲートウェイ)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(415ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-28
+- ITパスポート: lanchester-positions(ランチェスター戦略の4つの立場)、five-forces-deep(ファイブフォース分析)
+- AWS: aws-peering-tgw(VPCピアリングとTransit Gateway)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(418ページ生成)、docs内の内部リンク切れ0(search.html除く)
