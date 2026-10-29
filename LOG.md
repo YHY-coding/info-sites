@@ -168,3 +168,9 @@
 - AWS: aws-peering-tgw(VPCピアリングとTransit Gateway)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(418ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-29
+- ITパスポート: value-chain-deep(バリューチェーン分析)、core-competence(コアコンピタンス)
+- AWS: aws-vpc-endpoint(VPCエンドポイントとPrivateLink)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(421ページ生成)、docs内の内部リンク切れ0(search.html除く)
