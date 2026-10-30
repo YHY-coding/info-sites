@@ -174,3 +174,9 @@
 - AWS: aws-vpc-endpoint(VPCエンドポイントとPrivateLink)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(421ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-30
+- ITパスポート: pest-3c(PEST分析と3C分析の使い分け)、logic-tree-mece(ロジックツリーとMECE)
+- AWS: aws-route53-policy(Route 53のルーティングポリシー)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(425ページ生成)、docs内の内部リンク切れ0(search.html除く)
