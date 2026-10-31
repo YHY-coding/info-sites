@@ -186,3 +186,7 @@
 - AWS: aws-cloudfront(CloudFrontの仕組み)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(428ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-31 週次サイト追加
+- percent-tools(割合・増減率計算ツール集): 11ページ(index, percent-of, what-percent, change-rate, reverse, ratio, basics, percent-vs-point, pitfalls, manual, glossary)
+- 確認: build.py エラーなし(439ページ生成)、Python基準実装とJSをnodeで300ケース照合し不一致0、docs内の内部リンク切れ0(search.html除く)

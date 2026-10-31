@@ -1,0 +1,40 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>比の簡約と按分ツール|整数比を簡単にして合計を分ける</title><meta name="description" content="2つの整数比を最も簡単な整数比に直し、合計の値をその比で分けます。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/percent-tools/ratio.html"><meta property="og:title" content="比の簡約と按分ツール|整数比を簡単にして合計を分ける"><meta property="og:description" content="2つの整数比を最も簡単な整数比に直し、合計の値をその比で分けます。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/percent-tools/ratio.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">割合・増減率計算ツール集</a><nav><a href="percent-of.html">割合の値</a><a href="what-percent.html">何%か</a><a href="change-rate.html">増減率</a><a href="reverse.html">逆算</a><a href="ratio.html">比</a><a href="basics.html">基本</a><a href="percent-vs-point.html">%とポイント</a><a href="pitfalls.html">つまずき</a><a href="manual.html">手計算</a><a href="glossary.html">用語</a></nav></header>
+<main><h1>比の簡約と按分</h1><p>比 A : B(0以上の整数)と、分けたい合計の値を入力します。</p><div class='card'><label>A <input id='a' type='text' value='12'></label><br><label>B <input id='b' type='text' value='18'></label><br><label>合計の値 <input id='t' type='text' value='1000'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><h2>考え方</h2><ul><li>簡約: AとBを最大公約数で割る</li><li>按分: 合計 × A ÷ (A+B) と 合計 × B ÷ (A+B)</li></ul><p>費用の分担などに使う場合の取り決めは、当事者間の合意や公式の規定で確認してください。</p><script>
+function num(s){s=String(s).trim().replace(/,/g,'');if(!/^-?[0-9]+(\.[0-9]+)?$/.test(s))return null;return parseFloat(s)}
+function int(s){s=String(s).trim();if(!/^[0-9]+$/.test(s))return null;return parseInt(s,10)}
+function gcd(a,b){while(b){var t=a%b;a=b;b=t}return a}
+function pctOf(p,b){return b*p/100}
+function whatPct(a,b){return b===0?null:a/b*100}
+function changeRate(o,n){return o===0?null:(n-o)/o*100}
+function applyChange(b,r){return b*(1+r/100)}
+function reverse(a,r){return r===-100?null:a/(1+r/100)}
+function simplify(a,b){var g=gcd(a,b);return g===0?null:[a/g,b/g]}
+function split(t,a,b){return a+b===0?null:[t*a/(a+b),t*b/(a+b)]}
+function f2(x){return x.toFixed(2)}
+function $(id){return document.getElementById(id)}
+
+function run(){var a=int($('a').value),b=int($('b').value),t=num($('t').value);
+if(a===null||b===null||t===null){$('out').textContent='比は0以上の整数、合計は数字で入力してください';return}
+var s=simplify(a,b),sp=split(t,a,b);if(s===null||sp===null){$('out').textContent='比の両方が0のときは計算できません';return}
+$('out').innerHTML='<p>'+a+' : '+b+' = <strong>'+s[0]+' : '+s[1]+'</strong>(最も簡単な整数比)</p><p>'+t+' を '+a+' : '+b+' に分ける → <strong>'+f2(sp[0])+'</strong> と <strong>'+f2(sp[1])+'</strong></p>'}
+$('btn').onclick=run;run();
+</script></main>
+<footer><p>本サイトの結果は概算・目安です。契約・会計・申告などで使う前には、公式の情報や各組織の規定で確認してください。入力した値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-10-31</p></footer></body></html>
