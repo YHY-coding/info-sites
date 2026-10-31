@@ -180,3 +180,9 @@
 - AWS: aws-route53-policy(Route 53のルーティングポリシー)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(425ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-10-31
+- ITパスポート: product-life-cycle(プロダクトライフサイクル)、business-models-b(BtoB・BtoC・CtoC・BtoEなどの取引形態)
+- AWS: aws-cloudfront(CloudFrontの仕組み)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(428ページ生成)、docs内の内部リンク切れ0(search.html除く)
