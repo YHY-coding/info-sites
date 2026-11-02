@@ -196,3 +196,9 @@
 - AWS: aws-global-accelerator(Global Accelerator)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(442ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-02
+- ITパスポート: crm-one-to-one(CRMとワントゥワンマーケティング)、longtail-freemium-deep(ロングテールとフリーミアム)
+- AWS: aws-dx-vpn(Direct ConnectとVPNの比較)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(445ページ生成)、docs内の内部リンク切れ0(search.html除く)
