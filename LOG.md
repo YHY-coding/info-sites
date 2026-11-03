@@ -208,3 +208,9 @@
 - AWS: aws-iam-policy-reading(IAMのポリシーの読み方)
 - 追加: 3ページ、4択問題4問
 - 確認: build.py エラーなし(448ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-04
+- ITパスポート: inbound-outbound-marketing(インバウンド・アウトバウンドの用語)、direct-omnichannel(ダイレクトマーケティングとオムニチャネル)
+- AWS: aws-iam-role-federation(IAMロールとフェデレーション)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(452ページ生成)、docs内の内部リンク切れ0(search.html除く)
