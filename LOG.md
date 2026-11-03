@@ -214,3 +214,8 @@
 - AWS: aws-iam-role-federation(IAMロールとフェデレーション)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(452ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-03 (週次新サイト)
+- 追加slug: interest-tools(単利・複利計算ツール集)
+- ページ数: 10(index, simple, compound, accumulate, years, rule72, basics, simple-vs-compound, pitfalls, glossary)
+- 確認: build.py エラーなし(462ページ生成)、Python基準実装とnode上のJSが13ケースで一致、docs内の内部リンク切れ0
