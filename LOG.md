@@ -202,3 +202,9 @@
 - AWS: aws-dx-vpn(Direct ConnectとVPNの比較)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(445ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-03
+- ITパスポート: subscription-sharing(サブスクリプション・シェアリングエコノミー)、platform-business(プラットフォームビジネス)
+- AWS: aws-iam-policy-reading(IAMのポリシーの読み方)
+- 追加: 3ページ、4択問題4問
+- 確認: build.py エラーなし(448ページ生成)、docs内の内部リンク切れ0(search.html除く)
