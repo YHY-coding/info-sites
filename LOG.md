@@ -219,3 +219,9 @@
 - 追加slug: interest-tools(単利・複利計算ツール集)
 - ページ数: 10(index, simple, compound, accumulate, years, rule72, basics, simple-vs-compound, pitfalls, glossary)
 - 確認: build.py エラーなし(462ページ生成)、Python基準実装とnode上のJSが13ケースで一致、docs内の内部リンク切れ0
+
+## 2026-11-05
+- ITパスポート: web-ad-types(広告の種類)、seo-sem(SEOとSEM)
+- AWS: aws-iam-identity-center(IAM Identity Center)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(465ページ生成)、docs内の内部リンク切れ0(search.html除く)
