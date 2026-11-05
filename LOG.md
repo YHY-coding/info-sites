@@ -225,3 +225,9 @@
 - AWS: aws-iam-identity-center(IAM Identity Center)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(465ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-12
+- ITパスポート: design-thinking-ux(デザイン思考とUX)、accessibility-universal-design(アクセシビリティとユニバーサルデザイン)
+- AWS: aws-cognito(Amazon Cognitoの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(469ページ生成)、docs内の内部リンク切れ0(search.html除く)
