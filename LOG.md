@@ -231,3 +231,9 @@
 - AWS: aws-cognito(Amazon Cognitoの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(469ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-19
+- ITパスポート: dark-patterns(ダークパターンとは)、startup-venture(スタートアップ・ベンチャー・第二創業)
+- AWS: aws-organizations-scp(Organizationsとサービスコントロールポリシー)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(472ページ生成)、docs内の内部リンク切れ0(search.html除く)
