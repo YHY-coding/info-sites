@@ -237,3 +237,9 @@
 - AWS: aws-organizations-scp(Organizationsとサービスコントロールポリシー)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(472ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-26
+- ITパスポート: vc-crowdfunding(ベンチャーキャピタルとクラウドファンディング)、ma-terms-goodwill-synergy(M&Aの用語)
+- AWS: aws-control-tower(Control TowerとLanding Zone)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(475ページ生成)、docs内の内部リンク切れ0(search.html除く)
