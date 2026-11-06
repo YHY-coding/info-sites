@@ -243,3 +243,8 @@
 - AWS: aws-control-tower(Control TowerとLanding Zone)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(475ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-06
+- 新サイト: cooking-converter(料理の分量換算ツール集)
+- ページ: index, volume, weight, rice, servings, oven, tables, measuring-tips, terms, faq(10ページ。うちツール5・解説/早見表4・トップ1)
+- 確認: build.py エラーなし(482ページ生成)、Python基準実装とnode上のJSが480ケースで一致、ブラウザでツール5ページのJSエラーなし、docs内の内部リンク切れ0

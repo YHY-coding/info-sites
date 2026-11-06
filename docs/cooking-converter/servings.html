@@ -1,0 +1,48 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人数分の換算|レシピの材料を増減する計算ツール</title><meta name="description" content="レシピの材料の数字を、何人分から何人分へ、自動で倍率計算します。1行に1材料で入力するだけ。">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">料理の分量換算ツール集</a><nav><a href="volume.html">体積</a><a href="weight.html">グラム</a><a href="rice.html">お米</a><a href="servings.html">人数</a><a href="oven.html">温度</a><a href="tables.html">早見表</a><a href="measuring-tips.html">コツ</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>人数分の換算</h1><p>材料を1行に1つずつ入力し、元の人数と作りたい人数を入れると、各行の数字を倍率計算します。</p><div class='card'><label>元のレシピの人数 <input id='f' type='number' value='2' min='0.5' step='any'></label><br><label>作りたい人数 <input id='t' type='number' value='5' min='0' step='any'></label><br><label>材料(1行に1つ)<br><textarea id='lines' rows='6' cols='36'>鶏もも肉 300g
+玉ねぎ 1個
+水 200ml
+しょうゆ 大さじ2
+砂糖 小さじ1.5</textarea></label><br><br><button id='btn'>換算する</button></div><div id='out' class='card'></div><h2>倍率計算の注意</h2><ul><li>行の最初に出てくる数字だけを倍率計算します。「1/2個」のような分数は、小数(0.5)に直して入力してください</li><li>調味料や香辛料は、量を単純に倍にすると濃すぎることがあります。人数を大きく変えるときは、味を見ながら調整してください</li><li>加熱時間・鍋の大きさ・オーブンの温度は、量に比例して変わらないことがあります</li></ul><script>
+var DATA={"vol": {"ml": 1.0, "L": 1000.0, "tsp": 5.0, "tbsp": 15.0, "cup": 200.0, "go": 180.0, "ustsp": 4.92892159375, "ustbsp": 14.78676478125, "uscup": 236.5882365, "usfloz": 29.5735295625}, "vn": {"ml": "ミリリットル(ml・cc)", "L": "リットル(L)", "tsp": "小さじ(日本・5ml)", "tbsp": "大さじ(日本・15ml)", "cup": "計量カップ(日本・200ml)", "go": "1合(180ml)", "ustsp": "米国ティースプーン(約4.93ml)", "ustbsp": "米国テーブルスプーン(約14.79ml)", "uscup": "米国カップ(約237ml)", "usfloz": "米国液量オンス(約29.57ml)"}, "ing": {"water": {"tsp": 5, "tbsp": 15, "cup": 200}, "milk": {"tsp": 5, "tbsp": 15, "cup": 210}, "oil": {"tsp": 4, "tbsp": 12, "cup": 180}, "shoyu": {"tsp": 6, "tbsp": 18, "cup": 230}, "miso": {"tsp": 6, "tbsp": 18, "cup": 230}, "mirin": {"tsp": 6, "tbsp": 18, "cup": 230}, "salt": {"tsp": 6, "tbsp": 18, "cup": 240}, "sugar": {"tsp": 3, "tbsp": 9, "cup": 130}, "gran": {"tsp": 4, "tbsp": 12, "cup": 180}, "flour": {"tsp": 3, "tbsp": 9, "cup": 110}, "starch": {"tsp": 3, "tbsp": 9, "cup": 130}, "panko": {"tsp": 1, "tbsp": 3, "cup": 40}, "butter": {"tsp": 4, "tbsp": 12, "cup": 180}, "mayo": {"tsp": 4, "tbsp": 12, "cup": 190}, "ketchup": {"tsp": 5, "tbsp": 15, "cup": 230}, "honey": {"tsp": 7, "tbsp": 21, "cup": 280}}, "un": {"tsp": "小さじ", "tbsp": "大さじ", "cup": "カップ(200ml)"}, "go": {"ml": 180, "raw": 150, "cooked": 2.2, "water": 1.2}};
+function convertVolume(v,a,b){return v*DATA.vol[a]/DATA.vol[b]}
+function spoonToGrams(n,ing,u){return n*DATA.ing[ing][u]}
+function gramsToSpoon(g,ing,u){return g/DATA.ing[ing][u]}
+function rice(go){return {ml:go*DATA.go.ml,raw_g:go*DATA.go.raw,cooked_g:go*DATA.go.raw*DATA.go.cooked,water_ml:go*DATA.go.ml*DATA.go.water}}
+function riceFromGrams(g){return g/DATA.go.raw}
+function scale(a,f,t){return a*t/f}
+function cToF(c){return c*9/5+32}
+function fToC(f){return (f-32)*5/9}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*10000)/10000).toLocaleString('ja-JP',{maximumFractionDigits:4})}
+function $(id){return document.getElementById(id)}
+if(typeof module!=='undefined')module.exports={convertVolume:convertVolume,spoonToGrams:spoonToGrams,gramsToSpoon:gramsToSpoon,rice:rice,riceFromGrams:riceFromGrams,scale:scale,cToF:cToF,fToC:fToC};
+
+if(typeof document!=='undefined'){
+function run(){var f=parseFloat($('f').value),t=parseFloat($('t').value),lines=$('lines').value.split('\n'),h='';
+if(!(f>0)||!(t>=0)){$('out').textContent='人数は正の数で入力してください';return}
+for(var i=0;i<lines.length;i++){var s=lines[i].trim();if(!s)continue;
+var m=s.match(/^(.*?)([0-9]+(?:\.[0-9]+)?)(.*)$/);
+if(m){h+='<tr><td>'+esc(m[1])+'<strong>'+fmt(scale(parseFloat(m[2]),f,t))+'</strong>'+esc(m[3])+'</td></tr>'}else{h+='<tr><td>'+esc(s)+'</td></tr>'}}
+$('out').innerHTML=h?'<table>'+h+'</table>':'材料を1行に1つ入力してください'}
+function esc(s){return s.replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+$('btn').onclick=run;run()}
+</script></main>
+<footer><p>本サイトの換算結果は概算・目安です。食材の種類・銘柄・詰め方で重さは変わります。計量スプーンやカップの容量、調理器具の設定は、商品の取扱説明書や公式の情報で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-06</p></footer></body></html>
