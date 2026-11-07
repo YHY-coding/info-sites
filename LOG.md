@@ -248,3 +248,9 @@
 - 新サイト: cooking-converter(料理の分量換算ツール集)
 - ページ: index, volume, weight, rice, servings, oven, tables, measuring-tips, terms, faq(10ページ。うちツール5・解説/早見表4・トップ1)
 - 確認: build.py エラーなし(482ページ生成)、Python基準実装とnode上のJSが480ケースで一致、ブラウザでツール5ページのJSエラーなし、docs内の内部リンク切れ0
+
+## 2026-12-06
+- ITパスポート: accounting-basics-bs-terms(会計の基礎用語)、depreciation-useful-life(減価償却と耐用年数)
+- AWS: aws-kms-cloudhsm(KMSとCloudHSM)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(489ページ生成)、docs内の内部リンク切れ0(search.html除く)
