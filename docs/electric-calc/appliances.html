@@ -1,0 +1,44 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>家電別の電気代の目安|消費電力と使用時間の例</title><meta name="description" content="テレビ・エアコン・冷蔵庫など家電の消費電力と使用時間の例を選んで、電気代の目安を計算します。数値は一般的な目安です。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/electric-calc/appliances.html"><meta property="og:title" content="家電別の電気代の目安|消費電力と使用時間の例"><meta property="og:description" content="テレビ・エアコン・冷蔵庫など家電の消費電力と使用時間の例を選んで、電気代の目安を計算します。数値は一般的な目安です。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/electric-calc/appliances.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">電気代・消費電力の計算ツール集</a><nav><a href="cost.html">電気代</a><a href="appliances.html">家電別</a><a href="compare.html">買い替え比較</a><a href="units.html">単位換算</a><a href="breaker.html">アンペア</a><a href="formulas.html">式の解説</a><a href="tips.html">節電のコツ</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>家電別の電気代の目安</h1><p>家電の例を選ぶと、消費電力と使用時間の例が入ります。実際の機器に合わせて数字を書き換えてください。</p><div class='card'><label>家電の例 <select id='sel'><option value='led'>LED電球(1個)</option><option value='tv'>液晶テレビ</option><option value='pc'>ノートパソコン</option><option value='fridge'>冷蔵庫(平均)</option><option value='ac'>エアコン(冷暖房の平均的な運転時)</option><option value='heater'>電気ストーブ</option><option value='dryer'>ヘアドライヤー</option><option value='micro'>電子レンジ</option><option value='kettle'>電気ケトル</option><option value='rice'>炊飯器(炊飯時)</option><option value='washer'>洗濯機</option><option value='router'>Wi-Fiルーター</option></select></label><br><label>消費電力(W) <input id='w' type='number' value='100' min='0' step='any'></label><br><label>1日の使用時間(時間) <input id='h' type='number' value='5' min='0' max='24' step='any'></label><br><label>使用日数 <input id='d' type='number' value='30' min='0' step='1'></label><br><label>電力量単価(円/kWh) <input id='p' type='number' value='30' min='0' step='any'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><p class='note'>初期値の電力量単価は、計算例のための仮の値です。実際の単価は、検針票や契約中の電力会社の公式サイトで確認して入力してください。</p><h2>家電の例と、30日あたりの消費電力量</h2><table><tr><th>家電</th><th>消費電力の例</th><th>使用時間の例</th><th>30日の電力量</th><th>メモ</th></tr><tr><th>LED電球(1個)</th><td>8W</td><td>5時間</td><td>1.2kWh</td><td>明るさ相当の白熱電球より小さい</td></tr><tr><th>液晶テレビ</th><td>100W</td><td>5時間</td><td>15kWh</td><td>画面サイズで変わる</td></tr><tr><th>ノートパソコン</th><td>40W</td><td>6時間</td><td>7.2kWh</td><td>負荷が高いと増える</td></tr><tr><th>冷蔵庫(平均)</th><td>40W</td><td>24時間</td><td>28.8kWh</td><td>実際は断続運転。年間の消費電力量表示から平均を出す方法もある</td></tr><tr><th>エアコン(冷暖房の平均的な運転時)</th><td>500W</td><td>8時間</td><td>120kWh</td><td>設定温度・外気温・部屋の広さで大きく変わる</td></tr><tr><th>電気ストーブ</th><td>800W</td><td>4時間</td><td>96kWh</td><td>発熱が主目的の機器は消費電力が大きい</td></tr><tr><th>ヘアドライヤー</th><td>1200W</td><td>0.2時間</td><td>7.2kWh</td><td>強風時の定格に近い</td></tr><tr><th>電子レンジ</th><td>1000W</td><td>0.3時間</td><td>9kWh</td><td>加熱出力ではなく消費電力で見る</td></tr><tr><th>電気ケトル</th><td>1200W</td><td>0.3時間</td><td>10.8kWh</td><td>沸騰させる時間は短い</td></tr><tr><th>炊飯器(炊飯時)</th><td>700W</td><td>1時間</td><td>21kWh</td><td>保温時は消費電力が小さい</td></tr><tr><th>洗濯機</th><td>300W</td><td>1時間</td><td>9kWh</td><td>乾燥機能つきは別に大きくなる</td></tr><tr><th>Wi-Fiルーター</th><td>10W</td><td>24時間</td><td>7.2kWh</td><td>常時通電する機器の例</td></tr></table><p class='note'>表の数字は計算のための例であり、実際の機器の値ではありません。機種ごとの値は、本体のラベルや取扱説明書で確認してください。</p><script>
+var DATA={};
+function kwhPer(w,h,d){return w*h*d/1000}
+function costYen(k,p){return k*p}
+function annualCost(w,h,p){return kwhPer(w,h,365)*p}
+function payback(extra,saving){return saving<=0?null:extra/saving}
+function wattsFromVA(v,a){return v*a}
+function ampsFromW(w,v){return w/v}
+function whToKwh(wh){return wh/1000}
+function kwhToMj(k){return k*3.6}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*100)/100).toLocaleString('ja-JP',{maximumFractionDigits:2})}
+function yen(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function $(id){return document.getElementById(id)}
+if(typeof module!=='undefined')module.exports={kwhPer:kwhPer,costYen:costYen,annualCost:annualCost,payback:payback,wattsFromVA:wattsFromVA,ampsFromW:ampsFromW,whToKwh:whToKwh,kwhToMj:kwhToMj};
+
+if(typeof document!=='undefined'){
+var A={"led": [8, 5], "tv": [100, 5], "pc": [40, 6], "fridge": [40, 24], "ac": [500, 8], "heater": [800, 4], "dryer": [1200, 0.2], "micro": [1000, 0.3], "kettle": [1200, 0.3], "rice": [700, 1], "washer": [300, 1], "router": [10, 24]};
+function run(){var p=parseFloat($('p').value),h=parseFloat($('h').value),w=parseFloat($('w').value),d=parseFloat($('d').value);
+if(!(p>=0)||!(h>=0&&h<=24)||!(w>=0)||!(d>=0)){$('out').textContent='入力を確認してください';return}
+var k=kwhPer(w,h,d);
+$('out').innerHTML='<table><tr><th>期間の消費電力量</th><td>'+fmt(k)+' kWh</td></tr><tr><th>期間の電気代</th><td>'+yen(costYen(k,p))+'</td></tr><tr><th>1年(365日)の電気代</th><td>'+yen(annualCost(w,h,p))+'</td></tr></table>'}
+$('sel').onchange=function(){var a=A[$('sel').value];$('w').value=a[0];$('h').value=a[1];run()};
+$('btn').onclick=run;$('sel').onchange()}
+</script></main>
+<footer><p>本サイトの計算結果は概算・目安です。電気料金の単価・基本料金・燃料費調整などは契約や時期で変わります。実際の金額は、検針票・契約中の電力会社の公式情報で確認してください。家電の消費電力は機種・使い方で変わるため、本体の表示や取扱説明書で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-07</p></footer></body></html>

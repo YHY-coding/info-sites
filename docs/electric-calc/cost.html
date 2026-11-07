@@ -1,0 +1,44 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>電気代の計算|消費電力(W)と使用時間から</title><meta name="description" content="消費電力(W)、1日の使用時間、日数、電力量単価を入力すると、消費電力量(kWh)と電気代の目安を計算します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/electric-calc/cost.html"><meta property="og:title" content="電気代の計算|消費電力(W)と使用時間から"><meta property="og:description" content="消費電力(W)、1日の使用時間、日数、電力量単価を入力すると、消費電力量(kWh)と電気代の目安を計算します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/electric-calc/cost.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">電気代・消費電力の計算ツール集</a><nav><a href="cost.html">電気代</a><a href="appliances.html">家電別</a><a href="compare.html">買い替え比較</a><a href="units.html">単位換算</a><a href="breaker.html">アンペア</a><a href="formulas.html">式の解説</a><a href="tips.html">節電のコツ</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>電気代の計算</h1><p>電気代の目安 = 消費電力(W) × 使用時間(h) ÷ 1000 × 電力量単価(円/kWh)</p><div class='card'><label>消費電力(W) <input id='w' type='number' value='100' min='0' step='any'></label><br><label>1日の使用時間(時間) <input id='h' type='number' value='5' min='0' max='24' step='any'></label><br><label>使用日数 <input id='d' type='number' value='30' min='0' step='1'></label><br><label>台数 <input id='n' type='number' value='1' min='1' step='1'></label><br><label>電力量単価(円/kWh) <input id='p' type='number' value='30' min='0' step='any'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><p class='note'>初期値の電力量単価は、計算例のための仮の値です。実際の単価は、検針票や契約中の電力会社の公式サイトで確認して入力してください。</p><h2>この計算に含まれないもの</h2><ul><li>基本料金・最低料金など、使った量によらない料金</li><li>燃料費調整額・再エネ賦課金など、時期で変わる項目</li><li>機器の消費電力は運転状態で変わります。表示されたW数は最大(定格)の場合があり、実際の平均はそれより小さいことが多いです</li></ul><p><a href='formulas.html'>式の考え方</a> / <a href='appliances.html'>家電別の目安</a></p><script>
+var DATA={};
+function kwhPer(w,h,d){return w*h*d/1000}
+function costYen(k,p){return k*p}
+function annualCost(w,h,p){return kwhPer(w,h,365)*p}
+function payback(extra,saving){return saving<=0?null:extra/saving}
+function wattsFromVA(v,a){return v*a}
+function ampsFromW(w,v){return w/v}
+function whToKwh(wh){return wh/1000}
+function kwhToMj(k){return k*3.6}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*100)/100).toLocaleString('ja-JP',{maximumFractionDigits:2})}
+function yen(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function $(id){return document.getElementById(id)}
+if(typeof module!=='undefined')module.exports={kwhPer:kwhPer,costYen:costYen,annualCost:annualCost,payback:payback,wattsFromVA:wattsFromVA,ampsFromW:ampsFromW,whToKwh:whToKwh,kwhToMj:kwhToMj};
+
+if(typeof document!=='undefined'){
+function run(){var w=parseFloat($('w').value),h=parseFloat($('h').value),d=parseFloat($('d').value),p=parseFloat($('p').value),n=parseFloat($('n').value);
+if(!(w>=0)||!(h>=0&&h<=24)||!(d>=0)||!(p>=0)||!(n>=1)){$('out').textContent='入力を確認してください(使用時間は0〜24時間)';return}
+var k=kwhPer(w,h,d)*n;
+$('out').innerHTML='<p class="big">'+yen(costYen(k,p))+'</p><table><tr><th>期間の消費電力量</th><td>'+fmt(k)+' kWh</td></tr>'
++'<tr><th>1日あたりの電気代</th><td>'+yen(costYen(kwhPer(w,h,1)*n,p))+'</td></tr>'
++'<tr><th>1年(365日同じ使い方)の電気代</th><td>'+yen(annualCost(w,h,p)*n)+'</td></tr></table>'}
+$('btn').onclick=run;run()}
+</script></main>
+<footer><p>本サイトの計算結果は概算・目安です。電気料金の単価・基本料金・燃料費調整などは契約や時期で変わります。実際の金額は、検針票・契約中の電力会社の公式情報で確認してください。家電の消費電力は機種・使い方で変わるため、本体の表示や取扱説明書で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-07</p></footer></body></html>

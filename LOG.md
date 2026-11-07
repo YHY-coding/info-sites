@@ -254,3 +254,8 @@
 - AWS: aws-kms-cloudhsm(KMSとCloudHSM)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(489ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-07
+- 新サイト: electric-calc(電気代・消費電力の計算ツール集)
+- ページ: index, cost, appliances, compare, units, breaker, formulas, tips, terms, faq(10ページ。うちツール5・解説/一覧4・トップ1)
+- 確認: build.py エラーなし(499ページ生成)、Python基準実装とnode上のJSが300ケースで一致、ブラウザでツール5ページのJSエラーなし、docs内の内部リンク切れ0
