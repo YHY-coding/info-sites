@@ -259,3 +259,9 @@
 - 新サイト: electric-calc(電気代・消費電力の計算ツール集)
 - ページ: index, cost, appliances, compare, units, breaker, formulas, tips, terms, faq(10ページ。うちツール5・解説/一覧4・トップ1)
 - 確認: build.py エラーなし(499ページ生成)、Python基準実装とnode上のJSが300ケースで一致、ブラウザでツール5ページのJSエラーなし、docs内の内部リンク切れ0
+
+## 2026-11-08
+- ITパスポート: cash-flow-statement-reading(キャッシュフロー計算書の読み方)、financial-ratios-liquidity-equity(流動比率・自己資本比率など財務指標)
+- AWS: aws-secrets-manager-parameter-store(Secrets Managerとパラメータストア)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(502ページ生成)、docs内の内部リンク切れ0(search.html除く)
