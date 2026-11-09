@@ -90,8 +90,8 @@
 | I69 | 減価償却と耐用年数 | 完了(2026-12-06) |
 | I70 | キャッシュフロー計算書の読み方 | 完了(2026-11-08) |
 | I71 | 流動比率・自己資本比率など財務指標 | 完了(2026-11-08) |
-| I72 | ROE・ROA・ROIの違い | 未着手 |
-| I73 | 在庫管理と発注方式 | 未着手 |
+| I72 | ROE・ROA・ROIの違い | 完了(2026-11-09) |
+| I73 | 在庫管理と発注方式 | 完了(2026-11-09) |
 | I74 | ABC分析とパレート図 | 未着手 |
 | I75 | 線形計画法の考え方 | 未着手 |
 | I76 | デシジョンツリーの読み方 | 未着手 |
@@ -171,7 +171,7 @@
 | A33 | Control TowerとLanding Zone | 完了(2026-11-26) |
 | A34 | KMSとCloudHSM | 完了(2026-12-06) |
 | A35 | Secrets Managerとパラメータストア | 完了(2026-11-08) |
-| A36 | ShieldとWAFとFirewall Manager | 未着手 |
+| A36 | ShieldとWAFとFirewall Manager | 完了(2026-11-09) |
 | A37 | GuardDutyとInspectorとMacieの比較 | 未着手 |
 | A38 | Security Hub | 未着手 |
 | A39 | CloudTrailとCloudWatchとConfigの比較 | 未着手 |

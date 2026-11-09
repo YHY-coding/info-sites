@@ -265,3 +265,9 @@
 - AWS: aws-secrets-manager-parameter-store(Secrets Managerとパラメータストア)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(502ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-09
+- ITパスポート: roe-roa-roi-difference(ROE・ROA・ROIの違い)、inventory-ordering-methods(在庫管理と発注方式)
+- AWS: aws-shield-waf-firewall-manager(ShieldとWAFとFirewall Manager)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(505ページ生成)、docs内の内部リンク切れ0(search.html除く)
