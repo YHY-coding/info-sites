@@ -271,3 +271,9 @@
 - AWS: aws-shield-waf-firewall-manager(ShieldとWAFとFirewall Manager)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(505ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-10
+- ITパスポート: abc-analysis-pareto(ABC分析とパレート図)、linear-programming-basics(線形計画法の考え方)
+- AWS: aws-guardduty-inspector-macie(GuardDuty・Inspector・Macieの比較)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(508ページ生成)、docs内の内部リンク切れ0(search.html除く)
