@@ -277,3 +277,9 @@
 - AWS: aws-guardduty-inspector-macie(GuardDuty・Inspector・Macieの比較)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(508ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-12
+- ITパスポート: decision-tree-reading(デシジョンツリーの読み方)、queueing-basics(待ち行列の基礎)
+- AWS: aws-security-hub(Security Hub)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(511ページ生成)、docs内の内部リンク切れ0(search.html除く)
