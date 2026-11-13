@@ -283,3 +283,9 @@
 - AWS: aws-security-hub(Security Hub)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(511ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-13
+- ITパスポート: game-theory-basics(ゲーム理論の基礎)、regression-correlation-basics(回帰分析と相関の基礎)
+- AWS: aws-cloudtrail-cloudwatch-config(CloudTrailとCloudWatchとConfigの比較)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(515ページ生成)、docs内の内部リンク切れ0(search.html除く)
