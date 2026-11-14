@@ -295,3 +295,7 @@
 - AWS: aws-cloudwatch-metrics-alarms(CloudWatchのメトリクスとアラーム)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(518ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-14(新サイト)
+- 追加: speed-distance(速度・距離・時間の計算ツール集)、10ページ(index, calc, units, pace, average, meeting, formulas, pitfalls, terms, faq)
+- 確認: build.py エラーなし(528ページ生成)、Python基準実装とブラウザJSをnodeで比較し不一致0(2600値)、docs内の内部リンク切れ0
