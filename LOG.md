@@ -289,3 +289,9 @@
 - AWS: aws-cloudtrail-cloudwatch-config(CloudTrailとCloudWatchとConfigの比較)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(515ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-14
+- ITパスポート: data-scales-of-measurement(統計のデータ尺度)、sampling-vs-census(標本調査と全数調査)
+- AWS: aws-cloudwatch-metrics-alarms(CloudWatchのメトリクスとアラーム)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(518ページ生成)、docs内の内部リンク切れ0(search.html除く)
