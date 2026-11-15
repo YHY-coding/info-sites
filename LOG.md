@@ -299,3 +299,9 @@
 ## 2026-11-14(新サイト)
 - 追加: speed-distance(速度・距離・時間の計算ツール集)、10ページ(index, calc, units, pace, average, meeting, formulas, pitfalls, terms, faq)
 - 確認: build.py エラーなし(528ページ生成)、Python基準実装とブラウザJSをnodeで比較し不一致0(2600値)、docs内の内部リンク切れ0
+
+## 2026-11-15
+- ITパスポート: quartile-outlier-histogram(四分位数・外れ値・ヒストグラム)、ai-history-booms(AIの歴史)
+- AWS: aws-xray-tracing(X-Rayとトレーシング)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(532ページ生成)、docs内の内部リンク切れ0(search.html除く)
