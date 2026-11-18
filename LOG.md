@@ -305,3 +305,9 @@
 - AWS: aws-xray-tracing(X-Rayとトレーシング)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(532ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-18
+- ITパスポート: ml-evaluation-overfitting(機械学習の評価)、neural-net-deep-learning(ニューラルネットワークとディープラーニング)
+- AWS: aws-systems-manager(Systems Managerの機能)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(535ページ生成)、docs内の内部リンク切れ0(search.html除く)
