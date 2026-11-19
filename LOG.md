@@ -311,3 +311,9 @@
 - AWS: aws-systems-manager(Systems Managerの機能)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(535ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-19(2回目)
+- ITパスポート: nlp-image-recognition(自然言語処理と画像認識)、ai-ethics-guidelines(AI倫理・AI事業者ガイドライン)
+- AWS: aws-cloudformation-cdk(CloudFormationとCDK)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(538ページ生成)、docs内の内部リンク切れ0(search.html除く)
