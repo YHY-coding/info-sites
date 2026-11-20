@@ -317,3 +317,9 @@
 - AWS: aws-cloudformation-cdk(CloudFormationとCDK)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(538ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-20
+- ITパスポート: iot-edge-computing(IoTとエッジコンピューティング)、mobile-5g-6g-basics(5Gと6Gの基礎)
+- AWS: aws-beanstalk-lightsail(Elastic BeanstalkとLightsail)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(542ページ生成)、docs内の内部リンク切れ0(search.html除く)
