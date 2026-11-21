@@ -1,0 +1,57 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>面積の計算|長方形・三角形・円・台形</title><meta name="description" content="長方形、三角形、円、台形、平行四辺形、円環の面積を計算します。円は円周も表示します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/area-volume/area.html"><meta property="og:title" content="面積の計算|長方形・三角形・円・台形"><meta property="og:description" content="長方形、三角形、円、台形、平行四辺形、円環の面積を計算します。円は円周も表示します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/area-volume/area.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">面積・体積・図形の計算ツール集</a><nav><a href="area.html">面積</a><a href="volume.html">体積</a><a href="area-units.html">面積の単位換算</a><a href="capacity.html">体積と容量</a><a href="formulas.html">式の一覧</a><a href="pitfalls.html">間違いやすい点</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>面積の計算</h1><p>図形を選び、長さを入力してください。長さの単位をそろえれば、結果はその単位の2乗です(mなら㎡)。</p><div class='card'><label>図形 <select id='shape'><option value='rect'>長方形</option><option value='tri'>三角形</option><option value='circle'>円</option><option value='trap'>台形</option><option value='para'>平行四辺形</option><option value='ring'>円環(ドーナツ型)</option></select></label><br><div id='fields'></div><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><p class='note'>円周率は、プログラム内の円周率(π)を使っています。表示は小数第3位までの四捨五入です。</p><p><a href='formulas.html'>式の一覧</a> / <a href='pitfalls.html'>間違いやすい点</a></p><script>
+var TSUBO=400/121;
+function areaRect(a,b){return a*b}
+function areaTriangle(b,h){return b*h/2}
+function areaCircle(r){return Math.PI*r*r}
+function areaTrapezoid(a,b,h){return (a+b)*h/2}
+function areaParallelogram(b,h){return b*h}
+function areaRing(ro,ri){return Math.PI*(ro*ro-ri*ri)}
+function circumference(r){return 2*Math.PI*r}
+function volBox(a,b,c){return a*b*c}
+function volCylinder(r,h){return Math.PI*r*r*h}
+function volSphere(r){return 4/3*Math.PI*Math.pow(r,3)}
+function volCone(r,h){return Math.PI*r*r*h/3}
+function volPyramid(s,h){return s*h/3}
+function surfaceBox(a,b,c){return 2*(a*b+b*c+c*a)}
+function surfaceSphere(r){return 4*Math.PI*r*r}
+function m2ToTsubo(m){return m/TSUBO}
+function tsuboToM2(t){return t*TSUBO}
+function m2ToHa(m){return m/10000}
+function cm3ToLiter(c){return c/1000}
+function m3ToLiter(m){return m*1000}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*1000)/1000).toLocaleString('ja-JP',{maximumFractionDigits:3})}
+function $(id){return document.getElementById(id)}
+function num(id){return parseFloat($(id).value)}
+if(typeof module!=='undefined')module.exports={areaRect:areaRect,areaTriangle:areaTriangle,areaCircle:areaCircle,areaTrapezoid:areaTrapezoid,areaParallelogram:areaParallelogram,areaRing:areaRing,circumference:circumference,volBox:volBox,volCylinder:volCylinder,volSphere:volSphere,volCone:volCone,volPyramid:volPyramid,surfaceBox:surfaceBox,surfaceSphere:surfaceSphere,m2ToTsubo:m2ToTsubo,tsuboToM2:tsuboToM2,m2ToHa:m2ToHa,cm3ToLiter:cm3ToLiter,m3ToLiter:m3ToLiter};
+
+if(typeof document!=='undefined'){
+var F={rect:['縦','横'],tri:['底辺','高さ'],circle:['半径'],trap:['上底','下底','高さ'],para:['底辺','高さ'],ring:['外側の半径','内側の半径']};
+function draw(){var s=$('shape').value,h='',i;for(i=0;i<F[s].length;i++)h+='<label>'+F[s][i]+' <input class="f" type="number" value="'+(i+2)+'" min="0" step="any"></label><br>';$('fields').innerHTML=h;run()}
+function run(){var s=$('shape').value,e=document.getElementsByClassName('f'),v=[],i;for(i=0;i<e.length;i++){v.push(parseFloat(e[i].value));if(!(v[i]>=0)){$('out').textContent='0以上の数を入力してください';return}}
+var a,o='';
+if(s==='rect')a=areaRect(v[0],v[1]);else if(s==='tri')a=areaTriangle(v[0],v[1]);else if(s==='circle')a=areaCircle(v[0]);else if(s==='trap')a=areaTrapezoid(v[0],v[1],v[2]);else if(s==='para')a=areaParallelogram(v[0],v[1]);else{if(v[1]>v[0]){$('out').textContent='内側の半径は外側以下にしてください';return}a=areaRing(v[0],v[1])}
+o='面積は <span class="big">'+fmt(a)+'</span>(長さの単位を2乗した単位)';
+if(s==='circle')o+='<br>円周は '+fmt(circumference(v[0]));
+$('out').innerHTML=o}
+$('shape').onchange=draw;$('btn').onclick=run;draw()}
+</script></main>
+<footer><p>本サイトの計算結果は概算・目安です。建築・工事・販売などで使う面積や体積は、測り方や定義が決まっている場合があります。重要な用途では、公式の基準や専門家に確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-21</p></footer></body></html>

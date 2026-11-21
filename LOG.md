@@ -329,3 +329,8 @@
 - AWS: aws-ecs-eks-fargate(ECS・EKS・Fargateの比較)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(545ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-21 (週次新サイト)
+- 追加slug: area-volume(面積・体積・図形の計算ツール集)
+- ページ数: 9ページ(index, area, volume, area-units, capacity, formulas, pitfalls, terms, faq)
+- 確認: build.py エラーなし(554ページ生成)、Python基準実装とJSの一致をnodeで950ケース確認(不一致0)、docs内の内部リンク切れ0
