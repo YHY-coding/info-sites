@@ -323,3 +323,9 @@
 - AWS: aws-beanstalk-lightsail(Elastic BeanstalkとLightsail)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(542ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-21
+- ITパスポート: drone-autonomous-driving-levels(ドローンと自動運転のレベル)、blockchain-crypto-assets(ブロックチェーンと暗号資産)
+- AWS: aws-ecs-eks-fargate(ECS・EKS・Fargateの比較)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(545ページ生成)、docs内の内部リンク切れ0(search.html除く)
