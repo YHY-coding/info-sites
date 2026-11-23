@@ -340,3 +340,9 @@
 - AWS: aws-lambda-pricing-limits(Lambdaの料金と制限(概要))
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(557ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-23
+- ITパスポート: rpa-lowcode-nocode(RPAとローコード・ノーコード)、sor-soe-core-system(SoRとSoEと基幹システム)
+- AWS: aws-api-gateway(API Gatewayの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(560ページ生成)、docs内の内部リンク切れ0(search.html除く)
