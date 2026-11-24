@@ -346,3 +346,9 @@
 - AWS: aws-api-gateway(API Gatewayの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(560ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-24
+- ITパスポート: ea-enterprise-architecture(EAの4つの体系)、itsm-itil-terms(ITサービスマネジメントの用語)
+- AWS: aws-sqs-sns-eventbridge(SQS・SNS・EventBridgeの使い分け)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(563ページ生成)、docs内の内部リンク切れ0(search.html除く)
