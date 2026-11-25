@@ -352,3 +352,9 @@
 - AWS: aws-sqs-sns-eventbridge(SQS・SNS・EventBridgeの使い分け)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(563ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-25
+- ITパスポート: sla-vs-slm-detail(SLAとSLMの違い)、v-model-detail(V字モデルの対応)
+- AWS: aws-step-functions(Step Functionsの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(567ページ生成)、docs内の内部リンク切れ0(search.html除く)
