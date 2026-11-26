@@ -358,3 +358,9 @@
 - AWS: aws-step-functions(Step Functionsの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(567ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-26(追加分)
+- ITパスポート: test-black-white-box(テストの技法)、review-walkthrough-inspection(レビューの種類)
+- AWS: aws-kinesis-family(Kinesisの種類)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(570ページ生成)、docs内の内部リンク切れ0(search.html除く)
