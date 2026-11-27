@@ -364,3 +364,9 @@
 - AWS: aws-kinesis-family(Kinesisの種類)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(570ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-27
+- ITパスポート: agile-scrum-terms(アジャイルとスクラムの用語)、devops-cicd(DevOpsとCI/CD)
+- AWS: aws-athena-glue-emr(Athena・Glue・EMRの使い分け)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(574ページ生成)、docs内の内部リンク切れ0(search.html除く)
