@@ -376,3 +376,8 @@
 - AWS: aws-quicksight(QuickSightの用途)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(577ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-28(追加サイト)
+- 新サイト: fuel-calc(燃費・ガソリン代・移動コストの計算ツール)
+- 追加: 9ページ(index, economy, cost, trip, compare, formulas, factors, pitfalls, terms, faq のうち解説含む計10ファイル)
+- 確認: Python基準実装とJSをnodeで300件比較し不一致0、build.py エラーなし(587ページ生成)、docs内の内部リンク切れ0

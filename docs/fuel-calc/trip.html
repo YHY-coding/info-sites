@@ -1,0 +1,41 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>移動コストの計算|往復・高速料金・人数割り</title><meta name="description" content="片道距離、燃費、単価、高速料金などから、往復を含めた移動コストと1人あたりの金額を計算します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/fuel-calc/trip.html"><meta property="og:title" content="移動コストの計算|往復・高速料金・人数割り"><meta property="og:description" content="片道距離、燃費、単価、高速料金などから、往復を含めた移動コストと1人あたりの金額を計算します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/fuel-calc/trip.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">燃費・ガソリン代・移動コストの計算ツール</a><nav><a href="economy.html">燃費</a><a href="cost.html">ガソリン代</a><a href="trip.html">移動コスト</a><a href="compare.html">年間比較</a><a href="formulas.html">式の解説</a><a href="factors.html">燃費が変わる要因</a><a href="pitfalls.html">間違いやすい点</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>移動コストの計算</h1><p>燃料代と、片道ぶんの料金(高速道路・駐車場など)を足して、人数で割った目安を出します。</p><div class='card'><label>片道の距離(km) <input id='km' type='number' value='150' min='0' step='any'></label><br><label>燃費(km/L) <input id='e' type='number' value='15' min='0' step='any'></label><br><label>単価(円/L) <input id='p' type='number' value='170' min='0' step='any'></label><br><label>片道の料金(円) <input id='toll' type='number' value='0' min='0' step='any'></label><br><label>人数 <input id='n' type='number' value='2' min='1' step='1'></label><br><label><input id='rt' type='checkbox' checked> 往復で計算する</label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><p class='note'>料金は、ここでは片道ぶんをそのまま往復で2倍します。実際の料金・割引は、道路会社などの公式情報で確認してください。車の維持費(保険・税・整備・減価)は含みません。</p><script>
+function economy(km,l){return km/l}
+function litersNeeded(km,e){return km/e}
+function fuelCost(km,e,p){return km/e*p}
+function lPer100km(e){return 100/e}
+function tripTotal(km,e,p,toll,rt){var n=rt?2:1;return n*(km/e*p+toll)}
+function perPerson(t,n){return t/n}
+function annualCost(k,e,p){return k/e*p}
+function annualDiff(k,a,b,p){return annualCost(k,a,p)-annualCost(k,b,p)}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*100)/100).toLocaleString('ja-JP',{maximumFractionDigits:2})}
+function yen(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function $(id){return document.getElementById(id)}
+if(typeof module!=='undefined')module.exports={economy:economy,litersNeeded:litersNeeded,fuelCost:fuelCost,lPer100km:lPer100km,tripTotal:tripTotal,perPerson:perPerson,annualCost:annualCost,annualDiff:annualDiff};
+
+if(typeof document!=='undefined'){
+function run(){var km=parseFloat($('km').value),e=parseFloat($('e').value),p=parseFloat($('p').value),toll=parseFloat($('toll').value)||0,n=parseInt($('n').value,10),rt=$('rt').checked;
+if(!(km>=0)||!(e>0)||!(p>=0)||!(toll>=0)||!(n>=1)){$('out').textContent='入力を確認してください(人数は1以上、燃費は0より大きい数)';return}
+var t=tripTotal(km,e,p,toll,rt);
+$('out').innerHTML='<table><tr><th>合計(燃料代+料金)</th><td><span class="big">'+yen(t)+'</span></td></tr><tr><th>1人あたり('+n+'人で割った場合)</th><td>'+yen(perPerson(t,n))+'</td></tr></table>'}
+$('btn').onclick=run;run()}
+</script></main>
+<footer><p>本サイトの計算結果は概算・目安です。実際の燃費は、運転のしかた、道路状況、積載、気温などで変わります。燃料価格や高速料金は、各スタンド・道路会社の公式情報で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-28</p></footer></body></html>

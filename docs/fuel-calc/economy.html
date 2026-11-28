@@ -1,0 +1,41 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>燃費の計算|満タン法でkm/Lを求める</title><meta name="description" content="走行距離と給油量から燃費(km/L)を計算します。100kmあたりの消費量も表示します。"><link rel="canonical" href="https://yhy-coding.github.io/info-sites/fuel-calc/economy.html"><meta property="og:title" content="燃費の計算|満タン法でkm/Lを求める"><meta property="og:description" content="走行距離と給油量から燃費(km/L)を計算します。100kmあたりの消費量も表示します。"><meta property="og:type" content="article"><meta property="og:url" content="https://yhy-coding.github.io/info-sites/fuel-calc/economy.html"><meta property="og:locale" content="ja_JP"><meta name="twitter:card" content="summary">
+<style>
+:root{--bg:#fff;--fg:#1c2330;--sub:#5b6577;--line:#e3e7ee;--acc:#1d5fd1;--card:#f6f8fb}
+@media(prefers-color-scheme:dark){:root{--bg:#10151d;--fg:#e8ecf3;--sub:#9aa5b8;--line:#243044;--acc:#6ea2ff;--card:#171e2a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
+header{padding-top:16px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+header a.logo{font-weight:700;color:var(--fg);text-decoration:none;font-size:1.1rem}
+nav a{margin-right:14px;font-size:.9rem;color:var(--sub);text-decoration:none}
+main{padding-top:20px;padding-bottom:32px}h1{font-size:1.5rem;line-height:1.4}h2{font-size:1.2rem;margin-top:2rem;border-left:4px solid var(--acc);padding-left:10px}
+a{color:var(--acc)}table{border-collapse:collapse;width:100%;font-size:.95rem}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}th{background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.note{font-size:.85rem;color:var(--sub)}input,select,button{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+button{background:var(--acc);color:#fff;border:0;cursor:pointer}.big{font-size:1.6rem;font-weight:700}
+ul.links{padding-left:1.2rem}footer{border-top:1px solid var(--line);padding-top:14px;padding-bottom:30px;font-size:.82rem;color:var(--sub)}
+</style></head><body>
+<header><a class="logo" href="index.html">燃費・ガソリン代・移動コストの計算ツール</a><nav><a href="economy.html">燃費</a><a href="cost.html">ガソリン代</a><a href="trip.html">移動コスト</a><a href="compare.html">年間比較</a><a href="formulas.html">式の解説</a><a href="factors.html">燃費が変わる要因</a><a href="pitfalls.html">間違いやすい点</a><a href="terms.html">用語</a><a href="faq.html">FAQ</a></nav></header>
+<main><h1>燃費の計算(満タン法)</h1><p>満タンにしてから、次に満タンにするまでの走行距離と給油量を入力してください。</p><div class='card'><label>走行距離(km) <input id='km' type='number' value='420' min='0' step='any'></label><br><label>給油量(L) <input id='l' type='number' value='30' min='0' step='any'></label><br><br><button id='btn'>計算する</button></div><div id='out' class='card'></div><p class='note'>満タンの基準(給油機が止まる位置)をそろえると、誤差が小さくなります。カタログの燃費値とは測り方が違うため、同じ数字にはなりません。</p><p><a href='cost.html'>ガソリン代の計算へ</a> / <a href='factors.html'>燃費が変わる要因</a></p><script>
+function economy(km,l){return km/l}
+function litersNeeded(km,e){return km/e}
+function fuelCost(km,e,p){return km/e*p}
+function lPer100km(e){return 100/e}
+function tripTotal(km,e,p,toll,rt){var n=rt?2:1;return n*(km/e*p+toll)}
+function perPerson(t,n){return t/n}
+function annualCost(k,e,p){return k/e*p}
+function annualDiff(k,a,b,p){return annualCost(k,a,p)-annualCost(k,b,p)}
+function fmt(x){if(!isFinite(x))return '-';var a=Math.abs(x);if(a!==0&&(a<0.001||a>=1e9))return x.toExponential(3);return (Math.round(x*100)/100).toLocaleString('ja-JP',{maximumFractionDigits:2})}
+function yen(x){return Math.round(x).toLocaleString('ja-JP')+'円'}
+function $(id){return document.getElementById(id)}
+if(typeof module!=='undefined')module.exports={economy:economy,litersNeeded:litersNeeded,fuelCost:fuelCost,lPer100km:lPer100km,tripTotal:tripTotal,perPerson:perPerson,annualCost:annualCost,annualDiff:annualDiff};
+
+if(typeof document!=='undefined'){
+function run(){var km=parseFloat($('km').value),l=parseFloat($('l').value);
+if(!(km>=0)||!(l>0)){$('out').textContent='距離と、0より大きい給油量を入力してください';return}
+var e=economy(km,l);
+$('out').innerHTML='燃費は <span class="big">'+fmt(e)+' km/L</span>'+(e>0?'(100kmあたり '+fmt(lPer100km(e))+' L)':'')}
+$('btn').onclick=run;run()}
+</script></main>
+<footer><p>本サイトの計算結果は概算・目安です。実際の燃費は、運転のしかた、道路状況、積載、気温などで変わります。燃料価格や高速料金は、各スタンド・道路会社の公式情報で確認してください。入力した数値は、ブラウザの中だけで計算され、送信されません。</p><p>最終更新: 2026-11-28</p></footer></body></html>
