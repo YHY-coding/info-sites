@@ -370,3 +370,9 @@
 - AWS: aws-athena-glue-emr(Athena・Glue・EMRの使い分け)
 - 追加: 3ページ、4択問題3問
 - 確認: build.py エラーなし(574ページ生成)、docs内の内部リンク切れ0(search.html除く)
+
+## 2026-11-28
+- ITパスポート: wbs-gantt(WBSとガントチャート)、pert-diagram-reading(PERT図の読み方)
+- AWS: aws-quicksight(QuickSightの用途)
+- 追加: 3ページ、4択問題3問
+- 確認: build.py エラーなし(577ページ生成)、docs内の内部リンク切れ0(search.html除く)
